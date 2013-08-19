@@ -101,20 +101,17 @@ enum qbmove_parameter
     PARAM_POS_RESOLUTION         = 4,	///< Angle resolution for inputs and
                                         ///  measurements. Used during
                                         ///  communication.
-    PARAM_POS_OFFSET             = 5,   ///< Adds a constant offset to the input
-                                        ///  references. Useful when using a 
-                                        ///  joystick.
-    PARAM_MEAS_FILTER            = 6,   ///< Measurement filter, should be from
+    PARAM_MEAS_FILTER            = 5,   ///< Measurement filter, should be from
                                         ///  0 to 1. 32 bit float number.
-    PARAM_CONTROL_DEADZONE       = 7,   ///< Applies a deadzone to the 
+    PARAM_CONTROL_DEADZONE       = 6,   ///< Applies a deadzone to the 
                                         ///  controller
-    PARAM_MEASUREMENT_OFFSET     = 8,   ///< Adds a constant offset to the
+    PARAM_MEASUREMENT_OFFSET     = 7,   ///< Adds a constant offset to the
                                         ///  measurements
-    PARAM_MEASUREMENT_MULTIPLIER = 9,   ///< Adds a multiplier to the 
+    PARAM_MEASUREMENT_MULTIPLIER = 8,   ///< Adds a multiplier to the 
                                         ///  measurements
-    PARAM_POS_LIMIT				 = 10	///< Set position limit and activation flag
-    									///  | int8 | int16   | int16   |
-    									///  | FLAG | INF_LIM | SUP_LIM |
+    PARAM_POS_LIMIT				 = 9	///< Set position limit and activation flag
+    									///  | int8 | int32     | int32     | int32     | int32     | 
+    									///  | FLAG | INF_LIM_1 | SUP_LIM_1 | INF_LIM_2 | SUP_LIM_2 |
 };
 
 

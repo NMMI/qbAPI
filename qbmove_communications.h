@@ -62,16 +62,11 @@
 //                                                              structures/enums
 //==============================================================================
 
-enum COMM_PROTOCOL { COMM_RS_485	= 0 };
-
 typedef struct comm_settings comm_settings;
 
 struct comm_settings
 {
-    HANDLE                  file_handle;
-    enum COMM_PROTOCOL      type;
-    void (*write)(comm_settings *comm_settings_t, int id, char *package, int package_size);
-    int (*read)(comm_settings *comm_settings_t, int id, char *package);
+    HANDLE file_handle;
 };
 
 
@@ -163,38 +158,6 @@ void closeRS485( comm_settings *comm_settings_t );
 
 /** \name QB Move Commands */
 /** \{ */
-
-//===============================================================     RS485write
-
-/** This function is used to send a package to the device.
- *
- *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
- *                              communication settings.
- *
- *  \param  id              The device's id number.
- *
- *  \param  package         Package.
- *
- *  \param  package_size    Package Size.
- *
- *  \par Example
- *  \code
-
-    comm_settings    comm_settings_t;
-    char        auxstring[500];
-    
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
-    RS485GetInfo(&comm_settings_t, auxstring);         
-    puts(auxstring);
-    closeRS485(&comm_settings_t);
-
- *  \endcode 
-**/
-
-void RS485write(    comm_settings *comm_settings_t, 
-                    int id, 
-                    char *package, 
-                    int package_size);
 
 //================================================================     RS485read
 
@@ -436,6 +399,44 @@ int commGetMeasurements(    comm_settings *comm_settings_t,
                             int id, 
                             short int measurements[3] );
 
+
+//======================================================     commGetCurrents
+
+/** This function gets currents from a QB Move connected to the serial 
+*  port.
+* 
+*  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                              communication settings.
+*
+*  \param  id              The device's id number.
+*  \param  currents    Currents.
+*
+*  \return Returns 0 if communication was ok, -1 otherwise.
+*
+*  \par Example 
+*  \code
+
+   comm_settings comm_settings_t;
+   int     device_id = 65;
+   short int currents[2];      
+
+   openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+
+   if(!commGetMeasurements(&comm_settings_t, DEVICE_ID, currents))
+       printf("Measurements: %d\t%d\t%d\n",currents[0], currents[1], currents[2]);
+   else
+       puts("Couldn't retrieve measurements.");                    
+
+   closeRS485(&comm_settings_t);
+
+*  \endcode  
+
+**/
+
+int commGetCurrents(    comm_settings *comm_settings_t, 
+                           int id, 
+                           short int currents[2] );
+
 //==========================================================     commGetActivate
 
 /** This function gets the activation status of a QB Move connected to the serial 
@@ -641,6 +642,36 @@ void commRestoreParams( comm_settings *comm_settings_t, int id );
 //==========================================================     timevaldiff
 
 long timevaldiff (struct timeval *starttime, struct timeval *finishtime);
+
+
+//=================================================================     checksum
+
+
+/** This functions returns an 8 bit LCR checksum over the lenght of a buffer.
+ *
+ * \param   data_buffer Buffer.
+ * \param   data_length Buffer length.
+ * 
+ *  \par Example
+ *  \code
+
+    char    aux;
+    char    buffer[5];
+    
+    buffer  = "abcde";
+    aux     = checksum(buffer,5);
+    printf("Checksum: %d", (int) aux)
+
+ *  \endcode   
+ 
+**/
+ 
+ /**
+  * \name General Functions
+  * \{
+ **/
+ 
+char checksum ( char * data_buffer, int data_length );
 
 /** \} */
 
