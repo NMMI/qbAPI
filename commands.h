@@ -62,10 +62,9 @@ enum qbmove_command
                                     ///  loads them
     CMD_RESTORE_PARAMS      = 4,    ///< Restore default factory parameters
     CMD_GET_INFO		    = 5,    ///< Asks for a string of information about
-                                    ///  the device
     CMD_SET_VALUE           = 6,
     CMD_GET_VALUE           = 7,
-    // RESET                    = 8,    ///< Resets the device
+
 
 //=========================================================     QB Move commands
 
@@ -76,6 +75,8 @@ enum qbmove_command
     CMD_SET_INPUTS		    = 130,  ///< Command for setting reference inputs
     CMD_GET_INPUTS		    = 131,  ///< Command for getting reference inputs
     CMD_GET_MEASUREMENTS    = 132,  ///< Command for asking device's
+    CMD_GET_CURRENTS    	= 133,  ///< Command for asking device's
+
                                     ///  measurements
 
 
@@ -136,25 +137,12 @@ enum qbmove_resolution
 
 //==============================================================     input modes
 
-enum qbmove_input_mode
+enum qbmove_mode
 {
     INPUT_MODE_EXTERNAL = 0,        ///< References through external
                                     ///  commands (default)
     INPUT_MODE_ENCODER3 = 1         ///< Encoder 3 drives all inputs
 };
-
-// #define INPUT_MODE_EXTERNAL         0   ///< References through external
-//                                         ///  commands (default)
-// #define INPUT_MODE_ENCODER3         1   ///< Encoder 3 drives all inputs
-
-
-// #define PARAM_CONTROL_MODE
-// #define PARAM_MEAS_RESOLUTION_16BIT
-// #define PARAM_NAME
-
-
-// #define CONTROL_MODE_ANGLE		    0
-// #define CONTROL_MODE_SPEED			1
 
 /** \} */
 
@@ -164,9 +152,6 @@ enum qbmove_input_mode
 /** \name QB Move Information Strings */
 /** \{ */
 #define INFO_ALL        0 ///< All system information.
-
-// #define INFO_DEVICE_NAME
-// #define INFO_VERSION
 
 /** \} */
     
