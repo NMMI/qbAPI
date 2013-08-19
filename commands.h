@@ -75,11 +75,9 @@ enum qbmove_command
     CMD_SET_INPUTS		    = 130,  ///< Command for setting reference inputs
     CMD_GET_INPUTS		    = 131,  ///< Command for getting reference inputs
     CMD_GET_MEASUREMENTS    = 132,  ///< Command for asking device's
+    								///  position measurements
     CMD_GET_CURRENTS    	= 133,  ///< Command for asking device's
-
-                                    ///  measurements
-
-
+    								///  current measurements
 };
 
 /** \} */
@@ -93,30 +91,30 @@ enum qbmove_parameter
 {
     //////////////////////////   implemented   //////////////////////////
     
-    PARAM_ID		    	    = 0,    ///< Device's ID number
-    PARAM_CONTROL_K		        = 1,    ///< PID Control proportional constant
-    PARAM_STARTUP_ACTIVATION    = 2,    ///< Start up activation byte
-    PARAM_INPUT_MODE            = 3,    ///< Input mode
+    PARAM_ID		    	     = 0,	///< Device's ID number
+    PARAM_CONTROL_K		         = 1,	///< PID Control proportional constant
+    PARAM_STARTUP_ACTIVATION     = 2,	///< Start up activation byte
+    PARAM_INPUT_MODE             = 3,	///< Input mode
 
     /////////////////////////   not implemented   ////////////////////////
     
-    PARAM_POS_RESOLUTION        = 4,    ///< Angle resolution for inputs and
+    PARAM_POS_RESOLUTION         = 4,	///< Angle resolution for inputs and
                                         ///  measurements. Used during
                                         ///  communication.
-    PARAM_POS_MULTIPLIER        = 5,    ///< Multiplier constant that amplifies
-                                        ///  input references. Useful when using
-                                        ///  a joystick
-    PARAM_POS_OFFSET            = 6,    ///< Adds a constant offset to the input
+    PARAM_POS_OFFSET             = 5,   ///< Adds a constant offset to the input
                                         ///  references. Useful when using a 
                                         ///  joystick.
-    PARAM_MEAS_FILTER           = 7,    ///< Measurement filter, should be from
+    PARAM_MEAS_FILTER            = 6,   ///< Measurement filter, should be from
                                         ///  0 to 1. 32 bit float number.
-    PARAM_CONTROL_DEADZONE      = 8,    ///< Applies a deadzone to the 
+    PARAM_CONTROL_DEADZONE       = 7,   ///< Applies a deadzone to the 
                                         ///  controller
-    PARAM_MEASUREMENT_OFFSET    = 9,    ///< Adds a constant offset to the
+    PARAM_MEASUREMENT_OFFSET     = 8,   ///< Adds a constant offset to the
                                         ///  measurements
-    PARAM_MEASUREMENT_MULTIPLIER = 10   ///< Adds a multiplier to the 
-                                        ///  measurements                                    
+    PARAM_MEASUREMENT_MULTIPLIER = 9,   ///< Adds a multiplier to the 
+                                        ///  measurements
+    PARAM_POS_LIMIT				 = 10	///< Set position limit and activation flag
+    									///  | int8 | int16   | int16   |
+    									///  | FLAG | INF_LIM | SUP_LIM |
 };
 
 
