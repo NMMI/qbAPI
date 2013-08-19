@@ -1101,14 +1101,6 @@ void commSetParam(  comm_settings *comm_settings_t,
             value       = (unsigned char *) values;
             value_size  = 1;
             break;
-        case PARAM_POS_MULTIPLIER:
-            value       = (float *) values;
-            value_size  = 4;
-            break;
-        case PARAM_POS_OFFSET:
-            value           = (unsigned int *) values;
-            value_size      = 2;
-            break;
         case PARAM_MEAS_FILTER:
             value       = (float *) values;
             value_size  = 4;
@@ -1125,13 +1117,19 @@ void commSetParam(  comm_settings *comm_settings_t,
             value       = (float *) values;
             value_size  = 4;
             break;
+        case PARAM_POS_LIMIT_FLAG:
+        	value 		= (uint8 *) values;
+        	value_size  = 1;
+        case PARAM_POS_LIMIT:
+        	value 		= (int32 *) values;
+        	value_size  = 4;
     }
 	
 	
 	
     data_out[0]  = ':';
     data_out[1]  = ':';
-    data_out[2] = (unsigned char) id;
+    data_out[2]  = (unsigned char) id;
     data_out[3]  = 4 + num_of_values * value_size;
 	
 	data_out[4] = CMD_SET_PARAM;		            // command
@@ -1200,13 +1198,7 @@ int commGetParam(comm_settings *comm_settings_t,
             break;
         case PARAM_POS_RESOLUTION:
             values_size = 1;
-            break;
-        case PARAM_POS_MULTIPLIER:
-            values_size = 4;
-            break;
-        case PARAM_POS_OFFSET:
-            values_size = 2;
-            break;            
+            break;         
         case PARAM_MEAS_FILTER:
             values_size = 4;
             break;
@@ -1217,9 +1209,14 @@ int commGetParam(comm_settings *comm_settings_t,
             values_size = 2;        
             break;
         case PARAM_MEASUREMENT_MULTIPLIER:
-
             values_size = 4;
             break;
+        case PARAM_POS_LIMIT_FLAG:
+        	values_size = 1;
+        	break;
+        case PARAM_POS_LIMIT:
+        	values_size = 4;
+        	break;
     }
 
 //================================================      preparing packet to send

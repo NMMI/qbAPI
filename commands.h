@@ -109,7 +109,8 @@ enum qbmove_parameter
                                         ///  measurements
     PARAM_MEASUREMENT_MULTIPLIER = 8,   ///< Adds a multiplier to the 
                                         ///  measurements
-    PARAM_POS_LIMIT				 = 9	///< Set position limit and activation flag
+    PARAM_POS_LIMIT_FLAG         = 9,
+    PARAM_POS_LIMIT				 = 10	///< Set position limit and activation flag
     									///  | int8 | int32     | int32     | int32     | int32     | 
     									///  | FLAG | INF_LIM_1 | SUP_LIM_1 | INF_LIM_2 | SUP_LIM_2 |
 };
