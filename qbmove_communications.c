@@ -44,6 +44,7 @@
 
 #include <stdio.h>   /* Standard input/output definitions */
 #include <string.h>  /* String function definitions */
+#include <stdint.h>
 
 #if !(defined(_WIN32) || defined(_WIN64))
     #include <unistd.h>  /* UNIX standard function definitions */
@@ -1118,11 +1119,13 @@ void commSetParam(  comm_settings *comm_settings_t,
             value_size  = 4;
             break;
         case PARAM_POS_LIMIT_FLAG:
-        	value 		= (uint8 *) values;
+        	value 		= (unsigned char *) values;
         	value_size  = 1;
+            break;
         case PARAM_POS_LIMIT:
-        	value 		= (int32 *) values;
+        	value 		= (int32_t *) values;
         	value_size  = 4;
+            break;
     }
 	
 	
