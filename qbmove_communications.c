@@ -41,6 +41,7 @@
 
 #include "qbmove_communications.h"
 #include "commands.h"
+#include "../definitions.h"
 
 #include <stdio.h>   /* Standard input/output definitions */
 #include <string.h>  /* String function definitions */
@@ -68,7 +69,7 @@
     // #define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
 #else
     #define BAUD_RATE   460800         ///< Virtual COM baud rate - UNIX         
-    // #define BAUD_RATE   B115200         ///< Virtual COM baud rate - UNIX
+    //define BAUD_RATE   B115200         ///< Virtual COM baud rate - UNIX
     // #define BAUD_RATE   B230400         ///< Virtual COM baud rate - UNIX
 #endif
 
@@ -100,16 +101,18 @@ int RS485listPorts( char list_of_ports[10][255] )
 
     while ( ( directory_p = readdir(directory) ) && i < 10 )
     {    
-        strncpy(aux_string, directory_p->d_name, 13);
-        aux_string[13] = 0;
-        
-        if(!strcmp(aux_string, "tty.usbserial")|!strcmp(aux_string, "tty.SLAB_USBt"))
-             {
-                 strcpy( list_of_ports[i], "/dev/" );
-                 strcat(list_of_ports[i], directory_p->d_name);
-                 i++;
-             }
+        if (strstr(directory_p->d_name, "tty.usbserial") || strstr(directory_p->d_name, "ttyUSB")) {
+            strcpy(list_of_ports[i], "/dev/" );
+            strcat(list_of_ports[i], directory_p->d_name);
+            i++;
         }
+
+        // if(!strcmp(aux_string, "tty.usbserial")|!strcmp(aux_string, "tty.SLAB_USBt")) {
+        //          strcpy( list_of_ports[i], "/dev/" );
+        //          strcat(list_of_ports[i], directory_p->d_name);
+        //          i++;
+        //      }
+    }
 
     (void)closedir(directory);
     
@@ -846,7 +849,7 @@ int commGetInputs(comm_settings *comm_settings_t, int id, short int inputs[2]){
 // This function gets measurements from the QB Move.
 //==============================================================================
 
-int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measurements[3]){
+int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measurements[]){
 
     char data_out[BUFFER_SIZE];		// output data buffer
     char package_in[BUFFER_SIZE];		// output data buffer
@@ -892,6 +895,11 @@ int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measur
     
     ((char *) &measurements[2])[0] = package_in[6];
     ((char *) &measurements[2])[1] = package_in[5];
+
+    #if NUM_OF_SENSORS == 4
+        ((char *) &measurements[3])[0] = package_in[8];
+        ((char *) &measurements[3])[1] = package_in[7];
+    #endif
 	
 
     return 0;
