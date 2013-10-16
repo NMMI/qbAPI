@@ -56,21 +56,18 @@
     #include <dirent.h>
     #include <sys/time.h>
     #include <time.h>
+    #include <stdlib.h>
 #endif
 
 
 //=================================================================     #defines
 
-#if  DOXYGEN
-    #define BAUD_RATE   CBR_115200(WIN) or B115200(UNIX) 
-    ///< Virtual COM baud rate.
-
-#elif (defined(_WIN32) || defined(_WIN64))
-    // #define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
+#if (defined(_WIN32) || defined(_WIN64))
+    #define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
+#elif (defined(__APPLE__))
+    #define BAUD_RATE   460800
 #else
-    #define BAUD_RATE   460800         ///< Virtual COM baud rate - UNIX         
-    //define BAUD_RATE   B115200         ///< Virtual COM baud rate - UNIX
-    // #define BAUD_RATE   B230400         ///< Virtual COM baud rate - UNIX
+    #define BAUD_RATE   B460800         ///< Virtual COM baud rate - UNIX
 #endif
 
 
@@ -89,37 +86,10 @@
 
 int RS485listPorts( char list_of_ports[10][255] )
 {
-    //////////////////////////////   MAC OS X   //////////////////////////////
-    #ifdef __APPLE__
-
-    DIR     *directory;
-    struct  dirent *directory_p;
-    int i = 0;
-    char aux_string[255];
     
-    directory = opendir("/dev");
-
-    while ( ( directory_p = readdir(directory) ) && i < 10 )
-    {    
-        if (strstr(directory_p->d_name, "tty.usbserial") || strstr(directory_p->d_name, "ttyUSB")) {
-            strcpy(list_of_ports[i], "/dev/" );
-            strcat(list_of_ports[i], directory_p->d_name);
-            i++;
-        }
-
-        // if(!strcmp(aux_string, "tty.usbserial")|!strcmp(aux_string, "tty.SLAB_USBt")) {
-        //          strcpy( list_of_ports[i], "/dev/" );
-        //          strcat(list_of_ports[i], directory_p->d_name);
-        //          i++;
-        //      }
-    }
-
-    (void)closedir(directory);
-    
-    return i;
     
     //////////////////////////////   WINDOWS   //////////////////////////////
-    #elif (defined(_WIN32) || defined(_WIN64))
+    #if (defined(_WIN32) || defined(_WIN64))
     
     HANDLE port;
     int i, h;
@@ -144,6 +114,29 @@ int RS485listPorts( char list_of_ports[10][255] )
     }
 
     return h;
+
+    
+    //////////////////////////////   UNIX   //////////////////////////////
+    #else
+
+    DIR     *directory;
+    struct  dirent *directory_p;
+    int i = 0;
+    
+    directory = opendir("/dev");
+
+    while ( ( directory_p = readdir(directory) ) && i < 10 )
+    {    
+        if (strstr(directory_p->d_name, "tty.usbserial") || strstr(directory_p->d_name, "ttyUSB")) {
+            strcpy(list_of_ports[i], "/dev/" );
+            strcat(list_of_ports[i], directory_p->d_name);
+            i++;
+        }
+    }
+
+    (void)closedir(directory);
+    
+    return i;
 
     #endif
     
@@ -459,7 +452,6 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 {
         unsigned char package_in[BUFFER_SIZE];
-        int package_out_size;
         int id;
         int h = 0;
 	    unsigned char data_out[BUFFER_SIZE];		// output data buffer
@@ -499,8 +491,6 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
          for(id = 1; id < 255; ++id)
          {
             list_of_ids[id] = 0;
-			 
-	        package_out_size = 2;
 		
 		    data_out[0]  = ':';
 		    data_out[1]  = ':';
@@ -601,10 +591,11 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
             buffer[i] = aux;
         i++;
     }    
-#else        
+#else
     write(comm_settings_t->file_handle, auxstring, 3);   
     usleep(200000);
     ioctl(comm_settings_t->file_handle, FIONREAD, &bytes);
+    printf("BYTES: %d\n", bytes);
     read(comm_settings_t->file_handle, buffer, bytes);
 #endif        
     
