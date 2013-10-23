@@ -1085,7 +1085,7 @@ void commSetParam(  comm_settings *comm_settings_t,
             value       = (unsigned char *) values;
             value_size  = 1;
             break;
-        case PARAM_CONTROL_K:
+        case PARAM_PID_CONTROL:
             value       = (float *) values;
             value_size  = 4;         
             break;
@@ -1189,7 +1189,7 @@ int commGetParam(comm_settings *comm_settings_t,
         case PARAM_ID:
             values_size = 1;
             break;
-        case PARAM_CONTROL_K:
+        case PARAM_PID_CONTROL:
                 values_size = 4;
                 break;
         case PARAM_STARTUP_ACTIVATION:
