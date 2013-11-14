@@ -435,6 +435,15 @@ int commGetCurrents(    comm_settings *comm_settings_t,
                            int id, 
                            short int currents[2] );
 
+//======================================================     commGetCurrAndMeas
+
+// Values is a short int array of 2 + NUM_OF_SENSORS (for the qbmove is 5)
+
+int commGetCurrAndMeas( comm_settings *comm_settings_t,
+                        int id,
+                        short int values[]);
+
+
 //==========================================================     commGetActivate
 
 /** This function gets the activation status of a QB Move connected to the serial 

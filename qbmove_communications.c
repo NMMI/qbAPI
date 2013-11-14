@@ -749,7 +749,7 @@ void commActivate(comm_settings *comm_settings_t, int id, char activate)
 }
 
 //==============================================================================
-//                                                          commGetMeasurements
+//                                                               commGetActivate
 //==============================================================================
 // This function gets measurements from the QB Move.
 //==============================================================================
@@ -1009,6 +1009,73 @@ int commGetCurrents(comm_settings *comm_settings_t, int id, short int currents[2
     ((char *) &currents[1])[0] = package_in[4];
     ((char *) &currents[1])[1] = package_in[3];
 
+
+    return 0;
+}
+
+
+//==============================================================================
+//                                                            commGetCurrAndMeas
+//==============================================================================
+// This function gets currents and measurements from the QB Move.
+//==============================================================================
+
+int commGetCurrAndMeas( comm_settings *comm_settings_t,
+                        int id,
+                        short int values[]) {
+
+    char data_out[BUFFER_SIZE];     // output data buffer
+    char package_in[BUFFER_SIZE];       // output data buffer
+    int package_in_size;
+    int n_bytes;
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        DWORD package_size_out;                 // for serial port access   
+    #endif
+
+    //=================================================     preparing packet to send
+
+    
+    data_out[0] = ':';
+    data_out[1] = ':';
+    data_out[2] = (unsigned char) id;
+    data_out[3] = 2;   
+    data_out[4] = CMD_GET_CURR_AND_MEAS;             // command
+    data_out[5] = CMD_GET_CURR_AND_MEAS;             // checksum
+
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        WriteFile(comm_settings_t->file_handle, data_out, 6, &package_size_out, NULL);
+    #else
+        ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+        if(n_bytes)
+            read(comm_settings_t->file_handle, package_in, n_bytes);
+
+        write(comm_settings_t->file_handle, data_out, 6);
+    #endif
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size == -1)
+        return -1;
+
+    //==============================================================     get packet
+
+    // Currents
+    ((char *) &values[0])[0] = package_in[2];
+    ((char *) &values[0])[1] = package_in[1];
+    
+    ((char *) &values[1])[0] = package_in[4];
+    ((char *) &values[1])[1] = package_in[3];
+
+    // Measurements
+    ((char *) &values[2])[0] = package_in[6];
+    ((char *) &values[2])[1] = package_in[5];
+
+    ((char *) &values[3])[0] = package_in[8];
+    ((char *) &values[3])[1] = package_in[7];
+
+    ((char *) &values[4])[0] = package_in[10];
+    ((char *) &values[4])[1] = package_in[9];
 
     return 0;
 }
