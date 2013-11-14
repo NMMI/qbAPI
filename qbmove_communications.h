@@ -128,8 +128,6 @@ int RS485listPorts( char list_of_ports[10][255] );
  *  \endcode
 **/
 
-void RS485InitCommSettings(comm_settings *comm_settings_t);
-
 void openRS485( comm_settings *comm_settings_t, const char *port_s );
 
 //===============================================================     closeRS485
@@ -514,6 +512,7 @@ int commGetInfo(    comm_settings *comm_settings_t,
 /** \name QB Move Parameters */
 /** \{ */
 
+
 //============================================================     commSetParam
 
 /** This function sets a parameter that remains stored in the QB Move memory. 
@@ -674,6 +673,9 @@ long timevaldiff (struct timeval *starttime, struct timeval *finishtime);
 char checksum ( char * data_buffer, int data_length );
 
 /** \} */
+
+
+void commBootloader(comm_settings *comm_settings_t, int id);
 
 // ----------------------------------------------------------------------------
 #endif

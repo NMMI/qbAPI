@@ -65,6 +65,8 @@ enum qbmove_command
     CMD_SET_VALUE           = 6,
     CMD_GET_VALUE           = 7,
 
+    CMD_BOOTLOADER          = 8,
+
 
 //=========================================================     QB Move commands
 
@@ -92,7 +94,7 @@ enum qbmove_parameter
     //////////////////////////   implemented   //////////////////////////
     
     PARAM_ID		    	     = 0,	///< Device's ID number
-    PARAM_CONTROL_K		         = 1,	///< PID Control proportional constant
+    PARAM_PID_CONTROL            = 1,	///< PID Control proportional constant
     PARAM_STARTUP_ACTIVATION     = 2,	///< Start up activation byte
     PARAM_INPUT_MODE             = 3,	///< Input mode
 

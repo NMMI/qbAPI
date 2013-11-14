@@ -43,6 +43,7 @@
 #include "commands.h"
 #include "../definitions.h"
 
+
 #include <stdio.h>   /* Standard input/output definitions */
 #include <string.h>  /* String function definitions */
 #include <stdint.h>
@@ -57,6 +58,11 @@
     #include <sys/time.h>
     #include <time.h>
     #include <stdlib.h>
+    #define _BSD_SOURCE
+#endif
+
+#if !(defined(_WIN32) || defined(_WIN64)) && !(defined(__APPLE__))
+    #include <linux/serial.h>
 #endif
 
 
@@ -79,6 +85,60 @@
 //===========================================     public fuctions implementation
 
 /// @cond C_FILES
+
+////////////////
+ #include <stdio.h>
+#include <ctype.h>
+ 
+#ifndef HEXDUMP_COLS
+#define HEXDUMP_COLS 8
+#endif
+ 
+void hexdump(void *mem, unsigned int len)
+{
+        unsigned int i, j;
+        
+        for(i = 0; i < len + ((len % HEXDUMP_COLS) ? (HEXDUMP_COLS - len % HEXDUMP_COLS) : 0); i++)
+        {
+                /* print offset */
+                if(i % HEXDUMP_COLS == 0)
+                {
+                        printf("0x%06x: ", i);
+                }
+ 
+                /* print hex data */
+                if(i < len)
+                {
+                        printf("%02x ", 0xFF & ((char*)mem)[i]);
+                }
+                else /* end of block, just aligning for ASCII dump */
+                {
+                        printf("   ");
+                }
+                
+                /* print ASCII dump */
+                if(i % HEXDUMP_COLS == (HEXDUMP_COLS - 1))
+                {
+                        for(j = i - (HEXDUMP_COLS - 1); j <= i; j++)
+                        {
+                                if(j >= len) /* end of block, not really printing */
+                                {
+                                        putchar(' ');
+                                }
+                                else if(isprint(((char*)mem)[j])) /* printable char */
+                                {
+                                        putchar(0xFF & ((char*)mem)[j]);        
+                                }
+                                else /* other char */
+                                {
+                                        putchar('.');
+                                }
+                        }
+                        putchar('\n');
+                }
+        }
+}
+///////////////
 
 //==============================================================================
 //                                                               RS485listPorts
@@ -147,11 +207,6 @@ int RS485listPorts( char list_of_ports[10][255] )
 //                                                                openRS485
 //==============================================================================
 
-void RS485InitCommSettings(comm_settings *comm_settings_t)
-{
-    comm_settings_t->file_handle    = comm_settings_t->file_handle;
-}
-
 
 void openRS485(comm_settings *comm_settings_t, const char *port_s)
 {
@@ -216,7 +271,6 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s)
     	cts.WriteTotalTimeoutConstant 	= 100;           		// msec
     	cts.WriteTotalTimeoutMultiplier	= 0;       				// msec
     	SetCommTimeouts(comm_settings_t->file_handle, &cts);	
-        RS485InitCommSettings(comm_settings_t);
 
 
         return;
@@ -253,6 +307,11 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s)
             goto error; 
         }
 
+        // if(fcntl(comm_settings_t->file_handle, F_SETFL, O_NONBLOCK) == -1)
+        // {
+        //     goto error; 
+        // }
+
         if (tcgetattr(comm_settings_t->file_handle, &options) == -1)
         {
             goto error; 
@@ -260,7 +319,6 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s)
         }
     
         // set baud rate
-        // cfsetspeed(&options, BAUD_RATE);
         cfsetispeed(&options, BAUD_RATE);
         cfsetospeed(&options, BAUD_RATE);
 
@@ -269,11 +327,11 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s)
 
         // enable flags
         options.c_cflag &= ~PARENB;
-        options.c_cflag &= ~CSTOPB;
+        //options.c_cflag &= ~CSTOPB;
         options.c_cflag &= ~CSIZE;
         options.c_cflag |= CS8;
     
-        // disable flags
+        //disable flags
         options.c_cflag &= ~CRTSCTS;
         options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);    
         options.c_oflag &= ~OPOST;    
@@ -282,13 +340,19 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s)
         options.c_cc[VMIN] = 0;
         options.c_cc[VTIME] = 0;
 
+        #if !(defined __APPLE__)
+            struct serial_struct serinfo;
+
+            ioctl(comm_settings_t->file_handle, TIOCGSERIAL, &serinfo);
+            serinfo.flags |= ASYNC_LOW_LATENCY;
+            ioctl(comm_settings_t->file_handle, TIOCSSERIAL, &serinfo);
+        #endif
+
         // save changes
         if (tcsetattr(comm_settings_t->file_handle, TCSANOW, &options) == -1)
         {
             goto error;
         }
-        
-        RS485InitCommSettings(comm_settings_t);
         
         return;
 
@@ -388,7 +452,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
         
         ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);        
 
-        while((n_bytes == 0) && ( timevaldiff(&start, &now) < 4000)) 
+        while((n_bytes < 4) && ( timevaldiff(&start, &now) < 4000)) 
         {
             gettimeofday(&now, NULL);                 
             ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
@@ -416,7 +480,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
         
         ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
 
-        while((n_bytes == 0) && ( timevaldiff(&start, &now) < 4000))
+        while((n_bytes < package_size) && ( timevaldiff(&start, &now) < 4000))
         {
             gettimeofday(&now, NULL);
             ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);            
@@ -1057,6 +1121,44 @@ int commGetInfo(comm_settings *comm_settings_t, int id, unsigned char info_type,
 }
 
 
+
+//==============================================================================
+//                                                                commBootloader
+//==============================================================================
+//  This function launches bootloader
+//==============================================================================
+
+
+void commBootloader(comm_settings *comm_settings_t, int id)
+{
+    char data_out[BUFFER_SIZE];     // output data buffer
+    char package_in[BUFFER_SIZE];
+    int n_bytes;
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        DWORD package_size_out;                 // for serial port access   
+    #endif    
+    
+        data_out[0] = ':';
+        data_out[1] = ':';
+        data_out[2] = (unsigned char) id;
+        data_out[3] = 2;
+        data_out[4] = CMD_BOOTLOADER;       // command
+        data_out[5] = CMD_BOOTLOADER;       // checksum
+    
+    #if (defined(_WIN32) || defined(_WIN64))
+        WriteFile(comm_settings_t->file_handle, data_out, 6, &package_size_out, NULL);
+    #else
+        ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+        if(n_bytes)
+            read(comm_settings_t->file_handle, package_in, n_bytes);
+
+        write(comm_settings_t->file_handle, data_out, 6);
+    #endif
+    
+}
+
+
 //==============================================================================
 //                                                                  commSetParam
 //==============================================================================
@@ -1151,6 +1253,9 @@ void commSetParam(  comm_settings *comm_settings_t,
 
 	data_out[ 7 + num_of_values * value_size ] =
 	    checksum( data_out + 4, 3 + num_of_values * value_size );	// checksum
+
+    // utility function to print raw data
+    //hexdump(data_out, 20);
 	
 
 #if (defined(_WIN32) || defined(_WIN64))
