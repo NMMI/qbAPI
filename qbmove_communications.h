@@ -441,7 +441,7 @@ int commGetCurrents(    comm_settings *comm_settings_t,
 
 int commGetCurrAndMeas( comm_settings *comm_settings_t,
                         int id,
-                        short int values[]);
+                        short int *values);
 
 
 //==========================================================     commGetActivate

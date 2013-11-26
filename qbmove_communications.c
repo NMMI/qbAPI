@@ -69,7 +69,8 @@
 //=================================================================     #defines
 
 #if (defined(_WIN32) || defined(_WIN64))
-    #define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
+    //#define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
+    #define BAUD_RATE   460800            ///< Virtual COM baud rate - WINDOWS
 #elif (defined(__APPLE__))
     #define BAUD_RATE   460800
 #else
@@ -80,7 +81,7 @@
 #define BUFFER_SIZE 500
 ///< Size of buffers that store communication packets
 
-// #define VERBOSE                 ///< Used for debugging
+//#define VERBOSE                 ///< Used for debugging
 
 //===========================================     public fuctions implementation
 
@@ -96,47 +97,47 @@
  
 void hexdump(void *mem, unsigned int len)
 {
-        unsigned int i, j;
-        
-        for(i = 0; i < len + ((len % HEXDUMP_COLS) ? (HEXDUMP_COLS - len % HEXDUMP_COLS) : 0); i++)
+    unsigned int i, j;
+    
+    for(i = 0; i < len + ((len % HEXDUMP_COLS) ? (HEXDUMP_COLS - len % HEXDUMP_COLS) : 0); i++)
+    {
+        /* print offset */
+        if(i % HEXDUMP_COLS == 0)
         {
-                /* print offset */
-                if(i % HEXDUMP_COLS == 0)
-                {
-                        printf("0x%06x: ", i);
-                }
- 
-                /* print hex data */
-                if(i < len)
-                {
-                        printf("%02x ", 0xFF & ((char*)mem)[i]);
-                }
-                else /* end of block, just aligning for ASCII dump */
-                {
-                        printf("   ");
-                }
-                
-                /* print ASCII dump */
-                if(i % HEXDUMP_COLS == (HEXDUMP_COLS - 1))
-                {
-                        for(j = i - (HEXDUMP_COLS - 1); j <= i; j++)
-                        {
-                                if(j >= len) /* end of block, not really printing */
-                                {
-                                        putchar(' ');
-                                }
-                                else if(isprint(((char*)mem)[j])) /* printable char */
-                                {
-                                        putchar(0xFF & ((char*)mem)[j]);        
-                                }
-                                else /* other char */
-                                {
-                                        putchar('.');
-                                }
-                        }
-                        putchar('\n');
-                }
+            printf("0x%06x: ", i);
         }
+
+        /* print hex data */
+        if(i < len)
+        {
+            printf("%02x ", 0xFF & ((char*)mem)[i]);
+        }
+        else /* end of block, just aligning for ASCII dump */
+        {
+            printf("   ");
+        }
+        
+        /* print ASCII dump */
+        if(i % HEXDUMP_COLS == (HEXDUMP_COLS - 1))
+        {
+            for(j = i - (HEXDUMP_COLS - 1); j <= i; j++)
+            {
+                if(j >= len) /* end of block, not really printing */
+                {
+                    putchar(' ');
+                }
+                else if(isprint(((char*)mem)[j])) /* printable char */
+                {
+                    putchar(0xFF & ((char*)mem)[j]);        
+                }
+                else /* other char */
+                {
+                    putchar('.');
+                }
+            }
+            putchar('\n');
+        }
+    }
 }
 ///////////////
 
@@ -464,16 +465,11 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 
         // Control ID
         if ((id != 0) && (data_in[2] != id)) {
-        	return -1;
+            return -1;
         }
 
             
         package_size = data_in[3];
-        
-        if(package_size > 8)
-        {
-            //usleep(package_size * 500);
-        }
         
         gettimeofday(&start, NULL);
         gettimeofday(&now, NULL);                 
@@ -495,7 +491,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
     // Control checksum
     if (checksum ( (char *) data_in, package_size - 1) != (char) data_in[package_size-1])
     {
-       return -1; //XXX
+       return -1;
     }
     
 
@@ -657,7 +653,7 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
     }    
 #else
     write(comm_settings_t->file_handle, auxstring, 3);   
-    usleep(200000);
+    usleep(300000);
     ioctl(comm_settings_t->file_handle, FIONREAD, &bytes);
     printf("BYTES: %d\n", bytes);
     read(comm_settings_t->file_handle, buffer, bytes);
@@ -1022,7 +1018,7 @@ int commGetCurrents(comm_settings *comm_settings_t, int id, short int currents[2
 
 int commGetCurrAndMeas( comm_settings *comm_settings_t,
                         int id,
-                        short int values[]) {
+                        short int *values) {
 
     char data_out[BUFFER_SIZE];     // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
