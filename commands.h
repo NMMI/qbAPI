@@ -40,6 +40,7 @@
 #ifndef COM_COMMANDS_DEFINITIONS_H_INCLUDED
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
+
 //==============================================================================
 //                                                                      COMMANDS
 //==============================================================================
@@ -54,18 +55,22 @@ enum qbmove_command
 
 //=========================================================     general commands
 
-    CMD_PING    		    = 0,    ///< Asks for a ping message
-    CMD_SET_PARAM		    = 1,    ///< Command for setting a parameter to be 
-                                    ///  stored in the device memory
-    CMD_GET_PARAM		    = 2,    ///< Command for getting stored parameters    
-    CMD_STORE_PARAMS        = 3,    ///< Stores all parameters in memory and 
-                                    ///  loads them
-    CMD_RESTORE_PARAMS      = 4,    ///< Restore default factory parameters
-    CMD_GET_INFO		    = 5,    ///< Asks for a string of information about
-    CMD_SET_VALUE           = 6,
-    CMD_GET_VALUE           = 7,
+    CMD_PING                    = 0,    ///< Asks for a ping message
+    CMD_SET_PARAM               = 1,    ///< Command for setting a parameter to be 
+                                        ///  stored in the device memory
+    CMD_GET_PARAM               = 2,    ///< Command for getting stored parameters    
+    CMD_STORE_PARAMS            = 3,    ///< Stores all parameters in memory and 
+                                        ///  loads them
+    CMD_STORE_DEFAULT_PARAMS    = 4,    ///< Store current parameters as factory parameters
+    CMD_RESTORE_PARAMS          = 5,    ///< Restore default factory parameters
+    CMD_GET_INFO                = 6,    ///< Asks for a string of information about
 
-    CMD_BOOTLOADER          = 8,
+    CMD_SET_VALUE               = 7,
+    CMD_GET_VALUE               = 8,
+
+    CMD_BOOTLOADER              = 9,
+
+    CMD_INIT_MEM                = 10,
 
 
 //=========================================================     QB Move commands
@@ -93,30 +98,26 @@ enum qbmove_command
 
 enum qbmove_parameter
 {
-    //////////////////////////   implemented   //////////////////////////
     
     PARAM_ID		    	     = 0,	///< Device's ID number
     PARAM_PID_CONTROL            = 1,	///< PID Control proportional constant
     PARAM_STARTUP_ACTIVATION     = 2,	///< Start up activation byte
     PARAM_INPUT_MODE             = 3,	///< Input mode
-
-    /////////////////////////   not implemented   ////////////////////////
     
     PARAM_POS_RESOLUTION         = 4,	///< Angle resolution for inputs and
                                         ///  measurements. Used during
                                         ///  communication.
-    PARAM_MEAS_FILTER            = 5,   ///< Measurement filter, should be from
-                                        ///  0 to 1. 32 bit float number.
-    PARAM_CONTROL_DEADZONE       = 6,   ///< Applies a deadzone to the 
-                                        ///  controller
-    PARAM_MEASUREMENT_OFFSET     = 7,   ///< Adds a constant offset to the
+    PARAM_MEASUREMENT_OFFSET     = 5,   ///< Adds a constant offset to the
                                         ///  measurements
-    PARAM_MEASUREMENT_MULTIPLIER = 8,   ///< Adds a multiplier to the 
+    PARAM_MEASUREMENT_MULTIPLIER = 6,   ///< Adds a multiplier to the 
                                         ///  measurements
-    PARAM_POS_LIMIT_FLAG         = 9,   ///< Enable/disable position limiting
-    PARAM_POS_LIMIT				 = 10	///< Position limit values
+    PARAM_POS_LIMIT_FLAG         = 7,   ///< Enable/disable position limiting
+    PARAM_POS_LIMIT				 = 8,	///< Position limit values
     									///  | int32     | int32     | int32     | int32     | 
     									///  | INF_LIM_1 | SUP_LIM_1 | INF_LIM_2 | SUP_LIM_2 |
+
+    PARAM_MAX_STEP_POS           = 9,
+    PARAM_MAX_STEP_NEG           = 10
 };
 
 

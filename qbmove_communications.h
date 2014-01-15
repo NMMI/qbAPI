@@ -549,7 +549,7 @@ int commGetInfo(    comm_settings *comm_settings_t,
  *  \endcode    
 **/
 
-void commSetParam(  comm_settings *comm_settings_t,
+int commSetParam(  comm_settings *comm_settings_t,
                     int id,
                     enum qbmove_parameter type,
                     void *values,
@@ -618,9 +618,12 @@ int commGetParam(comm_settings *comm_settings_t,
 **/
 
 
-void commStoreParams( comm_settings *comm_settings_t, int id);
+int commStoreParams( comm_settings *comm_settings_t, int id);
 
-//==========================================================     commStoreParams
+// TODO
+int commStoreDefaultParams( comm_settings *comm_settings_t, int id);
+
+//==========================================================     commRestoreParams
 
 
 /** This function restores the factory default parameters.
@@ -645,7 +648,11 @@ void commStoreParams( comm_settings *comm_settings_t, int id);
 *  \endcode    
 **/
 
-void commRestoreParams( comm_settings *comm_settings_t, int id );
+int commRestoreParams( comm_settings *comm_settings_t, int id );
+
+///TODO
+
+int commInitMem(comm_settings *comm_settings_t, int id);
 
 //==========================================================     timevaldiff
 
@@ -684,7 +691,7 @@ char checksum ( char * data_buffer, int data_length );
 /** \} */
 
 
-void commBootloader(comm_settings *comm_settings_t, int id);
+int commBootloader(comm_settings *comm_settings_t, int id);
 
 // ----------------------------------------------------------------------------
 #endif
