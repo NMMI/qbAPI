@@ -85,8 +85,9 @@ enum qbmove_command
     								///  position measurements
     CMD_GET_CURRENTS    	= 133,  ///< Command for asking device's
     								///  current measurements
-    CMD_GET_CURR_AND_MEAS   = 134  ///< Command for asking device's
+    CMD_GET_CURR_AND_MEAS   = 134,  ///< Command for asking device's
                                     ///  measurements and currents
+    CMD_SET_POS_STIFF       = 135
 };
 
 /** \} */
