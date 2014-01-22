@@ -701,6 +701,8 @@ char checksum ( char * data_buffer, int data_length );
 
 int commBootloader(comm_settings *comm_settings_t, int id);
 
+int commCalibrate(comm_settings *comm_settings_t, int id);
+
 // ----------------------------------------------------------------------------
 #endif
 

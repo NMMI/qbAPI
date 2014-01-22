@@ -1271,6 +1271,48 @@ int commBootloader(comm_settings *comm_settings_t, int id)
 
 
 //==============================================================================
+//                                                                 commCalibrate
+//==============================================================================
+//  This function starts the caliobration of the stiffness
+//==============================================================================
+
+
+int commCalibrate(comm_settings *comm_settings_t, int id)
+{
+    char data_out[BUFFER_SIZE];     // output data buffer
+    char package_in[BUFFER_SIZE];
+    int package_in_size;
+    int n_bytes;
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        DWORD package_size_out;                 // for serial port access   
+    #endif    
+    
+        data_out[0] = ':';
+        data_out[1] = ':';
+        data_out[2] = (unsigned char) id;
+        data_out[3] = 2;
+        data_out[4] = CMD_CALIBRATE;       // command
+        data_out[5] = CMD_CALIBRATE;       // checksum
+    
+    #if (defined(_WIN32) || defined(_WIN64))
+        WriteFile(comm_settings_t->file_handle, data_out, 6, &package_size_out, NULL);
+    #else
+        ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+        if(n_bytes)
+            read(comm_settings_t->file_handle, package_in, n_bytes);
+
+        write(comm_settings_t->file_handle, data_out, 6);
+    #endif
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size == -1)
+            return -1;
+
+    return 0;
+}
+
+//==============================================================================
 //                                                                  commSetParam
 //==============================================================================
 // This function send a parameter to the QB Move.
