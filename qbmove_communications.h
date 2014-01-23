@@ -319,17 +319,12 @@ void commActivate(  comm_settings *comm_settings_t,
  *  \endcode  
 **/
 
-void commSetInputs( comm_settings *comm_settings_t, 
-                    int id, 
-                    short int inputs[2] );
+void commSetInputs( comm_settings *comm_settings_t, int id, short int inputs[]);
 
 
 //============================================================     commSetPosStiff
 
-void commSetPosStiff(comm_settings *comm_settings_t,
-                     int id,
-                     float* pos,
-                     float* stiff);
+void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[]);
 
 //============================================================     commGetInputs
 

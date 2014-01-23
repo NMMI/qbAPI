@@ -795,7 +795,7 @@ int commGetActivate(comm_settings *comm_settings_t, int id, char *activate){
 // This function send reference inputs to the qb move.
 //==============================================================================
 
-void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[2])
+void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[])
 {    
     char data_out[BUFFER_SIZE];		// output data buffer
     unsigned char package_in[BUFFER_SIZE];
@@ -838,7 +838,7 @@ void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[2])
 // This function send reference position and stiffness to the qbmove
 //==============================================================================
 
-void commSetPosStiff(comm_settings *comm_settings_t, int id, float* pos, float* stiff)
+void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[])
 {    
     char data_out[BUFFER_SIZE];     // output data buffer
     unsigned char package_in[BUFFER_SIZE];
@@ -852,28 +852,24 @@ void commSetPosStiff(comm_settings *comm_settings_t, int id, float* pos, float* 
     data_out[0]  = ':';
     data_out[1]  = ':';
     data_out[2] = (unsigned char) id;
-    data_out[3]  = 10;
+    data_out[3]  = 6;
 
 
     data_out[4]  = CMD_SET_POS_STIFF;                // command
-    data_out[5]  = ((char*) pos)[3];
-    data_out[6]  = ((char*) pos)[2];
-    data_out[7]  = ((char*) pos)[1];
-    data_out[8]  = ((char*) pos)[0];
-    data_out[9]  = ((char*) stiff)[3];
-    data_out[10] = ((char*) stiff)[2];
-    data_out[11] = ((char*) stiff)[1];
-    data_out[12] = ((char*) stiff)[0];
-    data_out[13] = checksum(data_out + 4, 9);   // checksum    
+    data_out[5] = ((char *) &inputs[0])[1];
+    data_out[6] = ((char *) &inputs[0])[0];
+    data_out[7] = ((char *) &inputs[1])[1];
+    data_out[8] = ((char *) &inputs[1])[0];
+    data_out[9] = checksum(data_out + 4, 5);   // checksum    
 
     #if (defined(_WIN32) || defined(_WIN64))
-        WriteFile(comm_settings_t->file_handle, data_out, 14, &package_size_out, NULL);
+        WriteFile(comm_settings_t->file_handle, data_out, 10, &package_size_out, NULL);
     #else
         ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
         if(n_bytes)
             read(comm_settings_t->file_handle, package_in, n_bytes);
 
-        write(comm_settings_t->file_handle, data_out, 14);
+        write(comm_settings_t->file_handle, data_out, 10);
     #endif
 
 }
@@ -1370,8 +1366,8 @@ int commSetParam(  comm_settings *comm_settings_t,
         	value_size  = 1;
             break;
         case PARAM_POS_LIMIT:
-        	value 		= (int32_t *) values;
-        	value_size  = 4;
+        	value 		= (short int *) values;
+        	value_size  = 2;
             break;
         case PARAM_MAX_STEP_POS:
             value       = (int32_t *) values;
