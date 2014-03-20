@@ -1349,6 +1349,10 @@ int commSetParam(  comm_settings *comm_settings_t,
             value       = (unsigned char *) values;
             value_size  = 1;
             break;
+        case PARAM_CONTROL_MODE:
+            value       = (unsigned char *) values;
+            value_size  = 1;
+            break;
         case PARAM_POS_RESOLUTION:
             value       = (unsigned char *) values;
             value_size  = 1;
@@ -1453,12 +1457,15 @@ int commGetParam(comm_settings *comm_settings_t,
             values_size = 1;
             break;
         case PARAM_PID_CONTROL:
-                values_size = 4;
-                break;
+            values_size = 4;
+            break;
         case PARAM_STARTUP_ACTIVATION:
             values_size = 1;
             break;
         case PARAM_INPUT_MODE:
+            values_size = 1;
+            break;
+        case PARAM_CONTROL_MODE:
             values_size = 1;
             break;
         case PARAM_POS_RESOLUTION:
@@ -1612,7 +1619,7 @@ int commStoreDefaultParams( comm_settings *comm_settings_t, int id )
 }
 
 //==============================================================================
-//                                                               commRestoreParams
+//                                                             commRestoreParams
 //==============================================================================
 
 int commRestoreParams( comm_settings *comm_settings_t, int id )
