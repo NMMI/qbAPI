@@ -507,6 +507,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 {
         unsigned char package_in[BUFFER_SIZE];
+        unsigned char package_out[BUFFER_SIZE];
         int id;
         int h = 0;
 	    unsigned char data_out[BUFFER_SIZE];		// output data buffer
@@ -619,6 +620,7 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
     unsigned char auxstring[3];
 
+    const int size = 512;
     
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD n_bytes_out;					// for serial port access
@@ -626,7 +628,9 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
     unsigned char aux;
     int i = 0;
 #else
-    int bytes;  
+    int bytes;
+    int count = 0;
+    char aux_buffer[size];
 #endif	
     
     auxstring[0] = '?'; 
@@ -648,10 +652,31 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
     }    
 #else
     write(comm_settings_t->file_handle, auxstring, 3);   
-    usleep(500000);
-    ioctl(comm_settings_t->file_handle, FIONREAD, &bytes);
-    printf("BYTES: %d\n", bytes);
-    read(comm_settings_t->file_handle, buffer, bytes);
+    usleep(200000);
+    // usleep(2000000);
+    while(1) {
+        usleep(50000);
+        if(ioctl(comm_settings_t->file_handle, FIONREAD, &bytes) < 0)
+            break;
+        if(bytes == 0)
+            break;
+
+        printf("Bytes: %d\n", bytes);
+        if(bytes > size)
+            bytes = size;
+
+        read(comm_settings_t->file_handle, aux_buffer, bytes);
+
+        strncpy(buffer + count, aux_buffer, bytes);
+
+        count += bytes;
+
+        printf("Count: %d\n", count);
+
+    }
+
+    strcpy(buffer + count, "\0");
+
 #endif        
     
 }

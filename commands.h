@@ -102,7 +102,7 @@ enum qbmove_command
 enum qbmove_parameter
 {
     
-    PARAM_ID		    	     = 0,	///< Device's ID number
+    PARAM_ID                     = 0,	///< Device's ID number
     PARAM_PID_CONTROL            = 1,	///< PID Control proportional constant
     PARAM_STARTUP_ACTIVATION     = 2,	///< Start up activation byte
     PARAM_INPUT_MODE             = 3,	///< Input mode
