@@ -58,7 +58,6 @@
     #include <sys/time.h>
     #include <time.h>
     #include <stdlib.h>
-    #define _BSD_SOURCE
 #endif
 
 #if !(defined(_WIN32) || defined(_WIN64)) && !(defined(__APPLE__))
@@ -589,7 +588,7 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
                  }
      
              #else
-                 usleep(20000);
+                 usleep(3000);
                  ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
                  if (n_bytes >= 6)
                  {
@@ -661,7 +660,6 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
         if(bytes == 0)
             break;
 
-        printf("Bytes: %d\n", bytes);
         if(bytes > size)
             bytes = size;
 
@@ -670,9 +668,6 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
         strncpy(buffer + count, aux_buffer, bytes);
 
         count += bytes;
-
-        printf("Count: %d\n", count);
-
     }
 
     strcpy(buffer + count, "\0");
@@ -701,7 +696,7 @@ int commPing(comm_settings *comm_settings_t, int id)
 
 	    package_out[0]  = ':';
 	    package_out[1]  = ':';
-	    package_out[2] = (unsigned char) id;
+	    package_out[2]  = (unsigned char) id;
 	    package_out[3]  = 2;
 
 
