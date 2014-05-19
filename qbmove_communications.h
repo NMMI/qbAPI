@@ -438,13 +438,19 @@ int commGetCurrents(    comm_settings *comm_settings_t,
                            int id, 
                            short int currents[2] );
 
-//======================================================     commGetCurrAndMeas
+//=======================================================     commGetCurrAndMeas
 
 // Values is a short int array of 2 + NUM_OF_SENSORS (for the qbmove is 5)
 
 int commGetCurrAndMeas( comm_settings *comm_settings_t,
                         int id,
                         short int *values);
+
+//===============================================================     commGetEmg
+
+int commGetEmg(comm_settings *comm_settings_t,
+               int id,
+               short int emg[2]);
 
 
 //==========================================================     commGetActivate
@@ -697,6 +703,8 @@ char checksum ( char * data_buffer, int data_length );
 int commBootloader(comm_settings *comm_settings_t, int id);
 
 int commCalibrate(comm_settings *comm_settings_t, int id);
+
+int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, short int repetitions);
 
 // ----------------------------------------------------------------------------
 #endif

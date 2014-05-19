@@ -41,7 +41,7 @@
 
 #include "qbmove_communications.h"
 #include "commands.h"
-#include "../definitions.h"
+//#include "../definitions.h"
 
 
 #include <stdio.h>   /* Standard input/output definitions */
@@ -506,14 +506,14 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 {
         unsigned char package_in[BUFFER_SIZE];
-        unsigned char package_out[BUFFER_SIZE];
         int id;
         int h = 0;
 	    unsigned char data_out[BUFFER_SIZE];		// output data buffer
 	    int n_bytes;
 
 	    #if (defined(_WIN32) || defined(_WIN64))
-	        DWORD package_size_out;					// for serial port access	
+	        DWORD package_size_out;					// for serial port access
+            unsigned char package_out[BUFFER_SIZE];
 	    #endif    
 		
         
@@ -1069,6 +1069,59 @@ int commGetCurrents(comm_settings *comm_settings_t, int id, short int currents[2
 
 
 //==============================================================================
+//                                                          commGetEmg
+//==============================================================================
+// This function gets currents from the QB Move.
+//==============================================================================
+
+int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]){
+
+    char data_out[BUFFER_SIZE];         // output data buffer
+    char package_in[BUFFER_SIZE];       // output data buffer
+    int package_in_size;
+    int n_bytes;
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        DWORD package_size_out;                 // for serial port access   
+    #endif    
+    
+
+//=================================================     preparing packet to send
+
+    data_out[0] = ':';
+    data_out[1] = ':';
+    data_out[2] = (unsigned char) id;
+    data_out[3] = 2;
+    data_out[4] = CMD_GET_EMG;             // command
+    data_out[5] = CMD_GET_EMG;             // checksum
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        WriteFile(comm_settings_t->file_handle, data_out, 6, &package_size_out, NULL);
+    #else
+        ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+        if(n_bytes)
+            read(comm_settings_t->file_handle, package_in, n_bytes);
+
+        write(comm_settings_t->file_handle, data_out, 6);
+    #endif
+
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size == -1)
+        return -1;
+//==============================================================     get packet
+
+    ((char *) &emg[0])[0] = package_in[2];
+    ((char *) &emg[0])[1] = package_in[1];
+    
+    ((char *) &emg[1])[0] = package_in[4];
+    ((char *) &emg[1])[1] = package_in[3];
+
+
+    return 0;
+}
+
+//==============================================================================
 //                                                            commGetCurrAndMeas
 //==============================================================================
 // This function gets currents and measurements from the QB Move.
@@ -1319,6 +1372,53 @@ int commCalibrate(comm_settings *comm_settings_t, int id)
             read(comm_settings_t->file_handle, package_in, n_bytes);
 
         write(comm_settings_t->file_handle, data_out, 6);
+    #endif
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size == -1)
+            return -1;
+
+    return 0;
+}
+
+//==============================================================================
+//                                                             commHandCalibrate
+//==============================================================================
+//  This function start the hand calibration
+//==============================================================================
+
+
+int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, short int repetitions)
+{
+    char data_out[BUFFER_SIZE];     // output data buffer
+    char package_in[BUFFER_SIZE];
+    int package_in_size;
+    int n_bytes;
+
+    #if (defined(_WIN32) || defined(_WIN64))
+        DWORD package_size_out;                 // for serial port access   
+    #endif    
+    
+        data_out[0] = ':';
+        data_out[1] = ':';
+        data_out[2] = (unsigned char) id;
+        data_out[3] = 6;
+        data_out[4] = CMD_CALIBRATE;       // command
+        data_out[5] = ((char *) &speed)[1];
+        data_out[6] = ((char *) &speed)[0];
+        data_out[7] = ((char *) &repetitions)[1];
+        data_out[8] = ((char *) &repetitions)[0];
+        data_out[9] = checksum(data_out + 4, 5);   // checksum    
+
+    
+    #if (defined(_WIN32) || defined(_WIN64))
+        WriteFile(comm_settings_t->file_handle, data_out, 10, &package_size_out, NULL);
+    #else
+        ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+        if(n_bytes)
+            read(comm_settings_t->file_handle, package_in, n_bytes);
+
+        write(comm_settings_t->file_handle, data_out, 10);
     #endif
 
     package_in_size = RS485read(comm_settings_t, id, package_in);

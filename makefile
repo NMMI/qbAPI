@@ -1,18 +1,19 @@
 # compiler
-COMPILER = gcc
+COMPILER = g++
 
 # flags
 CFLAGS = -c -Wall
 
-all:objs/qbmove_packages.o objs/qbmove_communications.o objs lib
-	ar rcs lib/libqbmove.a objs/*.o
-	cp qbmove_communications.h qbmove_packages.h lib
-    
-objs/qbmove_packages.o:qbmove_packages.c objs
-	$(COMPILER) $(CFLAGS) qbmove_packages.c -o objs/qbmove_packages.o
+all:objs/qbmove_communications.o objs/qbmovelibrary.o objs lib
+	ar rcs lib/libqbmove.a objs/qbmove_communications.o objs/qbmovelibrary.o
+	ar rcs lib/libqbmove_comm.a objs/qbmove_communications.o
+	cp qbmove_communications.h lib
 
 objs/qbmove_communications.o:qbmove_communications.c objs
 	$(COMPILER) $(CFLAGS) qbmove_communications.c -o objs/qbmove_communications.o
+
+objs/qbmovelibrary.o:qbmovelibrary.cpp objs
+	$(COMPILER) $(CFLAGS) qbmovelibrary.cpp -o objs/qbmovelibrary.o
 
 clean:
 	rm -rf *.o bin objs lib

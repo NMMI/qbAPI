@@ -1,1 +1,6 @@
 .DS_Store
+lib/libqbmove.a
+lib/libqbmove_comm.a
+lib/qbmove_communications.h
+objs/qbmove_communications.o
+objs/qbmovelibrary.o
