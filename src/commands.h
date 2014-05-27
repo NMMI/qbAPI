@@ -123,9 +123,10 @@ enum qbmove_parameter
 
     PARAM_MAX_STEP_POS           = 9,
     PARAM_MAX_STEP_NEG           = 10,
-    PARAM_POS_RESOLUTION         = 11   ///< Angle resolution for inputs and
+    PARAM_POS_RESOLUTION         = 11,  ///< Angle resolution for inputs and
                                         ///  measurements. Used during
                                         ///  communication.
+    PARAM_CURRENT_LIMIT          = 12   ///< Limit for absorbed current
 };
 
 

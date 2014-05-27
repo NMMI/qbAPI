@@ -70,6 +70,7 @@
 #if (defined(_WIN32) || defined(_WIN64))
     //#define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
     #define BAUD_RATE   460800            ///< Virtual COM baud rate - WINDOWS
+    #define usleep(X) Sleep((X) / 1000)
 #elif (defined(__APPLE__))
     #define BAUD_RATE   460800
 #else
@@ -1501,10 +1502,13 @@ int commSetParam(  comm_settings *comm_settings_t,
             value       = (int32_t *) values;
             value_size  = 4;
             break;
+        case PARAM_CURRENT_LIMIT:
+            value       = (int16_t *) values;
+            value_size  = 2;
+            break;
     }
-	
-	
-	
+
+
     data_out[0]  = ':';
     data_out[1]  = ':';
     data_out[2]  = (unsigned char) id;
@@ -1606,6 +1610,8 @@ int commGetParam(comm_settings *comm_settings_t,
         case PARAM_MAX_STEP_POS:
             break;
         case PARAM_MAX_STEP_NEG:
+            break;
+        case PARAM_CURRENT_LIMIT:
             break;
     }
 
