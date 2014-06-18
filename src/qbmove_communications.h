@@ -44,7 +44,6 @@
 //==============================================================================
 
 #include "commands.h"
-#include <sys/time.h>
 #include <time.h>
 
 #if (defined(_WIN32) || defined(_WIN64))
@@ -56,6 +55,7 @@
 **/
     #define HANDLE  int
     #define INVALID_HANDLE_VALUE    -1
+    #include <sys/time.h>
 #endif
 
 //==============================================================================
@@ -521,7 +521,7 @@ int commGetActivate(    comm_settings *comm_settings_t,
 
 int commGetInfo(    comm_settings *comm_settings_t, 
                     int id, 
-                    unsigned char info_type, 
+                    short int info_type, 
                     char *info );
 
 /** \} */

@@ -649,9 +649,9 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
         if(n_bytes_in)
             buffer[i] = aux;
         i++;
-    }    
+    }
 #else
-    write(comm_settings_t->file_handle, auxstring, 3);   
+    write(comm_settings_t->file_handle, auxstring, 3);
     usleep(200000);
     // usleep(2000000);
     while(1) {
@@ -673,8 +673,7 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
 
     strcpy(buffer + count, "\0");
 
-#endif        
-    
+#endif
 }
 
 //==============================================================================
@@ -1194,23 +1193,28 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t,
 // This function gets a string of information from the QB Move.
 //==============================================================================
 
-int commGetInfo(comm_settings *comm_settings_t, int id, unsigned char info_type, char *info){
+int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, char *buffer){
 
     char data_out[BUFFER_SIZE];			// output data buffer
     char package_in[BUFFER_SIZE];		// output data buffer
-    int n_bytes;	
-    int package_in_size;
-    unsigned char num_of_pages;
+    int n_bytes;
     char aux_string[256];
-    int i;
+
 	
 	#if (defined(_WIN32) || defined(_WIN64))
-	    DWORD package_size_out;					// for serial port access	
-	#endif    
-	
+	    DWORD package_size_out;					// for serial port access
+        DWORD n_bytes_in = 0;
+        char aux;
+        int i;
+	#else
+        int bytes;
+        int count = 0;
+        const int size = 512;
+        char aux_buffer[size];
+    #endif
 
     strcpy(aux_string, "");
-    strcpy(info, "");    
+    strcpy(buffer, "");
 
 //=================================================		preparing packet to send
 
@@ -1221,77 +1225,49 @@ int commGetInfo(comm_settings *comm_settings_t, int id, unsigned char info_type,
     data_out[4] = CMD_GET_INFO;                        // command
     data_out[5] = ((unsigned char *) &info_type)[1];   // parameter type
     data_out[6] = ((unsigned char *) &info_type)[0];   // parameter type
-    data_out[7] = 0;    
+    data_out[7] = 0;
     data_out[8] = checksum(data_out + 4, 4);           // checksum
 	
 	
 #if (defined(_WIN32) || defined(_WIN64))
     WriteFile(comm_settings_t->file_handle, data_out, 9, &package_size_out, NULL);
-#else
-    ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
-    if(n_bytes)
-        read(comm_settings_t->file_handle, package_in, n_bytes);
 
+    n_bytes_in = 1;
+
+    Sleep(200);
+
+    while(n_bytes_in)
+    {
+        ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL);
+        if(n_bytes_in)
+            buffer[i] = aux;
+        i++;
+    }
+#else
     write(comm_settings_t->file_handle, data_out, 9);
+
+    usleep(200000);
+    // usleep(2000000);
+    while(1) {
+        usleep(50000);
+        if(ioctl(comm_settings_t->file_handle, FIONREAD, &bytes) < 0)
+            break;
+        if(bytes == 0)
+            break;
+
+        if(bytes > size)
+            bytes = size;
+
+        read(comm_settings_t->file_handle, aux_buffer, bytes);
+
+        strncpy(buffer + count, aux_buffer, bytes);
+
+        count += bytes;
+    }
+
+    strcpy(buffer + count, "\0");
 #endif
 
-
-//==============================================================	 get packet
-
-    package_in_size = RS485read(comm_settings_t, id, package_in);
-
-    if (package_in_size == -1)
-        return -1;
-    
-	    strncpy(info, package_in + 2, package_in_size - 2);
-	
-    num_of_pages =  package_in[1];
-    
-    strcat(info, aux_string);
-    
-    if (num_of_pages > 1)
-    {        
-        for(i = 1; i < num_of_pages; ++i)
-        {
-						
-		    data_out[0]  = ':';
-		    data_out[1]  = ':';
-		    data_out[2] = (unsigned char) id;
-		    data_out[3]  = 5;
-						
-		    data_out[4] = CMD_GET_INFO;                        // command
-
-		    data_out[5] = ((unsigned char *) &info_type)[1];          // parameter type
-		    data_out[6] = ((unsigned char *) &info_type)[0];          // parameter type
-
-		    data_out[7] = i;    
-		    data_out[8] = checksum(data_out + 4, 4);             // checksum
-		
-		
-
-		#if (defined(_WIN32) || defined(_WIN64))
-		    WriteFile(comm_settings_t->file_handle, data_out, 9, &package_size_out, NULL);
-		#else
-		    ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
-		    if(n_bytes)
-		        read(comm_settings_t->file_handle, package_in, n_bytes);
-
-		    write(comm_settings_t->file_handle, data_out, 9);
-		#endif
-
-            package_in_size = 
-                RS485read(comm_settings_t, id, package_in);
-
-            if (package_in_size == -1) return -1;
-			
-		    strncpy(info, package_in + 2, package_in_size - 2);
-			
-            num_of_pages = package_in[1];
-                
-            strcat(info, aux_string);
-        }
-    }
-    
     return 0;
 }
 
