@@ -67,19 +67,22 @@
 
 //=================================================================     #defines
 
+
+
 #if (defined(_WIN32) || defined(_WIN64))
     //#define BAUD_RATE   CBR_115200      ///< Virtual COM baud rate - WINDOWS
-    #define BAUD_RATE   460800            ///< Virtual COM baud rate - WINDOWS
+    //#define BAUD_RATE   460800            ///< Virtual COM baud rate - WINDOWS
     #define usleep(X) Sleep((X) / 1000)
 #elif (defined(__APPLE__))
-    #define BAUD_RATE   460800
+    //#define BAUD_RATE   460800
 #else
-    #define BAUD_RATE   B460800         ///< Virtual COM baud rate - UNIX
+    //#define BAUD_RATE   B460800         ///< Virtual COM baud rate - UNIX
 #endif
 
 
 #define BUFFER_SIZE 500
 ///< Size of buffers that store communication packets
+
 
 //#define VERBOSE                 ///< Used for debugging
 
@@ -209,7 +212,7 @@ int RS485listPorts( char list_of_ports[10][255] )
 //==============================================================================
 
 
-void openRS485(comm_settings *comm_settings_t, const char *port_s)
+void openRS485(comm_settings *comm_settings_t, const char *port_s, DWORD BAUD_RATE)
 {
 
 //////////////////////////////   WINDOWS CODE   //////////////////////////////
