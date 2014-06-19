@@ -128,7 +128,7 @@ int RS485listPorts( char list_of_ports[10][255] );
  *  \endcode
 **/
 
-void openRS485( comm_settings *comm_settings_t, const char *port_s );
+void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 460800);
 
 //===============================================================     closeRS485
 
