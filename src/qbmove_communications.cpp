@@ -212,7 +212,7 @@ int RS485listPorts( char list_of_ports[10][255] )
 //==============================================================================
 
 
-void openRS485(comm_settings *comm_settings_t, const char *port_s, DWORD BAUD_RATE)
+void openRS485(comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE)
 {
 
 //////////////////////////////   WINDOWS CODE   //////////////////////////////
