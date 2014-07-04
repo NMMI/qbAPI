@@ -39,24 +39,15 @@
 #define QBMOVE_SERIALPORT_H_INCLUDED
 
 
-//==============================================================================
-//                                                                       defines
-//==============================================================================
-
-#include "commands.h"
-#include <time.h>
-
-#if (defined(_WIN32) || defined(_WIN64))
-    #include <windows.h>
-#else
-/**
- * On unix systems, HANDLE is defined as an _int_ and INVALID_HANDLE_VALUE
- * is defined as -1.
-**/
+#if !(defined(_WIN32) || defined(_WIN64))
     #define HANDLE  int
     #define INVALID_HANDLE_VALUE    -1
-    #include <sys/time.h>
 #endif
+
+//=================================================================     includes
+
+#include "commands.h"
+
 
 //==============================================================================
 //                                                              structures/enums
@@ -104,7 +95,7 @@ struct comm_settings
  *  \endcode    
 **/
 
-int RS485listPorts( char list_of_ports[10][255] );    
+int RS485listPorts( char list_of_ports[10][255] );
     
 //================================================================     openRS485
 
