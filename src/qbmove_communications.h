@@ -39,7 +39,9 @@
 #define QBMOVE_SERIALPORT_H_INCLUDED
 
 
-#if !(defined(_WIN32) || defined(_WIN64))
+#if (defined(_WIN32) || defined(_WIN64))
+    #include <windows.h>
+#else
     #define HANDLE  int
     #define INVALID_HANDLE_VALUE    -1
 #endif
