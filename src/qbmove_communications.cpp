@@ -475,7 +475,6 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
     int id;
     int h = 0;
     unsigned char data_out[BUFFER_SIZE];        // output data buffer
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                     // for serial port access
@@ -500,6 +499,8 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 
     SetCommTimeouts(comm_settings_t->file_handle, &cts);    
 #else
+    int n_bytes;
+
     ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
     if(n_bytes)
         read(comm_settings_t->file_handle, package_in, n_bytes);
@@ -578,7 +579,6 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 
 void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
     unsigned char auxstring[3];
-    const int size = 512;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD n_bytes_out;                  // for serial port access
@@ -586,6 +586,7 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
     unsigned char aux;
     int i = 0;
 #else
+    const int size = 512;
     int bytes;
     int count = 0;
     char aux_buffer[size];
@@ -601,6 +602,7 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
 
     Sleep(200);
 
+    
     while(n_bytes_in) {
         ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL);
         if(n_bytes_in)
@@ -642,10 +644,11 @@ int commPing(comm_settings *comm_settings_t, int id)
     char package_out[BUFFER_SIZE];      // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access	
+#else
+    int n_bytes;
 #endif
 
 //=================================================		preparing packet to send
@@ -686,11 +689,12 @@ int commPing(comm_settings *comm_settings_t, int id)
 void commActivate(comm_settings *comm_settings_t, int id, char activate) {
 
     char data_out[BUFFER_SIZE];             // output data buffer
-    char package_in[BUFFER_SIZE];
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
+    char package_in[BUFFER_SIZE];
 #endif
 
     data_out[0] = ':';
@@ -724,11 +728,14 @@ int commGetActivate(comm_settings *comm_settings_t, int id, char *activate){
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
+    
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
 #endif
+
 
 //=================================================		preparing packet to send
 
@@ -770,11 +777,12 @@ int commGetActivate(comm_settings *comm_settings_t, int id, char *activate){
 void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[]) {
 
     char data_out[BUFFER_SIZE];         // output data buffer
-    unsigned char package_in[BUFFER_SIZE];
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    unsigned char package_in[BUFFER_SIZE];
+    int n_bytes;
 #endif
 
 
@@ -812,12 +820,13 @@ void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[]) {
 void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[]) {
 
     char data_out[BUFFER_SIZE];                 // output data buffer
+
+#if (defined(_WIN32) || defined(_WIN64))
+    DWORD package_size_out;                 // for serial port access   
+#else
     unsigned char package_in[BUFFER_SIZE];
     int n_bytes;
-
-    #if (defined(_WIN32) || defined(_WIN64))
-        DWORD package_size_out;                 // for serial port access   
-    #endif
+#endif
 
 
     data_out[0] = ':';
@@ -855,11 +864,13 @@ int commGetInputs(comm_settings *comm_settings_t, int id, short int inputs[2]) {
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
+    
 
-    #if (defined(_WIN32) || defined(_WIN64))
-        DWORD package_size_out;         // for serial port access	
-    #endif
+#if (defined(_WIN32) || defined(_WIN64))
+    DWORD package_size_out;         // for serial port access	
+#else
+    int n_bytes;
+#endif
 
 //=================================================		preparing packet to send
 
@@ -908,10 +919,11 @@ int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measur
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
 #endif
 
 //=================================================		preparing packet to send
@@ -967,10 +979,11 @@ int commGetCurrents(comm_settings *comm_settings_t, int id, short int currents[2
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
 #endif
 
 //=================================================		preparing packet to send
@@ -1019,10 +1032,11 @@ int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]) {
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access   
+#else
+    int n_bytes;
 #endif
 
 //=================================================     preparing packet to send
@@ -1073,10 +1087,11 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t,
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access   
+#else
+    int n_bytes;
 #endif
 
 //=================================================     preparing packet to send
@@ -1134,14 +1149,12 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t,
 int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, char *buffer) {
 
     char data_out[BUFFER_SIZE];             // output data buffer
-    char aux_string[256];
-
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access
     DWORD n_bytes_in = 0;
-    char aux;
-    int i;
+    unsigned char aux;
+    int i = 0;
 #else
     int bytes;
     int count = 0;
@@ -1149,15 +1162,14 @@ int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, cha
     char aux_buffer[size];
 #endif
 
-    strcpy(aux_string, "");
     strcpy(buffer, "");
 
 //=================================================		preparing packet to send
 
-    data_out[0]  = ':';
-    data_out[1]  = ':';
+    data_out[0] = ':';
+    data_out[1] = ':';
     data_out[2] = (unsigned char) id;
-    data_out[3]  = 5;
+    data_out[3] = 5;
     data_out[4] = CMD_GET_INFO;                        // command
     data_out[5] = ((unsigned char *) &info_type)[1];   // parameter type
     data_out[6] = ((unsigned char *) &info_type)[0];   // parameter type
@@ -1222,10 +1234,11 @@ int commBootloader(comm_settings *comm_settings_t, int id) {
     char data_out[BUFFER_SIZE];             // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access   
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';
@@ -1266,10 +1279,11 @@ int commCalibrate(comm_settings *comm_settings_t, int id) {
     char data_out[BUFFER_SIZE];             // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access   
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';
@@ -1308,10 +1322,11 @@ int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, s
     char data_out[BUFFER_SIZE];             // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access   
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';
@@ -1357,12 +1372,13 @@ int commSetParam(  comm_settings *comm_settings_t,
     char data_out[BUFFER_SIZE];     // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
     void *value;
     unsigned short int value_size, i, h;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;         // for serial port access	
+#else
+    int n_bytes;
 #endif
 
     switch (type){
@@ -1485,11 +1501,12 @@ int commGetParam(comm_settings *comm_settings_t,
     int package_in_size;
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];
-    int n_bytes;
     unsigned short int values_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
 #endif
 
     switch (type){
@@ -1594,10 +1611,11 @@ int commStoreParams( comm_settings *comm_settings_t, int id ) {
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';
@@ -1636,10 +1654,11 @@ int commStoreDefaultParams( comm_settings *comm_settings_t, int id ) {
     char data_out[BUFFER_SIZE];         // output data buffers
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access   
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';
@@ -1678,10 +1697,11 @@ int commRestoreParams( comm_settings *comm_settings_t, int id ) {
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';
@@ -1721,10 +1741,11 @@ int commInitMem(comm_settings *comm_settings_t, int id) {
     char data_out[BUFFER_SIZE];     // output data buffer
     char package_in[BUFFER_SIZE];
     int package_in_size;
-    int n_bytes;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access   
+#else
+    int n_bytes;
 #endif
 
     data_out[0] = ':';

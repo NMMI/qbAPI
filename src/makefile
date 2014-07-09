@@ -11,7 +11,6 @@ LIB_FOLDER = ../lib
 all:$(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/qbmovelibrary.o $(OBJS_FOLDER) $(LIB_FOLDER)
 	ar rcs $(LIB_FOLDER)/libqbmove.a $(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/qbmovelibrary.o
 	ar rcs $(LIB_FOLDER)/libqbmove_comm.a $(OBJS_FOLDER)/qbmove_communications.o
-#cp qbmove_communications.h $(LIB_FOLDER)
 
 $(OBJS_FOLDER)/qbmove_communications.o:qbmove_communications.cpp $(OBJS_FOLDER)
 	$(COMPILER) $(CFLAGS) qbmove_communications.cpp -o $(OBJS_FOLDER)/qbmove_communications.o
