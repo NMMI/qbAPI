@@ -40,6 +40,7 @@
 #ifndef COM_COMMANDS_DEFINITIONS_H_INCLUDED
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
+#define NUM_OF_SENSORS 3
 
 //==============================================================================
 //                                                                      COMMANDS
