@@ -46,7 +46,9 @@
     #define INVALID_HANDLE_VALUE    -1
 #endif
 
-//=================================================================     includes
+#if !(defined(_WIN32) || defined(_WIN64)) && !(defined(__APPLE__)) //only for linux
+    #include <termios.h>
+#endif
 
 #include "commands.h"
 
@@ -121,7 +123,12 @@ int RS485listPorts( char list_of_ports[10][255] );
  *  \endcode
 **/
 
-void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 460800);
+#if !(defined(_WIN32) || defined(_WIN64)) && !(defined(__APPLE__)) //only for linux
+    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = B460800);
+#else
+    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 460800);
+#endif
+
 
 //===============================================================     closeRS485
 
