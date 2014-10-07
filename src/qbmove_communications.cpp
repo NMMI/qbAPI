@@ -1141,6 +1141,66 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t,
 }
 
 //==============================================================================
+//                                                             commGetVelocities
+//==============================================================================
+// This function gets measurements from the QB Move.
+//==============================================================================
+
+int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurements[]) {
+
+    char data_out[BUFFER_SIZE];         // output data buffer
+    char package_in[BUFFER_SIZE];       // output data buffer
+    int package_in_size;
+
+#if (defined(_WIN32) || defined(_WIN64))
+    DWORD package_size_out;             // for serial port access   
+#else
+    int n_bytes;
+#endif
+
+//=================================================     preparing packet to send
+
+    data_out[0] = ':';
+    data_out[1] = ':';
+    data_out[2] = (unsigned char) id;
+    data_out[3] = 2;
+    data_out[4] = CMD_GET_VELOCITIES;             // command
+    data_out[5] = CMD_GET_VELOCITIES;             // checksum
+
+#if (defined(_WIN32) || defined(_WIN64))
+    WriteFile(comm_settings_t->file_handle, data_out, 6, &package_size_out, NULL);
+#else
+    ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+    if(n_bytes)
+        read(comm_settings_t->file_handle, package_in, n_bytes);
+
+    write(comm_settings_t->file_handle, data_out, 6);
+#endif
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size == -1)
+        return -1;
+
+//==============================================================     get packet
+
+    ((char *) &measurements[0])[0] = package_in[2];
+    ((char *) &measurements[0])[1] = package_in[1];
+
+    ((char *) &measurements[1])[0] = package_in[4];
+    ((char *) &measurements[1])[1] = package_in[3];
+
+    ((char *) &measurements[2])[0] = package_in[6];
+    ((char *) &measurements[2])[1] = package_in[5];
+
+#if NUM_OF_SENSORS == 4
+    ((char *) &measurements[3])[0] = package_in[8];
+    ((char *) &measurements[3])[1] = package_in[7];
+#endif
+
+    return 0;
+}
+
+//==============================================================================
 //                                                                   commGetInfo
 //==============================================================================
 // This function gets a string of information from the QB Move.

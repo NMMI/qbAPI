@@ -92,7 +92,10 @@ enum qbmove_command
                                     ///  measurements and currents
     CMD_SET_POS_STIFF       = 135,
 
-    CMD_GET_EMG             = 136
+    CMD_GET_EMG             = 136,
+
+    CMD_GET_VELOCITIES      = 137   ///< Command for asking device's
+                                    ///  current velocity of motors and pulley
 };
 
 /** \} */

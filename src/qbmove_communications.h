@@ -452,6 +452,9 @@ int commGetEmg(comm_settings *comm_settings_t,
                int id,
                short int emg[2]);
 
+//========================================================     commGetVelocities
+int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurements[]);
+
 
 //==========================================================     commGetActivate
 
