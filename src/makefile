@@ -4,9 +4,19 @@ COMPILER = g++
 # flags
 CFLAGS = -c -Wall
 
+ifeq "$(OS)"  "Windows_NT"
+
+# folders
+OBJS_FOLDER = ..\objs
+LIB_FOLDER = ..\lib
+
+else
+
 # folders
 OBJS_FOLDER = ../objs
 LIB_FOLDER = ../lib
+
+endif
 
 all:$(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/qbmovelibrary.o $(OBJS_FOLDER) $(LIB_FOLDER)
 	ar rcs $(LIB_FOLDER)/libqbmove.a $(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/qbmovelibrary.o
@@ -20,8 +30,8 @@ $(OBJS_FOLDER)/qbmovelibrary.o:qbmovelibrary.cpp $(OBJS_FOLDER)
 
 clean:
 ifeq "$(OS)"  "Windows_NT"
-	erase /Q /S ..\objs
-	erase /Q /S ..\lib
+	rmdir /Q /S ..\objs
+	rmdir /Q /S ..\lib
 else
 	rm -rf $(OBJS_FOLDER) $(LIB_FOLDER)
 endif
