@@ -1506,6 +1506,25 @@ int commSetParam(  comm_settings *comm_settings_t,
             value       = (int16_t *) values;
             value_size  = 2;
             break;
+
+        case PARAM_EMG_CALIB_FLAG:
+            value       = (int8_t *) values;
+            value_size  = 1;
+            break;
+
+        case PARAM_EMG_THRESHOLD:
+            value       = (int16_t *) values;
+            value_size  = 2;
+            break;
+
+
+        case PARAM_EMG_MAX_VALUE:
+            value       = (int32_t *) values;
+            value_size  = 4;
+            break;
+
+        default:
+            break;
     }
 
 
@@ -1561,7 +1580,7 @@ int commGetParam(comm_settings *comm_settings_t,
     int package_in_size;
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];
-    unsigned short int values_size;
+    unsigned short int value_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;             // for serial port access	
@@ -1571,52 +1590,67 @@ int commGetParam(comm_settings *comm_settings_t,
 
     switch (type){
         case PARAM_ID:
-            values_size = 1;
+            value_size = 1;
             break;
 
         case PARAM_PID_CONTROL:
-            values_size = 4;
+            value_size = 4;
             break;
 
         case PARAM_STARTUP_ACTIVATION:
-            values_size = 1;
+            value_size = 1;
             break;
 
         case PARAM_INPUT_MODE:
-            values_size = 1;
+            value_size = 1;
             break;
 
         case PARAM_CONTROL_MODE:
-            values_size = 1;
+            value_size = 1;
             break;
 
         case PARAM_POS_RESOLUTION:
-            values_size = 1;
+            value_size = 1;
             break;
 
         case PARAM_MEASUREMENT_OFFSET:
-            values_size = 2;
+            value_size = 2;
             break;
 
         case PARAM_MEASUREMENT_MULTIPLIER:
-            values_size = 4;
+            value_size = 4;
             break;
 
         case PARAM_POS_LIMIT_FLAG:
-            values_size = 1;
+            value_size = 1;
             break;
 
         case PARAM_POS_LIMIT:
-            values_size = 4;
+            value_size = 4;
             break;
 
         case PARAM_MAX_STEP_POS:
+            value_size = 4;
             break;
 
         case PARAM_MAX_STEP_NEG:
+            value_size = 4;
             break;
 
         case PARAM_CURRENT_LIMIT:
+            value_size = 2;
+            break;
+
+        case PARAM_EMG_CALIB_FLAG:
+            value_size = 1;
+            break;
+
+        case PARAM_EMG_THRESHOLD:
+            value_size = 2;
+            break;
+
+        case PARAM_EMG_MAX_VALUE:
+            value_size = 4;
             break;
     }
 
@@ -1652,10 +1686,10 @@ int commGetParam(comm_settings *comm_settings_t,
     unsigned short int i, h;
 
     for(h = 0; h < num_of_values; ++h) {
-        for(i = 0; i < values_size; ++i) {
+        for(i = 0; i < value_size; ++i) {
             ((char *) values)
-                [ h * values_size + values_size - i - 1 ] =
-                package_in[ h * values_size + i + 1 ];
+                [ h * value_size + value_size - i - 1 ] =
+                package_in[ h * value_size + i + 1 ];
         }
     }
 
