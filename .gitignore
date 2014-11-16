@@ -4,3 +4,11 @@ lib/libqbmove_comm.a
 lib/qbmove_communications.h
 objs/qbmove_communications.o
 objs/qbmovelibrary.o
+lib_unix/libqbmove.a
+lib_unix/libqbmove_comm.a
+lib_win/libqbmove.a
+lib_win/libqbmove_comm.a
+objs_unix/qbmove_communications.o
+objs_unix/qbmovelibrary.o
+objs_win/qbmove_communications.o
+objs_win/qbmovelibrary.o

@@ -1,9 +1,6 @@
 These are the C/C++ libraries to interact with *qbmove* and *SoftHand*
 
-If you want to use these libraries with
-[*qbmoveadmin*](https://github.com/qbrobotics/qbmoveadmin) or
-[*handadmin*](https://github.com/qbrobotics/handadmin) software,
-be sure to organize your folder as follows:
+If you want to use these libraries with [*qbmoveadmin*](https://github.com/qbrobotics/qbmoveadmin) or [*handadmin*](https://github.com/qbrobotics/handadmin) software, be sure to organize your folder as follows:
 
 * your_workingcopy
     * qbAPI
@@ -12,13 +9,22 @@ be sure to organize your folder as follows:
 
 ### Compile the libraries
 
-simply go into `/src` folder and type "make". You now should have a
-folder organized like follows:
+simply go into `/src` folder and type `make`. Depending on your OS you shold see a folder like this:
 
 * qbAPI
-    * lib
+    * lib_win
         * libqbmove_comm.a
-    * objs
+    * objs_win
+    * src
+    * license.txt
+    * README.txt
+
+or
+
+* qbAPI
+    * lib_unix
+        * libqbmove_comm.a
+    * objs_unix
     * src
     * license.txt
     * README.txt

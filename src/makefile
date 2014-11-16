@@ -7,14 +7,14 @@ CFLAGS = -c -Wall
 ifeq "$(OS)"  "Windows_NT"
 
 # folders
-OBJS_FOLDER = ..\objs
-LIB_FOLDER = ..\lib
+OBJS_FOLDER = ..\objs_win
+LIB_FOLDER = ..\lib_win
 
 else
 
 # folders
-OBJS_FOLDER = ../objs
-LIB_FOLDER = ../lib
+OBJS_FOLDER = ../objs_unix
+LIB_FOLDER = ../lib_unix
 
 endif
 
@@ -30,8 +30,8 @@ $(OBJS_FOLDER)/qbmovelibrary.o:qbmovelibrary.cpp $(OBJS_FOLDER)
 
 clean:
 ifeq "$(OS)"  "Windows_NT"
-	rmdir /Q /S ..\objs
-	rmdir /Q /S ..\lib
+	rmdir /Q /S $(OBJS_FOLDER)
+	rmdir /Q /S $(LIB_FOLDER)
 else
 	rm -rf $(OBJS_FOLDER) $(LIB_FOLDER)
 endif

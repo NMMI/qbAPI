@@ -1523,6 +1523,11 @@ int commSetParam(  comm_settings *comm_settings_t,
             value_size  = 4;
             break;
 
+        case PARAM_EMG_SPEED:
+            value       = (uint8_t *) values;
+            value_size  = 1;
+            break;
+
         default:
             break;
     }
@@ -1651,6 +1656,13 @@ int commGetParam(comm_settings *comm_settings_t,
 
         case PARAM_EMG_MAX_VALUE:
             value_size = 4;
+            break;
+
+        case PARAM_EMG_SPEED:
+            value_size = 1;
+            break;
+
+        default:
             break;
     }
 
