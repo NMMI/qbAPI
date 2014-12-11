@@ -1,18 +1,18 @@
 // Copyright (c) 2012, qbrobotics.
 // All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without 
+//
+// Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
-// 
+//
 // - Redistributions of source code must retain the above copyright notice, this
 // list of conditions and the following disclaimer.
 // - Redistributions in binary form must reproduce the above copyright notice,
 // this list of conditions and the following disclaimer in the documentation
 // and/or other materials provided with the distribution.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE  
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
 // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
 // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
@@ -20,7 +20,7 @@
 // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-// POSSIBILITY OF SUCH DAMAGE. 
+// POSSIBILITY OF SUCH DAMAGE.
 
 /**
  * \file        commands.h
@@ -28,11 +28,11 @@
  *  \brief      Definitions for QB Move commands, parameters and packages.
  *
  *  \details
- *  This file is included in the QB Move firmware, in its libraries and 
- *  applications. It contains all definitions that are necessary for the 
+ *  This file is included in the QB Move firmware, in its libraries and
+ *  applications. It contains all definitions that are necessary for the
  *  contruction of communication packages.
- *  
- *  It includes definitions for all of the device commands, parameters and also 
+ *
+ *  It includes definitions for all of the device commands, parameters and also
  *  the size of answer packages.
  *
 **/
@@ -41,6 +41,7 @@
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
 #define NUM_OF_SENSORS 3
+#define API_VERSION "v5.0.0"
 
 //==============================================================================
 //                                                                      COMMANDS
@@ -57,10 +58,10 @@ enum qbmove_command
 //=========================================================     general commands
 
     CMD_PING                    = 0,    ///< Asks for a ping message
-    CMD_SET_PARAM               = 1,    ///< Command for setting a parameter to be 
+    CMD_SET_PARAM               = 1,    ///< Command for setting a parameter to be
                                         ///  stored in the device memory
-    CMD_GET_PARAM               = 2,    ///< Command for getting stored parameters    
-    CMD_STORE_PARAMS            = 3,    ///< Stores all parameters in memory and 
+    CMD_GET_PARAM               = 2,    ///< Command for getting stored parameters
+    CMD_STORE_PARAMS            = 3,    ///< Stores all parameters in memory and
                                         ///  loads them
     CMD_STORE_DEFAULT_PARAMS    = 4,    ///< Store current parameters as factory parameters
     CMD_RESTORE_PARAMS          = 5,    ///< Restore default factory parameters
@@ -78,7 +79,7 @@ enum qbmove_command
 
 //=========================================================     QB Move commands
 
-    CMD_ACTIVATE            = 128,  ///< Command for activating/deactivating 
+    CMD_ACTIVATE            = 128,  ///< Command for activating/deactivating
                                     ///  the device
     CMD_GET_ACTIVATE        = 129,  ///< Command for getting device activation
                                     ///  state
@@ -107,22 +108,22 @@ enum qbmove_command
 
 enum qbmove_parameter
 {
-    
+
     PARAM_ID                     = 0,   ///< Device's ID number
     PARAM_PID_CONTROL            = 1,   ///< PID Control proportional constant
     PARAM_STARTUP_ACTIVATION     = 2,   ///< Start up activation byte
     PARAM_INPUT_MODE             = 3,   ///< Input mode
-    
+
     PARAM_CONTROL_MODE           = 4,   ///< Choose the kind of control between
                                         ///  position control, current control
                                         ///  or direct PWM value input
     PARAM_MEASUREMENT_OFFSET     = 5,   ///< Adds a constant offset to the
                                         ///  measurements
-    PARAM_MEASUREMENT_MULTIPLIER = 6,   ///< Adds a multiplier to the 
+    PARAM_MEASUREMENT_MULTIPLIER = 6,   ///< Adds a multiplier to the
                                         ///  measurements
     PARAM_POS_LIMIT_FLAG         = 7,   ///< Enable/disable position limiting
     PARAM_POS_LIMIT              = 8,   ///< Position limit values
-                                        ///  | int32     | int32     | int32     | int32     | 
+                                        ///  | int32     | int32     | int32     | int32     |
                                         ///  | INF_LIM_1 | SUP_LIM_1 | INF_LIM_2 | SUP_LIM_2 |
 
     PARAM_MAX_STEP_POS           = 9,
@@ -193,7 +194,7 @@ enum qbmove_control_mode
 #define INFO_ALL        0 ///< All system information.
 
 /** \} */
-    
+
 // ----------------------------------------------------------------------------
 #endif
 

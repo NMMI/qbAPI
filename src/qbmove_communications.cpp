@@ -1,18 +1,18 @@
 // Copyright (c) 2012, qbrobotics.
 // All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without 
+//
+// Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
-// 
+//
 // - Redistributions of source code must retain the above copyright notice, this
 // list of conditions and the following disclaimer.
 // - Redistributions in binary form must reproduce the above copyright notice,
 // this list of conditions and the following disclaimer in the documentation
 // and/or other materials provided with the distribution.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE  
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 // ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
 // LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
 // CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
@@ -25,12 +25,12 @@
 /**
  *  \file       qbmove_communications.c
  *
- *  \brief      Library of functions for SERIAL PORT communication with a 
+ *  \brief      Library of functions for SERIAL PORT communication with a
  *              QB Move.
  *
  *              Implementation.
  *
- *  \details    
+ *  \details
  *
  *  Check the \ref qbmove_communications.h "qbmove_communications.h file
  *  reference" for a complete description of the public functions implemented in
@@ -54,7 +54,7 @@
     #include <fcntl.h>   /* File control definitions */
     #include <errno.h>   /* Error number definitions */
     #include <termios.h> /* POSIX terminal control definitions */
-    #include <sys/ioctl.h>    
+    #include <sys/ioctl.h>
     #include <dirent.h>
     #include <sys/time.h>
     #include <stdlib.h>
@@ -94,11 +94,11 @@
 
 ////////////////
 
- 
+
 #ifndef HEXDUMP_COLS
 #define HEXDUMP_COLS 8
 #endif
- 
+
 void hexdump(void *mem, unsigned int len)
 {
     unsigned int i, j;
@@ -154,7 +154,7 @@ int RS485listPorts( char list_of_ports[10][255] )
     for(i = 1; i < 10; ++i) {
         strcpy(list_of_ports[i], "");
         sprintf(aux_string, "COM%d", i);
-        port = CreateFile(aux_string, GENERIC_WRITE|GENERIC_READ, 
+        port = CreateFile(aux_string, GENERIC_WRITE|GENERIC_READ,
                 0, NULL, OPEN_EXISTING, 0, NULL);
 
         if( port != INVALID_HANDLE_VALUE) {
@@ -219,32 +219,32 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE
 
 //==========================================     serial communication properties
 
-    dcb.DCBlength = sizeof (DCB); 
+    dcb.DCBlength = sizeof (DCB);
 
     GetCommState(comm_settings_t->file_handle, &dcb);
     dcb.BaudRate  = BAUD_RATE;
     dcb.Parity    = NOPARITY;
     dcb.StopBits  = ONESTOPBIT;
 
-    dcb.fOutxCtsFlow = FALSE;         // No CTS output flow control 
-    dcb.fOutxDsrFlow = FALSE;         // No DSR output flow control 
-    dcb.fDtrControl = FALSE;          // DTR flow control type 
+    dcb.fOutxCtsFlow = FALSE;         // No CTS output flow control
+    dcb.fOutxDsrFlow = FALSE;         // No DSR output flow control
+    dcb.fDtrControl = FALSE;          // DTR flow control type
 
-    dcb.fDsrSensitivity = FALSE;      // DSR sensitivity 
-    dcb.fTXContinueOnXoff = FALSE;     // XOFF continues Tx 
-    dcb.fOutX = FALSE;                // No XON/XOFF out flow control 
-    dcb.fInX = FALSE;                 // No XON/XOFF in flow control 
-    dcb.fErrorChar = FALSE;           // Disable error replacement 
-    dcb.fNull = FALSE;                // Disable null stripping 
-    dcb.fRtsControl = RTS_CONTROL_DISABLE;          // RTS flow control 
-    dcb.fAbortOnError = FALSE;        // Do not abort reads/writes on 
+    dcb.fDsrSensitivity = FALSE;      // DSR sensitivity
+    dcb.fTXContinueOnXoff = FALSE;     // XOFF continues Tx
+    dcb.fOutX = FALSE;                // No XON/XOFF out flow control
+    dcb.fInX = FALSE;                 // No XON/XOFF in flow control
+    dcb.fErrorChar = FALSE;           // Disable error replacement
+    dcb.fNull = FALSE;                // Disable null stripping
+    dcb.fRtsControl = RTS_CONTROL_DISABLE;          // RTS flow control
+    dcb.fAbortOnError = FALSE;        // Do not abort reads/writes on
                                       // error
-    dcb.ByteSize = 8;                 // Number of bits/byte, 4-8 
+    dcb.ByteSize = 8;                 // Number of bits/byte, 4-8
 
     dcb.DCBlength = sizeof(DCB);
     SetCommState(comm_settings_t->file_handle, &dcb);
 
-    //Set up Input/Output buffer size 
+    //Set up Input/Output buffer size
     SetupComm(comm_settings_t->file_handle, 100, 100);
 
     // timeouts
@@ -286,7 +286,7 @@ error:
     // set communication as BLOCKING
 
     if(fcntl(comm_settings_t->file_handle, F_SETFL, 0) == -1) {
-        goto error; 
+        goto error;
     }
 
     if (tcgetattr(comm_settings_t->file_handle, &options) == -1) {
@@ -327,7 +327,7 @@ error:
     if (tcsetattr(comm_settings_t->file_handle, TCSANOW, &options) == -1) {
         goto error;
     }
-    
+
     return;
 
 error:
@@ -345,7 +345,7 @@ error:
 //==============================================================================
 // This function is used to close a serial port being used with the QB Move.
 //==============================================================================
- 
+
 void closeRS485(comm_settings *comm_settings_t)
 {
 #if (defined(_WIN32) || defined(_WIN64))
@@ -497,7 +497,7 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
     cts.WriteTotalTimeoutConstant   = 5;      // msec
     cts.WriteTotalTimeoutMultiplier = 0;      // msec
 
-    SetCommTimeouts(comm_settings_t->file_handle, &cts);    
+    SetCommTimeouts(comm_settings_t->file_handle, &cts);
 #else
     int n_bytes;
 
@@ -572,7 +572,7 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
 //==============================================================================
 //                                                                          ping
 //==============================================================================
-// This function is used to ping the serial port for a QB Move and 
+// This function is used to ping the serial port for a QB Move and
 // get information about the device. ONLY USE WHEN ONE DEVICE IS CONNECTED
 //  ONLY.
 //==============================================================================
@@ -602,7 +602,7 @@ void RS485GetInfo(comm_settings *comm_settings_t, char *buffer){
 
     Sleep(200);
 
-    
+
     while(n_bytes_in) {
         ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL);
         if(n_bytes_in)
@@ -646,7 +646,7 @@ int commPing(comm_settings *comm_settings_t, int id)
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;                 // for serial port access	
+    DWORD package_size_out;                 // for serial port access
 #else
     int n_bytes;
 #endif
@@ -691,7 +691,7 @@ void commActivate(comm_settings *comm_settings_t, int id, char activate) {
     char data_out[BUFFER_SIZE];             // output data buffer
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
     char package_in[BUFFER_SIZE];
@@ -703,7 +703,7 @@ void commActivate(comm_settings *comm_settings_t, int id, char activate) {
     data_out[3] = 3;
     data_out[4] = CMD_ACTIVATE;                     // command
     data_out[5] = activate ? 3 : 0;
-    data_out[6] = checksum(data_out + 4, 2);        // checksum    
+    data_out[6] = checksum(data_out + 4, 2);        // checksum
 
 #if (defined(_WIN32) || defined(_WIN64))
     WriteFile(comm_settings_t->file_handle, data_out, 7, &package_size_out, NULL);
@@ -728,10 +728,10 @@ int commGetActivate(comm_settings *comm_settings_t, int id, char *activate){
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    
+
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -779,7 +779,7 @@ void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[]) {
     char data_out[BUFFER_SIZE];         // output data buffer
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     unsigned char package_in[BUFFER_SIZE];
     int n_bytes;
@@ -796,7 +796,7 @@ void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[]) {
     data_out[6] = ((char *) &inputs[0])[0];
     data_out[7] = ((char *) &inputs[1])[1];
     data_out[8] = ((char *) &inputs[1])[0];
-    data_out[9] = checksum(data_out + 4, 5);   // checksum    
+    data_out[9] = checksum(data_out + 4, 5);   // checksum
 
 #if (defined(_WIN32) || defined(_WIN64))
     WriteFile(comm_settings_t->file_handle, data_out, 10, &package_size_out, NULL);
@@ -822,7 +822,7 @@ void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[])
     char data_out[BUFFER_SIZE];                 // output data buffer
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;                 // for serial port access   
+    DWORD package_size_out;                 // for serial port access
 #else
     unsigned char package_in[BUFFER_SIZE];
     int n_bytes;
@@ -839,7 +839,7 @@ void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[])
     data_out[6] = ((char *) &inputs[0])[0];
     data_out[7] = ((char *) &inputs[1])[1];
     data_out[8] = ((char *) &inputs[1])[0];
-    data_out[9] = checksum(data_out + 4, 5);        // checksum    
+    data_out[9] = checksum(data_out + 4, 5);        // checksum
 
 #if (defined(_WIN32) || defined(_WIN64))
     WriteFile(comm_settings_t->file_handle, data_out, 10, &package_size_out, NULL);
@@ -864,10 +864,10 @@ int commGetInputs(comm_settings *comm_settings_t, int id, short int inputs[2]) {
     char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
-    
+
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;         // for serial port access	
+    DWORD package_size_out;         // for serial port access
 #else
     int n_bytes;
 #endif
@@ -921,7 +921,7 @@ int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measur
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -981,7 +981,7 @@ int commGetCurrents(comm_settings *comm_settings_t, int id, short int currents[2
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1034,7 +1034,7 @@ int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access   
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1089,7 +1089,7 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t,
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access   
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1099,7 +1099,7 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t,
     data_out[0] = ':';
     data_out[1] = ':';
     data_out[2] = (unsigned char) id;
-    data_out[3] = 2;   
+    data_out[3] = 2;
     data_out[4] = CMD_GET_CURR_AND_MEAS;             // command
     data_out[5] = CMD_GET_CURR_AND_MEAS;             // checksum
 
@@ -1153,7 +1153,7 @@ int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurem
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access   
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1296,7 +1296,7 @@ int commBootloader(comm_settings *comm_settings_t, int id) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;                 // for serial port access   
+    DWORD package_size_out;                 // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1341,7 +1341,7 @@ int commCalibrate(comm_settings *comm_settings_t, int id) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;                 // for serial port access   
+    DWORD package_size_out;                 // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1384,7 +1384,7 @@ int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, s
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;                 // for serial port access   
+    DWORD package_size_out;                 // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1398,7 +1398,7 @@ int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, s
     data_out[6] = ((char *) &speed)[0];
     data_out[7] = ((char *) &repetitions)[1];
     data_out[8] = ((char *) &repetitions)[0];
-    data_out[9] = checksum(data_out + 4, 5);    // checksum    
+    data_out[9] = checksum(data_out + 4, 5);    // checksum
 
 #if (defined(_WIN32) || defined(_WIN64))
     WriteFile(comm_settings_t->file_handle, data_out, 10, &package_size_out, NULL);
@@ -1423,10 +1423,10 @@ int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, s
 // This function send a parameter to the QB Move.
 //==============================================================================
 
-int commSetParam(  comm_settings *comm_settings_t, 
+int commSetParam(  comm_settings *comm_settings_t,
                     int id,
-                    enum qbmove_parameter type, 
-                    void *values, 
+                    enum qbmove_parameter type,
+                    void *values,
                     unsigned short num_of_values ) {
 
     char data_out[BUFFER_SIZE];     // output data buffer
@@ -1436,7 +1436,7 @@ int commSetParam(  comm_settings *comm_settings_t,
     unsigned short int value_size, i, h;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;         // for serial port access	
+    DWORD package_size_out;         // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1549,7 +1549,7 @@ int commSetParam(  comm_settings *comm_settings_t,
         }
     }
 
-    data_out[ 7 + num_of_values * value_size ] = 
+    data_out[ 7 + num_of_values * value_size ] =
             checksum( data_out + 4, 3 + num_of_values * value_size );
 
 
@@ -1576,9 +1576,9 @@ int commSetParam(  comm_settings *comm_settings_t,
 //                                                                 commGetParams
 //==============================================================================
 
-int commGetParam(comm_settings *comm_settings_t, 
+int commGetParam(comm_settings *comm_settings_t,
                     int id,
-                    enum qbmove_parameter type, 
+                    enum qbmove_parameter type,
                     void *values,
                     unsigned short num_of_values ) {
 
@@ -1588,7 +1588,7 @@ int commGetParam(comm_settings *comm_settings_t,
     unsigned short int value_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1675,7 +1675,7 @@ int commGetParam(comm_settings *comm_settings_t,
     data_out[4] = CMD_GET_PARAM;                // command
     data_out[5] = ((char *) &type)[1];          // parameter type
     data_out[6] = ((char *) &type)[0];          // parameter type
-    
+
     data_out[7] = checksum (data_out + 4, 3);   // checksum
 
 #if (defined(_WIN32) || defined(_WIN64))
@@ -1719,7 +1719,7 @@ int commStoreParams( comm_settings *comm_settings_t, int id ) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1762,7 +1762,7 @@ int commStoreDefaultParams( comm_settings *comm_settings_t, int id ) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access   
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1805,7 +1805,7 @@ int commRestoreParams( comm_settings *comm_settings_t, int id ) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;             // for serial port access	
+    DWORD package_size_out;             // for serial port access
 #else
     int n_bytes;
 #endif
@@ -1849,7 +1849,7 @@ int commInitMem(comm_settings *comm_settings_t, int id) {
     int package_in_size;
 
 #if (defined(_WIN32) || defined(_WIN64))
-    DWORD package_size_out;                 // for serial port access   
+    DWORD package_size_out;                 // for serial port access
 #else
     int n_bytes;
 #endif
