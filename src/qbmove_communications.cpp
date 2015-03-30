@@ -297,6 +297,8 @@ error:
     cfsetispeed(&options, BAUD_RATE);
     cfsetospeed(&options, BAUD_RATE);
 
+#if (defined __APPLE__)
+
     // enable the receiver and set local mode
     options.c_cflag |= (CLOCAL | CREAD);
 
@@ -310,12 +312,17 @@ error:
     options.c_cflag &= ~CRTSCTS;
     options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
     options.c_oflag &= ~OPOST;
-    options.c_iflag &= ~(IXON | IXOFF | IXANY);
-    options.c_oflag &= ~OPOST;
+    options.c_iflag &= ~(IXON | IXOFF | IXANY | INLCR);
+
     options.c_cc[VMIN] = 0;
     options.c_cc[VTIME] = 0;
 
-#if !(defined __APPLE__)
+#else
+    cfmakeraw(&options);
+
+    options.c_cc[VMIN] = 0;
+    options.c_cc[VTIME] = 0;
+
     struct serial_struct serinfo;
 
     ioctl(comm_settings_t->file_handle, TIOCGSERIAL, &serinfo);
@@ -384,12 +391,12 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 
     memcpy(package, data_in, package_size);
 
-    package[1] = 0;
-    package[2] = 0;
-    package[3] = 0;
-    package[4] = 0;
-    package[5] = 0;
-    package[6] = 0;
+    // package[1] = 0;
+    // package[2] = 0;
+    // package[3] = 0;
+    // package[4] = 0;
+    // package[5] = 0;
+    // package[6] = 0;
 
 // WINDOWS
 #if (defined(_WIN32) || defined(_WIN64))
@@ -1452,6 +1459,11 @@ int commSetParam(  comm_settings *comm_settings_t,
             value_size  = 4;
             break;
 
+        case PARAM_PID_CURR_CONTROL:
+            value       = (float *) values;
+            value_size  = 4;
+            break;
+
         case PARAM_STARTUP_ACTIVATION:
             value       = (unsigned char *) values;
             value_size  = 1;
@@ -1529,7 +1541,7 @@ int commSetParam(  comm_settings *comm_settings_t,
             break;
 
         default:
-            break;
+            return -1;
     }
 
 
@@ -1599,6 +1611,10 @@ int commGetParam(comm_settings *comm_settings_t,
             break;
 
         case PARAM_PID_CONTROL:
+            value_size = 4;
+            break;
+
+        case PARAM_PID_CURR_CONTROL:
             value_size = 4;
             break;
 

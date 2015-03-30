@@ -41,7 +41,7 @@
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
 #define NUM_OF_SENSORS 3
-#define API_VERSION "v5.0.0"
+#define API_VERSION "v5.0.1"
 
 //==============================================================================
 //                                                                      COMMANDS
@@ -137,7 +137,11 @@ enum qbmove_parameter
     PARAM_EMG_CALIB_FLAG         = 13,  ///< Enable calibration on startup
     PARAM_EMG_THRESHOLD          = 14,  ///< Minimum value to have effect
     PARAM_EMG_MAX_VALUE          = 15,  ///< Maximum value of EMG
-    PARAM_EMG_SPEED              = 16   ///< Closure speed when using EMG
+    PARAM_EMG_SPEED              = 16,  ///< Closure speed when using EMG
+
+    PARAM_SC_BAND                = 17,  ///< Short-Circuit band
+
+    PARAM_PID_CURR_CONTROL       = 18   ///< PID current control
 };
 
 
