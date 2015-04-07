@@ -18,15 +18,11 @@ LIB_FOLDER = ../lib_unix
 
 endif
 
-all:$(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/qbmovelibrary.o $(OBJS_FOLDER) $(LIB_FOLDER)
-	ar rcs $(LIB_FOLDER)/libqbmove.a $(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/qbmovelibrary.o
+all:$(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER) $(LIB_FOLDER)
 	ar rcs $(LIB_FOLDER)/libqbmove_comm.a $(OBJS_FOLDER)/qbmove_communications.o
 
 $(OBJS_FOLDER)/qbmove_communications.o:qbmove_communications.cpp $(OBJS_FOLDER)
 	$(COMPILER) $(CFLAGS) qbmove_communications.cpp -o $(OBJS_FOLDER)/qbmove_communications.o
-
-$(OBJS_FOLDER)/qbmovelibrary.o:qbmovelibrary.cpp $(OBJS_FOLDER)
-	$(COMPILER) $(CFLAGS) qbmovelibrary.cpp -o $(OBJS_FOLDER)/qbmovelibrary.o
 
 clean:
 ifeq "$(OS)"  "Windows_NT"

@@ -41,7 +41,7 @@
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
 #define NUM_OF_SENSORS 3
-#define API_VERSION "v5.0.2"
+#define API_VERSION "v5.0.3"
 
 //==============================================================================
 //                                                                      COMMANDS
@@ -183,9 +183,10 @@ enum qbmove_input_mode
 
 enum qbmove_control_mode
 {
-    CONTROL_ANGLE       = 0,        ///< Classic position control
-    CONTROL_PWM         = 1,        ///< Direct PWM value
-    CONTROL_CURRENT     = 2         ///< Current control (beta)
+    CONTROL_ANGLE           = 0,        ///< Classic position control
+    CONTROL_PWM             = 1,        ///< Direct PWM value
+    CONTROL_CURRENT         = 2,        ///< Current control (beta)
+    CURR_AND_POS_CONTROL    = 3         ///< Current control (beta)
 };
 
 /** \} */
