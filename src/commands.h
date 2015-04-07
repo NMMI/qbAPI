@@ -41,7 +41,7 @@
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
 #define NUM_OF_SENSORS 3
-#define API_VERSION "v5.0.1"
+#define API_VERSION "v5.0.2"
 
 //==============================================================================
 //                                                                      COMMANDS
