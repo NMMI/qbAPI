@@ -1888,7 +1888,7 @@ int commInitMem(comm_settings *comm_settings_t, int id) {
     write(comm_settings_t->file_handle, data_out, 6);
 #endif
 
-    usleep(200000);
+    usleep(300000);
     package_in_size = RS485read(comm_settings_t, id, package_in);
 
     if (package_in_size == -1) {
