@@ -41,7 +41,7 @@
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
 #define NUM_OF_SENSORS 3
-#define API_VERSION "v5.0.4"
+#define API_VERSION "v5.2.0"
 
 //==============================================================================
 //                                                                      COMMANDS
@@ -141,7 +141,11 @@ enum qbmove_parameter
 
     PARAM_SC_BAND                = 17,  ///< Short-Circuit band
 
-    PARAM_PID_CURR_CONTROL       = 18   ///< PID current control
+    PARAM_PID_CURR_CONTROL       = 18,  ///< PID current control
+
+    PARAM_DOUBLE_ENC_ON_OFF      = 19,  ///< Double Encoder Y/N
+
+    PARAM_MOT_HANDLE_RATIO       = 20   ///< Multiplier between handle and motor
 };
 
 

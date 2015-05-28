@@ -1540,6 +1540,16 @@ int commSetParam(  comm_settings *comm_settings_t,
             value_size  = 1;
             break;
 
+        case PARAM_DOUBLE_ENC_ON_OFF:
+            value       = (uint8_t *) values;
+            value_size  = 1;
+            break;
+
+        case PARAM_MOT_HANDLE_RATIO:
+            value       = (int8_t *) values;
+            value_size  = 1;
+            break;
+
         default:
             return -1;
     }
@@ -1675,6 +1685,15 @@ int commGetParam(comm_settings *comm_settings_t,
             break;
 
         case PARAM_EMG_SPEED:
+            value_size = 1;
+            break;
+
+        case PARAM_DOUBLE_ENC_ON_OFF:
+            printf("dentro al case della get\n");
+            value_size = 1;
+            break;
+
+        case PARAM_MOT_HANDLE_RATIO:
             value_size = 1;
             break;
 
