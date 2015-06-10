@@ -41,7 +41,7 @@
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
 #define NUM_OF_SENSORS 3
-#define API_VERSION "v5.2.0"
+#define API_VERSION "v5.2.1"
 
 //==============================================================================
 //                                                                      COMMANDS
@@ -192,6 +192,14 @@ enum qbmove_control_mode
     CONTROL_CURRENT         = 2,        ///< Current control (beta)
     CURR_AND_POS_CONTROL    = 3         ///< Current control (beta)
 };
+
+//====================================================     acknowledgment values
+enum acknowledgment_values
+{
+    ACK_ERROR           = 0,
+    ACK_OK              = 1
+};
+
 
 /** \} */
 

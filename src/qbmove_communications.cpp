@@ -391,13 +391,6 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 
     memcpy(package, data_in, package_size);
 
-    // package[1] = 0;
-    // package[2] = 0;
-    // package[3] = 0;
-    // package[4] = 0;
-    // package[5] = 0;
-    // package[6] = 0;
-
 // WINDOWS
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD data_in_bytes = 0;
@@ -459,7 +452,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 #endif
 
     // Control checksum
-    if (checksum ( (char *) data_in, package_size - 1) != (char) data_in[package_size-1]) {
+    if (checksum ( (char *) data_in, package_size - 1) != (char) data_in[package_size - 1]) {
        return -1;
     }
 
@@ -1240,12 +1233,11 @@ int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, cha
     data_out[4] = CMD_GET_INFO;                        // command
     data_out[5] = ((unsigned char *) &info_type)[1];   // parameter type
     data_out[6] = ((unsigned char *) &info_type)[0];   // parameter type
-    data_out[7] = 0;
-    data_out[8] = checksum(data_out + 4, 4);           // checksum
+    data_out[7] = checksum(data_out + 4, 3);           // checksum
 
 
 #if (defined(_WIN32) || defined(_WIN64))
-    WriteFile(comm_settings_t->file_handle, data_out, 9, &package_size_out, NULL);
+    WriteFile(comm_settings_t->file_handle, data_out, 8, &package_size_out, NULL);
 
     n_bytes_in = 1;
 
@@ -1260,7 +1252,7 @@ int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, cha
 
 #else
 
-    write(comm_settings_t->file_handle, data_out, 9);
+    write(comm_settings_t->file_handle, data_out, 8);
 
     usleep(200000);
 
@@ -1587,10 +1579,14 @@ int commSetParam(  comm_settings *comm_settings_t,
 
     package_in_size = RS485read(comm_settings_t, id, package_in);
 
-    if (package_in_size == -1) {
+    if ( (package_in_size == -1) || (package_in[0] == ACK_ERROR) ) {
         return -1;
-    } else {
+    }
+
+    if (package_in[0] == ACK_OK) {
         return 0;
+    } else {
+        return -1;
     }
 }
 
@@ -1779,10 +1775,14 @@ int commStoreParams( comm_settings *comm_settings_t, int id ) {
     usleep(100000);
     package_in_size = RS485read(comm_settings_t, id, package_in);
 
-    if (package_in_size == -1) {
+    if ( (package_in_size == -1) || (package_in[0] == ACK_ERROR) ) {
         return -1;
-    } else {
+    }
+
+    if (package_in[0] == ACK_OK) {
         return 0;
+    } else {
+        return -1;
     }
 }
 
