@@ -1685,7 +1685,6 @@ int commGetParam(comm_settings *comm_settings_t,
             break;
 
         case PARAM_DOUBLE_ENC_ON_OFF:
-            printf("dentro al case della get\n");
             value_size = 1;
             break;
 
