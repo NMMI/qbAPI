@@ -1024,7 +1024,7 @@ int commGetCurrents(comm_settings *comm_settings_t, int id, short int currents[2
 //==============================================================================
 //                                                          commGetEmg
 //==============================================================================
-// This function gets currents from the QB Move.
+// This function gets Emg signals from the Soft Hand
 //==============================================================================
 
 int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]) {
@@ -1329,7 +1329,7 @@ int commBootloader(comm_settings *comm_settings_t, int id) {
 //==============================================================================
 //                                                                 commCalibrate
 //==============================================================================
-//  This function starts the caliobration of the stiffness
+//  This function starts the calibration of the stiffness
 //==============================================================================
 
 
@@ -1521,7 +1521,6 @@ int commSetParam(  comm_settings *comm_settings_t,
             value_size  = 2;
             break;
 
-
         case PARAM_EMG_MAX_VALUE:
             value       = (int32_t *) values;
             value_size  = 4;
@@ -1539,6 +1538,11 @@ int commSetParam(  comm_settings *comm_settings_t,
 
         case PARAM_MOT_HANDLE_RATIO:
             value       = (int8_t *) values;
+            value_size  = 1;
+            break;
+
+        case PARAM_MOTOR_SUPPLY:
+            value       = (uint8_t *) values;
             value_size  = 1;
             break;
 
@@ -1691,6 +1695,10 @@ int commGetParam(comm_settings *comm_settings_t,
         case PARAM_MOT_HANDLE_RATIO:
             value_size = 1;
             break;
+
+        case PARAM_MOTOR_SUPPLY:
+            value_size = 1;
+            break; 
 
         default:
             break;

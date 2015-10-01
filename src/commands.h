@@ -145,7 +145,10 @@ enum qbmove_parameter
 
     PARAM_DOUBLE_ENC_ON_OFF      = 19,  ///< Double Encoder Y/N
 
-    PARAM_MOT_HANDLE_RATIO       = 20   ///< Multiplier between handle and motor
+    PARAM_MOT_HANDLE_RATIO       = 20,  ///< Multiplier between handle and motor
+
+    PARAM_MOTOR_SUPPLY           = 21   ///< Motor supply voltage of the hand
+
 };
 
 
