@@ -196,6 +196,13 @@ enum qbmove_control_mode
     CURR_AND_POS_CONTROL    = 3         ///< Current control (beta)
 };
 
+//============================================================     supply types
+
+enum motor_supply_tipe {
+    MAXON_24V               = 0,
+    MAXON_12V               = 1
+};
+
 //====================================================     acknowledgment values
 enum acknowledgment_values
 {
