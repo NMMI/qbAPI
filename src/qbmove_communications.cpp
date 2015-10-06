@@ -1229,7 +1229,7 @@ int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, cha
     data_out[0] = ':';
     data_out[1] = ':';
     data_out[2] = (unsigned char) id;
-    data_out[3] = 5;
+    data_out[3] = 4;
     data_out[4] = CMD_GET_INFO;                        // command
     data_out[5] = ((unsigned char *) &info_type)[1];   // parameter type
     data_out[6] = ((unsigned char *) &info_type)[0];   // parameter type
