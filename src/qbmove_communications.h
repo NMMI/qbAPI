@@ -25,14 +25,35 @@
 /**
  * \file        qbmove_communications.h
  *
- * \brief       Library of functions for SERIAL PORT communication with a QB Move.
+ * \brief       Library of functions for SERIAL PORT communication with a qbMove.
  *              Function Prototypes.
  *
- *  \details
+ * \details
  *
- *  This library contains all necessary functions for communicating with a QB Move when
+ *  This library contains all necessary functions for communicating with a qbMove when
  *  using a USB to RS485 connector that provides a Virtual COM interface.
 **/
+
+ /**
+* \mainpage     qbAPI Libraries
+*
+* \brief        Those functions allows to use the qbMove or the SoftHand through a serial port
+*
+* \version      5.3.0
+*
+* \author       qbrobotics
+*
+* \date         May 26, 2012
+*
+* \details      This is a set of functions that allows to use the qbMoves or the SoftHands 
+*               via a serial port.
+*
+*               Those APIs can be compiled for Unix systems like Linux and
+*               Mac OS X and even for Windows. Refer to https://github.com/qbrobotics/qbAPI/blob/master/README.md
+*               for detailed instructions.
+*
+* \copyright    (C)  qbrobotics. All rights reserved.
+*/
 
 
 #ifndef QBMOVE_SERIALPORT_H_INCLUDED
@@ -75,9 +96,7 @@ struct comm_settings
 //===========================================================     RS485listPorts
 
 /** This function is used to return a list of available serial ports. A maximum of 10
- *  ports are found. THIS FUNCTIONS IS NOT IMPLEMENTED FOR LINUX YET.
- *
- *  \todo Make LINUX version of this function.
+ *  ports are found.
  *
  *  \param  list_of_ports   An array of strings with the serial ports paths.
  *
@@ -86,8 +105,8 @@ struct comm_settings
  *  \par Example
  *  \code
 
-    int  i, num_ports;
-    char list_of_ports[10][255];
+    int     i, num_ports;
+    char    list_of_ports[10][255];
 
     num_ports = RS485listPorts(ports);
 
@@ -103,18 +122,21 @@ int RS485listPorts( char list_of_ports[10][255] );
 
 //================================================================     openRS485
 
-/** This function is used to open a serial port for using with the QB Move.
+/** This function is used to open a serial port for using with the qbMove.
  *
- *  \param port_s The string to the serial port path.
+ *  \param comm_settings    A _comm_settings_ structure containing info about the
+ *                          communication settings.
+ *  \param port_s           The string to the serial port path.
+ *  \param BAUD_RATE        The default baud rate value of the serial port
  *
  *  \return Returns the file descriptor associated to the serial port.
  *
  *  \par Example
  *  \code
 
-    comm_settings comm_settings_t;
+    comm_settings   comm_settings_t;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
     if(comm_settings_t.file_handle == INVALID_HANDLE_VALUE)
     {
     // ERROR
@@ -124,16 +146,16 @@ int RS485listPorts( char list_of_ports[10][255] );
 **/
 
 #if !(defined(_WIN32) || defined(_WIN64)) && !(defined(__APPLE__)) //only for linux
-    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = B460800);
+    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = B460800 );
 #else
-    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 460800);
+    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 460800 );
 #endif
 
 
 //===============================================================     closeRS485
 
 
-/** This function is used to close a serial port being used with the QB Move.
+/** This function is used to close a serial port being used with the qbMove.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
@@ -141,21 +163,15 @@ int RS485listPorts( char list_of_ports[10][255] );
  *  \par Example
  *  \code
 
-    comm_settings comm_settings_t;
+    comm_settings   comm_settings_t;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
     closeRS485(&comm_settings_t);
 
  *  \endcode
 **/
 
 void closeRS485( comm_settings *comm_settings_t );
-
-/** \} */
-
-
-/** \name QB Move Commands */
-/** \{ */
 
 //================================================================     RS485read
 
@@ -164,61 +180,82 @@ void closeRS485( comm_settings *comm_settings_t );
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
  *
- *  \param  id              The device's id number.
- *  \param  package         Package will be stored here.
+ *  \param  id                  The device's id number.
+ *  \param  package             Package will be stored here.
  *
  *  \return Returns package length if communication was ok, -1 otherwise.
  *
  *  \par Example
  *  \code
 
-     char package_in[15];		// output data buffer
-     char package_out[15];		// output data buffer
-     int package_out_size;
-     int id = 65;
-     int measurements[3];
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    char            data_read[1000];
 
-     package_out_size = pkgGetMeasurements(id, package_out);
+    openRS485(&comm_settings_t, "/dev/tty.usbserial-128");
+    commPing(&comm_settings_t, device_id);
+    RS485read(&comm_settings_t, device_id, data_read);
+    closeRS485(&comm_settings_t);
 
-     RS485write(comm_settings_t, id, package_out, package_out_size);
-
-     if (RS485read(comm_settings_t, id, package_in, 1))
-         return -1;
-
-     processReplyGetMeasurements(package_in, measurements);
-
+    printf(data_read);
 
  *  \endcode
 **/
 
-int RS485read(  comm_settings *comm_settings_t,
-                int id,
-                char *package );
+int RS485read( comm_settings *comm_settings_t, int id, char *package );
 
 //=========================================================     RS485ListDevices
+
+/** This function is used to list the number of devices connected to the serial port and
+ *  get their relative IDs
+ *
+ *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+ *                              communication settings.
+ *
+ *  \param  list_of_ids[255]    Buffer that stores a list of IDs to ping, in order to 
+ *                              see which of those IDs is connected. Is then filled with
+ *                              the IDs connected to the serial port.
+ *
+ *  \return                     Returns the number of devices connected                  
+ *
+ *  \par Example
+ *  \code
+
+    comm_settings   comm_settings_t;
+    int             device_id = 65; 
+    int             device_num;
+    char            list_of_ids[255];
+
+    openRS485(&comm_settings_t, device_id);
+    device_num = RS485ListDevices(&comm_settings_t, &list_of_ids);
+    closeRS485(&comm_settings_t);
+    printf("Number of devices connected: %d", i);
+
+ *  \endcode
+**/
 
 int RS485ListDevices( comm_settings *comm_settings_t, char list_of_ids[255] );
 
 //=============================================================     RS485GetInfo
 
-/** This function is used to ping the serial port for a QB Move and
+/** This function is used to ping the serial port for a qbMove and
  *  get information about the device. ONLY USE WHEN ONE DEVICE IS CONNECTED
  *  ONLY.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
  *
- *  \param  buffer          Buffer that stores a string with information about
- *                          the device. BUFFER SIZE MUST BE AT LEAST 500.
+ *  \param  buffer              Buffer that stores a string with information about
+ *                              the device. BUFFER SIZE MUST BE AT LEAST 500.
  *
  *
  *  \par Example
  *  \code
 
     comm_settings    comm_settings_t;
-    char        auxstring[500];
+    char             auxstring[500];
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
     RS485GetInfo(&comm_settings_t, auxstring);
     puts(auxstring);
     closeRS485(&comm_settings_t);
@@ -228,26 +265,32 @@ int RS485ListDevices( comm_settings *comm_settings_t, char list_of_ids[255] );
 
 void RS485GetInfo( comm_settings *comm_settings_t, char *buffer );
 
+/** \} */
+
+
+/** \name qbMove Commands */
+/** \{ */
+
 //================================================================     commPing
 
-/** This function is used to ping the QB Move.
+/** This function is used to ping the qbMove.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
  *
- *  \param  id              The device's id number.
- *  \param  buffer          Buffer that stores a string with information about
- *                          the device. BUFFER SIZE MUST BE AT LEAST 500.
+ *  \param  id                  The device's id number.
+ *  \param  buffer              Buffer that stores a string with information about
+ *                              the device. BUFFER SIZE MUST BE AT LEAST 500.
  *
  *  \return Returns 0 if ping was ok, -1 otherwise.
  *  \par Example
  *  \code
 
-comm_settings comm_settings_t;
-int     device_id = 65;
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
 
-   openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
-   if ( commPing(&comm_settings_t, device_id) )
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    if ( commPing(&comm_settings_t, device_id) )
         puts("Device exists.");
     else
         puts("Device does not exist.");
@@ -255,61 +298,55 @@ int     device_id = 65;
    closeRS485(&comm_settings_t);
 
 *  \endcode
-
-
 **/
 
 int commPing( comm_settings *comm_settings_t, int id );
 
 //=============================================================     commActivate
 
-
-
-/** This function activates or deactivates a QB Move connected to
+/** This function activates or deactivates a qbMove connected to
  *  the serial port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
  *
- *  \param  id              The device's id number.
- *  \param  activate        TRUE to turn motors on.
- *                          FALSE to turn motors off.
+ *  \param  id                  The device's id number.
+ *  \param  activate            TRUE to turn motors on.
+ *                              FALSE to turn motors off.
  *  \par Example
  *  \code
 
-    comm_settings comm_settings_t;
-    int     device_id = 65;
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
     commActivate(&comm_settings_t, device_id, TRUE);
     closeRS485(&comm_settings_t);
 
  *  \endcode
 **/
 
-void commActivate(  comm_settings *comm_settings_t,
-                    int id,
-                    char activate );
+void commActivate( comm_settings *comm_settings_t, int id, char activate );
 
 //============================================================     commSetInputs
 
-/** This function send reference inputs to a QB Move connected to the serial
+/** This function send reference inputs to a qbMove connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
  *
- *  \param  id              The device's id number.
- *  \param  inputs          Input references.
+ *  \param  id                  The device's id number.
+ *  \param  inputs              Input references.
  *
  *  \par Example
  *  \code
 
-    comm_settings comm_settings_t;
-    int     device_id = 65;
-    short int inputs[2];
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    short int       inputs[2];
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
     inputs[0]   = 1000;
     inputs[1]   = -1000;
@@ -319,16 +356,43 @@ void commActivate(  comm_settings *comm_settings_t,
  *  \endcode
 **/
 
-void commSetInputs( comm_settings *comm_settings_t, int id, short int inputs[]);
+void commSetInputs( comm_settings *comm_settings_t, int id, short int inputs[] );
 
 
 //============================================================     commSetPosStiff
 
-void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[]);
+/** This function send reference inputs to a qbMove connected to the serial
+ *  port. The reference is in shaft position and stiffness preset. IS VALID ONLY WHEN USED
+ *  FOR THE qbMove, NOT FOR THE softHand
+ *
+ *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+ *                              communication settings.
+ *
+ *  \param  id                  The device's id number.
+ *  \param  inputs              Input references.
+ *
+ *  \par Example
+ *  \code
+
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    short int       inputs[2];
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+    inputs[0]   = 100;          //Degrees
+    inputs[1]   = 30;           //stiffness preset
+    commSetPosStiff(&comm_settings_t, device_id, inputs);
+    closeRS485(&comm_settings_t);
+
+ *  \endcode
+**/
+
+void commSetPosStiff( comm_settings *comm_settings_t, int id, short int inputs[] );
 
 //============================================================     commGetInputs
 
-/** This function gets input references from a QB Move connected to the serial
+/** This function gets input references from a qbMove connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -342,16 +406,16 @@ void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[])
  *  \par Example
  *  \code
 
-    comm_settings comm_settings_t;
-    int     device_id = 65;
-    short int inputs[2];
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    short int       inputs[2];
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
     if(!commGetInputs(&comm_settings_t, DEVICE_ID, inputs))
         printf("Inputs: %d\t%d\n",inputs[0], inputs[1]);
     else
-        puts("Couldn't retrieve measurements.");
+        puts("Couldn't retrieve device inputs.");
 
     closeRS485(&comm_settings_t);
 
@@ -359,31 +423,29 @@ void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[])
 
 **/
 
-int commGetInputs(  comm_settings *comm_settings_t,
-                    int id,
-                    short int inputs[2] );
+int commGetInputs( comm_settings *comm_settings_t, int id, short int inputs[2] );
 
 //======================================================     commGetMeasurements
 
-/** This function gets measurements from a QB Move connected to the serial
+/** This function gets position measurements from a qbMove connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
  *
- *  \param  id              The device's id number.
- *  \param  measurements    Measurements.
+ *  \param  id                  The device's id number.
+ *  \param  measurements        Measurements.
  *
  *  \return Returns 0 if communication was ok, -1 otherwise.
  *
  *  \par Example
  *  \code
 
-    comm_settings comm_settings_t;
-    int     device_id = 65;
-    short int measurements[3];
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    short int       measurements[3];
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
     if(!commGetMeasurements(&comm_settings_t, DEVICE_ID, measurements))
         printf("Measurements: %d\t%d\t%d\n",measurements[0], measurements[1], measurements[2]);
@@ -396,37 +458,35 @@ int commGetInputs(  comm_settings *comm_settings_t,
 
 **/
 
-int commGetMeasurements(    comm_settings *comm_settings_t,
-                            int id,
-                            short int measurements[3] );
+int commGetMeasurements( comm_settings *comm_settings_t, int id, short int measurements[3] );
 
 
 //======================================================     commGetCurrents
 
-/** This function gets currents from a QB Move connected to the serial
+/** This function gets currents from a qbMove connected to the serial
 *  port.
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
 *
-*  \param  id              The device's id number.
-*  \param  currents    Currents.
+*  \param  id                  The device's id number.
+*  \param  currents            Currents.
 *
 *  \return Returns 0 if communication was ok, -1 otherwise.
 *
 *  \par Example
 *  \code
 
-   comm_settings comm_settings_t;
-   int     device_id = 65;
-   short int currents[2];
+   comm_settings    comm_settings_t;
+   int              device_id = 65;
+   short int        currents[2];
 
-   openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+   openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
-   if(!commGetMeasurements(&comm_settings_t, DEVICE_ID, currents))
-       printf("Measurements: %d\t%d\t%d\n",currents[0], currents[1], currents[2]);
+   if(!commGetCurrents(&comm_settings_t, device_id, currents))
+       printf("Measurements: %d\t%d\t%d\n",currents[0], currents[1]);
    else
-       puts("Couldn't retrieve measurements.");
+       puts("Couldn't retrieve currents.");
 
    closeRS485(&comm_settings_t);
 
@@ -434,31 +494,120 @@ int commGetMeasurements(    comm_settings *comm_settings_t,
 
 **/
 
-int commGetCurrents(    comm_settings *comm_settings_t,
-                           int id,
-                           short int currents[2] );
+int commGetCurrents( comm_settings *comm_settings_t, int id, short int currents[2] );
 
 //=======================================================     commGetCurrAndMeas
 
-// Values is a short int array of 2 + NUM_OF_SENSORS (for the qbmove is 5)
+/** This function gets currents and positipon measurements from a qbMove
+*   connected to the serial port
+*
+*  \param  comm_settings_t      A _comm_settings_ structure containing info about the
+*                               communication settings.
+*
+*  \param  id                   The device's id number.
+*  \param  values               Current and position measurements. Currents are in first
+*                               two positions
+*
+*  \return Returns 0 if communication was ok, -1 otherwise.
+*
+*  \par Example
+*  \code
 
-int commGetCurrAndMeas( comm_settings *comm_settings_t,
-                        int id,
-                        short int *values);
+   comm_settings    comm_settings_t;
+   int              device_id = 65;
+   short int        values[2];
+
+   openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+    if(!commGetCurrAndMeas(&comm_settings_t, device_id, currents)){
+        printf("Currents: %d\t%d\t%d\n",values[0], values[1]);
+        printf("Measurements: %d\t%d\t%d\n", values[2], values[3], values[4]);
+    }
+    else
+        puts("Couldn't retrieve currents.");
+
+   closeRS485(&comm_settings_t);
+
+*  \endcode
+
+**/
+
+int commGetCurrAndMeas( comm_settings *comm_settings_t, int id, short int *values );
 
 //===============================================================     commGetEmg
 
-int commGetEmg(comm_settings *comm_settings_t,
-               int id,
-               short int emg[2]);
+/** This function gets measurements from electomyographics sensors connected 
+*   to the SoftHand. IS USED ONLY WHEN THE BOARD IS USED FOR A SoftHand
+*
+*  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                              communication settings.
+*
+*  \param  id                  The device's id number.
+*  \param  values              Emg sensors measurements.
+*
+*  \return Returns 0 if communication was ok, -1 otherwise.
+*
+*  \par Example
+*  \code
+
+   comm_settings    comm_settings_t;
+   int              device_id = 65;
+   short int        values[2];
+
+   openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+   if(!commGetEmg(&comm_settings_t, device_id, values));
+       printf("Measurements: %d\t%d\t%d\n", values[0], values[1]);
+   else
+       puts("Couldn't retrieve emg values.");
+
+   closeRS485(&comm_settings_t);
+
+*  \endcode
+
+**/
+
+int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]);
 
 //========================================================     commGetVelocities
-int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurements[]);
+
+/** This function gets velocities of the two motors and the shaft from a qbMove
+*   connected to a serial port
+*
+*  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                              communication settings.
+*
+*  \param  id                  The device's id number.
+*  \param  measurements        Velocity measurements.
+*
+*  \return Returns 0 if communication was ok, -1 otherwise.
+*
+*  \par Example
+*  \code
+
+   comm_settings    comm_settings_t;
+   int              device_id = 65;
+   short int        vel_measurements[3];
+
+   openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+   if(!commGetVelocities(&comm_settings_t, device_id, vel_measurements))
+       printf("Measurements: %d\t%d\t%d\n", vel_measurements[0], vel_measurements[1], vel_measurements[2]);
+   else
+       puts("Couldn't retrieve velocities.");
+
+   closeRS485(&comm_settings_t);
+
+*  \endcode
+
+**/
+
+int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurements[] );
 
 
 //==========================================================     commGetActivate
 
-/** This function gets the activation status of a QB Move connected to the serial
+/** This function gets the activation status of a qbMove connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -476,12 +625,12 @@ int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurem
     int     device_id = 65;
     char    activation_status;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
     if(!commGetActivate(&comm_settings_t, DEVICE_ID, activation_status))
         printf("Activation status: %d\n", &activation_status);
     else
-        puts("Couldn't retrieve measurements.");
+        puts("Couldn't retrieve activation status.");
 
     closeRS485(&comm_settings_t);
 
@@ -489,14 +638,12 @@ int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurem
 
 **/
 
-int commGetActivate(    comm_settings *comm_settings_t,
-                        int id,
-                        char *activate );
+int commGetActivate( comm_settings *comm_settings_t, int id, char *activate );
 
 
 //==============================================================     commGetInfo
 
-/** This function is used to ping the QB Move and get information about the
+/** This function is used to ping the qbMove and get information about the
  *  device.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -514,7 +661,7 @@ int commGetActivate(    comm_settings *comm_settings_t,
     char    auxstring[500];
     int     device_id = 65;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
     commGetInfo(&comm_settings_t, device_id, INFO_ALL, auxstring);
     puts(auxstring);
     closeRS485(&comm_settings_t);
@@ -522,21 +669,99 @@ int commGetActivate(    comm_settings *comm_settings_t,
  *  \endcode
 **/
 
-int commGetInfo(    comm_settings *comm_settings_t,
-                    int id,
-                    short int info_type,
-                    char *info );
+int commGetInfo( comm_settings *comm_settings_t, int id, short int info_type, char *info );
+
+//==============================================================     commBootloader
+
+/** This function sends the board in the bootloader modality in order to update
+*   the firmware on the board
+*
+*   \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                               communication settings.
+*
+*   \param  id                  The device's id number.
+*
+*   \returns        Return 0 on success, -1 otherwise
+*
+*   \par Example
+*   \code
+
+    comm_settings comm_settings_t;
+    int     device_id = 65;
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    commBootloader(&comm_settings_t, device_id);
+    closeRS485(&comm_settings_t);
+
+ *  \endcode
+**/
+
+int commBootloader(comm_settings *comm_settings_t, int id);
+
+//==============================================================     commCalibrate
+
+/** This function is used to calibrate the maximum stiffness value of the qbMove
+*
+*   \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                               communication settings.
+*
+*   \param  id                  The device's id number.
+*
+*   \return         Returns 0 on success, -1 otherwise
+*
+*   \par Example
+*   \code
+
+    comm_settings comm_settings_t;
+    int     device_id = 65;
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    commCalibrate(&comm_settings_t, device_id);
+    closeRS485(&comm_settings_t);
+
+ *  \endcode
+**/
+
+int commCalibrate(comm_settings *comm_settings_t, int id);
+
+//==============================================================     commHandCalibrate
+
+/** This function is used to make a series of opening and closures of the SoftHand
+*
+*  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                              communication settings.
+*
+*  \param  id                  The device's id number.
+*  \param  speed               The speed of hand closure and opening [0 - 200]
+*  \param  repetitions         The nnumber of closures needed to be done [0 - 32767]
+*
+*  \par Example
+*  \code
+
+    comm_settings comm_settings_t;
+    int     speed = 200
+    int     repetitions = 400;
+    int     device_id = 65;
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    commHandCalibrate(&comm_settings_t, device_id, speed, repetitions);
+    closeRS485(&comm_settings_t);
+
+*  \endcode
+**/
+
+int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, short int repetitions);
 
 /** \} */
 
 
-/** \name QB Move Parameters */
+/** \name qbMove Parameters */
 /** \{ */
 
 
 //============================================================     commSetParam
 
-/** This function sets a parameter that remains stored in the QB Move memory.
+/** This function sets a parameter that remains stored in the qbMove memory.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
@@ -551,17 +776,19 @@ int commGetInfo(    comm_settings *comm_settings_t,
 
     comm_settings comm_settings_t;
     int     device_id = 65;
-    float   control_k = 0.1;
+    float   pid_values[3];
+        pid_values[0] = 0.1;
+        pid_values[1] = 0;
+        pid_values[2] = 0.8;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
-    commSetParam(&comm_settings_t, global_args.device_id,
-        PARAM_CONTROL_K, &global_args.control_k, 1);
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    commSetParam(&comm_settings_t, global_args.device_id, PARAM_PID_CONTROL, pid_values, 1);
     closeRS485(&comm_settings_t);
 
  *  \endcode
 **/
 
-int commSetParam(  comm_settings *comm_settings_t,
+int commSetParam( comm_settings *comm_settings_t,
                     int id,
                     enum qbmove_parameter type,
                     void *values,
@@ -569,7 +796,7 @@ int commSetParam(  comm_settings *comm_settings_t,
 
 //============================================================     commGetParam
 
-/** This function gets a parameter that is stored in the QB Move memory.
+/** This function gets a parameter that is stored in the qbMove memory.
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -583,17 +810,15 @@ int commSetParam(  comm_settings *comm_settings_t,
 *  \par Example
 *  \code
 
-    comm_settings comm_settings_t;
-    int     device_id = 65;
-    float   control_k;
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    float           control_pid[3];
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
-    if( commGetParams(&comm_settings_t, device_id, PARAM_CONTROL_K,
-                                           &control_k, 1) )
-   {
-       printf("Control constant: %f", control_k);
-   }
+    if(commGetParam(&comm_settings_t, device_id, PARAM_PID_CONTROL, control_pid, 1))
+        printf("Control PID values: %f\t,%f\t,%f\n", control_pid[0], control_pid[1], control_pid[2]);
+
     closeRS485(&comm_settings_t);
 
 *  \endcode
@@ -607,7 +832,7 @@ int commGetParam(comm_settings *comm_settings_t,
 
 //============================================================     commStoreParams
 
-/** This function stores all parameters that were set in the QB Move memory.
+/** This function stores all parameters that were set in the qbMove memory.
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -620,7 +845,7 @@ int commGetParam(comm_settings *comm_settings_t,
     comm_settings comm_settings_t;
     int     device_id = 65;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
     commStoreParams(&comm_settings_t, device_id)
 
@@ -632,7 +857,28 @@ int commGetParam(comm_settings *comm_settings_t,
 
 int commStoreParams( comm_settings *comm_settings_t, int id);
 
-// TODO
+//==========================================================     commStoreDefaultParams
+
+/** This function stores the factory default parameters.
+*
+*  \param  comm_settings_t  A _comm_settings_ structure containing info about
+*                           the communication settings.
+*
+*  \param  id               The device's id number.
+*
+*  \par Example
+*  \code
+
+    comm_settings comm_settings_t;
+    int     device_id = 65;
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    commStoreDefaultParams(&comm_settings_t, device_id)
+    closeRS485(&comm_settings_t);
+
+*  \endcode
+**/
+
 int commStoreDefaultParams( comm_settings *comm_settings_t, int id);
 
 //==========================================================     commRestoreParams
@@ -651,7 +897,7 @@ int commStoreDefaultParams( comm_settings *comm_settings_t, int id);
     comm_settings comm_settings_t;
     int     device_id = 65;
 
-    openRS485(&comm_settings_t,"/dev/tty.usbserial-FTU6OC47");
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
     commRestoreParams(&comm_settings_t, device_id)
 
@@ -662,11 +908,62 @@ int commStoreDefaultParams( comm_settings *comm_settings_t, int id);
 
 int commRestoreParams( comm_settings *comm_settings_t, int id );
 
-///TODO
+/** This function initialize the EEPROM memory of the board by loading the default 
+*   factory parameters. After the initialization a flag is set.
+*
+*  \param  comm_settings_t  A _comm_settings_ structure containing info about
+*                           the communication settings.
+*
+*  \param  id               The device's id number.
+*
+*  \par Example
+*  \code
+
+    comm_settings comm_settings_t;
+    int     device_id = 65;
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+    commInitMem(&comm_settings_t, device_id)
+
+    closeRS485(&comm_settings_t);
+
+*  \endcode
+**/
 
 int commInitMem(comm_settings *comm_settings_t, int id);
 
+/** \} */
+
+
+/** \name General Functions */
+/** \{ */
+
+
 //==========================================================     timevaldiff
+
+/** This functions returns a difference between two timeval structures in order 
+*   to obtain time elapsed between the two timeval;
+*
+* \param   starttime        The timeval structure containing the start time
+* \param   finishtime       The timeval structure containing the finish time
+*
+* \returns Returns the elapsed time between the two timeval structures. 
+*
+* \par Example
+* \code
+
+    struct timeval start, finish;
+    gettimeofday(&start, NULL);
+    // other instructions 
+    gettimeofday(&now, NULL);
+    long diff = timevaldiff(&start, &now);
+    
+    printf(Time elapsed: %ld, diff);
+
+ *  \endcode
+
+**/
 
 long timevaldiff (struct timeval *starttime, struct timeval *finishtime);
 
@@ -693,21 +990,10 @@ long timevaldiff (struct timeval *starttime, struct timeval *finishtime);
 
 **/
 
- /**
-  * \name General Functions
-  * \{
- **/
-
 char checksum ( char * data_buffer, int data_length );
 
 /** \} */
 
-
-int commBootloader(comm_settings *comm_settings_t, int id);
-
-int commCalibrate(comm_settings *comm_settings_t, int id);
-
-int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, short int repetitions);
 
 // ----------------------------------------------------------------------------
 #endif

@@ -28,7 +28,7 @@
  *  \brief      Definitions for QB Move commands, parameters and packages.
  *
  *  \details
- *  This file is included in the QB Move firmware, in its libraries and
+ *  This file is included in the qbMove firmware, in its libraries and
  *  applications. It contains all definitions that are necessary for the
  *  contruction of communication packages.
  *
@@ -48,7 +48,7 @@
 //==============================================================================
 
 
-/** \name QB Move Commands
+/** \name qbMove Commands
  * \{
 **/
 
@@ -67,15 +67,15 @@ enum qbmove_command
     CMD_RESTORE_PARAMS          = 5,    ///< Restore default factory parameters
     CMD_GET_INFO                = 6,    ///< Asks for a string of information about
 
-    CMD_SET_VALUE               = 7,
-    CMD_GET_VALUE               = 8,
+    CMD_SET_VALUE               = 7,    ///< Not used
+    CMD_GET_VALUE               = 8,    ///< Not used
 
-    CMD_BOOTLOADER              = 9,
+    CMD_BOOTLOADER              = 9,    ///< Sets the bootloader modality to update the
+                                        ///  firmware
+    CMD_INIT_MEM                = 10,   ///< Initialize the memory with the defalut values
 
-    CMD_INIT_MEM                = 10,
-
-    CMD_CALIBRATE               = 11,
-
+    CMD_CALIBRATE               = 11,   ///< Starts the stiffness calibration of the qbMove
+                                        ///  or the hand closure and opening calibration
 
 //=========================================================     QB Move commands
 
@@ -91,9 +91,9 @@ enum qbmove_command
                                     ///  current measurements
     CMD_GET_CURR_AND_MEAS   = 134,  ///< Command for asking device's
                                     ///  measurements and currents
-    CMD_SET_POS_STIFF       = 135,
-
-    CMD_GET_EMG             = 136,
+    CMD_SET_POS_STIFF       = 135,  ///< Command for setting stiffness and position
+                                    ///  of the qbMove's shaft
+    CMD_GET_EMG             = 136,  ///< Command for getting the emg sensors measurements
 
     CMD_GET_VELOCITIES      = 137   ///< Command for asking device's
                                     ///  current velocity of motors and pulley
@@ -103,7 +103,7 @@ enum qbmove_command
 //==============================================================================
 //                                                                    PARAMETERS
 //==============================================================================
-/** \name QB Move Parameters */
+/** \name qbMove Parameters */
 /** \{ */
 
 enum qbmove_parameter
@@ -123,11 +123,11 @@ enum qbmove_parameter
                                         ///  measurements
     PARAM_POS_LIMIT_FLAG         = 7,   ///< Enable/disable position limiting
     PARAM_POS_LIMIT              = 8,   ///< Position limit values
-                                        ///  | int32     | int32     | int32     | int32     |
-                                        ///  | INF_LIM_1 | SUP_LIM_1 | INF_LIM_2 | SUP_LIM_2 |
+                                        ///  [ int32     | int32     | int32     | int32     ]
+                                        ///  [ INF_LIM_1 | SUP_LIM_1 | INF_LIM_2 | SUP_LIM_2 ]
 
-    PARAM_MAX_STEP_POS           = 9,
-    PARAM_MAX_STEP_NEG           = 10,
+    PARAM_MAX_STEP_POS           = 9,   ///< Used to slow down movements for positive values
+    PARAM_MAX_STEP_NEG           = 10,  ///< Used to slow down movements for negative values
     PARAM_POS_RESOLUTION         = 11,  ///< Angle resolution for inputs and
                                         ///  measurements. Used during
                                         ///  communication.
