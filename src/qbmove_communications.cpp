@@ -1492,8 +1492,8 @@ int commSetParam(  comm_settings *comm_settings_t,
             break;
 
         case PARAM_POS_LIMIT:
-            value       = (short int *) values;
-            value_size  = 2;
+            value       = (int *) values;
+            value_size  = 4;
             break;
 
         case PARAM_MAX_STEP_POS:
