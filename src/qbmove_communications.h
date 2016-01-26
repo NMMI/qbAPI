@@ -460,6 +460,40 @@ int commGetInputs( comm_settings *comm_settings_t, int id, short int inputs[2] )
 
 int commGetMeasurements( comm_settings *comm_settings_t, int id, short int measurements[3] );
 
+//======================================================     commGetMeasurements
+
+/** This function gets counters values from a qbMove connected to the serial
+ *  port.
+ *
+ *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+ *                              communication settings.
+ *
+ *  \param  id                  The device's id number.
+ *  \param  counters            Counters
+ *
+ *  \return Returns 0 if communication was ok, -1 otherwise.
+ *
+ *  \par Example
+ *  \code
+
+    comm_settings       comm_settings_t;
+    int                 device_id = 65;
+    short unsigned int  counters[20];
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+    if(!commGetMeasurements(&comm_settings_t, DEVICE_ID, counters))
+        printf("Measurements: %d\t%d\t {...} %d\n", counters[0], counters[1], {...}, counters[20]);
+    else
+        puts("Couldn't retrieve counters.");
+
+    closeRS485(&comm_settings_t);
+
+ *  \endcode
+
+**/
+
+int commGetCounters( comm_settings *comm_settings_t, int id, short unsigned int counters[20] );
 
 //======================================================     commGetCurrents
 

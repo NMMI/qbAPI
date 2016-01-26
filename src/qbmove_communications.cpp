@@ -453,7 +453,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 
     // Control checksum
     if (checksum ( (char *) data_in, package_size - 1) != (char) data_in[package_size - 1]) {
-       return -1;
+        return -1;
     }
 
 #ifdef VERBOSE
@@ -964,6 +964,98 @@ int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measur
     ((char *) &measurements[3])[0] = package_in[8];
     ((char *) &measurements[3])[1] = package_in[7];
 #endif
+
+    return 0;
+}
+
+//==============================================================================
+//                                                               commGetCounters
+//==============================================================================
+// This function gets counters values from the QB Move.
+//==============================================================================
+
+int commGetCounters(comm_settings *comm_settings_t, int id, short unsigned int counters[]) {
+
+    char data_out[BUFFER_SIZE];         // output data buffer
+    char package_in[BUFFER_SIZE];       // output data buffer
+    int package_in_size;
+
+#if (defined(_WIN32) || defined(_WIN64))
+    DWORD package_size_out;             // for serial port access
+#else
+    int n_bytes;
+#endif
+
+//=================================================     preparing packet to send
+
+    data_out[0] = ':';
+    data_out[1] = ':';
+    data_out[2] = (unsigned char) id;
+    data_out[3] = 2;
+    data_out[4] = CMD_GET_COUNTERS;             // command
+    data_out[5] = CMD_GET_COUNTERS;             // checksum
+
+#if (defined(_WIN32) || defined(_WIN64))
+    WriteFile(comm_settings_t->file_handle, data_out, 6, &package_size_out, NULL);
+#else
+    ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+    if(n_bytes)
+        read(comm_settings_t->file_handle, package_in, n_bytes);
+
+    write(comm_settings_t->file_handle, data_out, 6);
+#endif
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size == -1) {
+        return -1;
+        printf("culo\n");
+    }
+//==============================================================     get packet
+
+    ((char *) &counters[0])[0] = package_in[2];
+    ((char *) &counters[0])[1] = package_in[1];
+    ((char *) &counters[1])[0] = package_in[4];
+    ((char *) &counters[1])[1] = package_in[3];
+    ((char *) &counters[2])[0] = package_in[6];
+    ((char *) &counters[2])[1] = package_in[5];
+    ((char *) &counters[3])[0] = package_in[8];
+    ((char *) &counters[3])[1] = package_in[7];
+
+    ((char *) &counters[4])[0] = package_in[10];
+    ((char *) &counters[4])[1] = package_in[9];
+    ((char *) &counters[5])[0] = package_in[12];
+    ((char *) &counters[5])[1] = package_in[11];
+    ((char *) &counters[6])[0] = package_in[14];
+    ((char *) &counters[6])[1] = package_in[13];
+    ((char *) &counters[7])[0] = package_in[16];
+    ((char *) &counters[7])[1] = package_in[15];
+
+    ((char *) &counters[8])[0] = package_in[18];
+    ((char *) &counters[8])[1] = package_in[17];
+    ((char *) &counters[9])[0] = package_in[20];
+    ((char *) &counters[9])[1] = package_in[19];
+    ((char *) &counters[10])[0] = package_in[22];
+    ((char *) &counters[10])[1] = package_in[21];
+    ((char *) &counters[11])[0] = package_in[24];
+    ((char *) &counters[11])[1] = package_in[23];
+
+    ((char *) &counters[12])[0] = package_in[26];
+    ((char *) &counters[12])[1] = package_in[25];
+    ((char *) &counters[13])[0] = package_in[28];
+    ((char *) &counters[13])[1] = package_in[27];
+    ((char *) &counters[14])[0] = package_in[30];
+    ((char *) &counters[14])[1] = package_in[29];
+    ((char *) &counters[15])[0] = package_in[32];
+    ((char *) &counters[15])[1] = package_in[31];
+
+    ((char *) &counters[16])[0] = package_in[34];
+    ((char *) &counters[16])[1] = package_in[33];
+    ((char *) &counters[17])[0] = package_in[36];
+    ((char *) &counters[17])[1] = package_in[35];
+    ((char *) &counters[18])[0] = package_in[38];
+    ((char *) &counters[18])[1] = package_in[37];
+    ((char *) &counters[19])[0] = package_in[40];
+    ((char *) &counters[19])[1] = package_in[39];
 
     return 0;
 }

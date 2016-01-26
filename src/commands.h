@@ -95,8 +95,9 @@ enum qbmove_command
                                     ///  of the qbMove's shaft
     CMD_GET_EMG             = 136,  ///< Command for getting the emg sensors measurements
 
-    CMD_GET_VELOCITIES      = 137   ///< Command for asking device's
+    CMD_GET_VELOCITIES      = 137,  ///< Command for asking device's
                                     ///  current velocity of motors and pulley
+    CMD_GET_COUNTERS        = 138
 };
 
 /** \} */
