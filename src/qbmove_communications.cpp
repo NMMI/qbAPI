@@ -1638,6 +1638,11 @@ int commSetParam(  comm_settings *comm_settings_t,
             value_size  = 1;
             break;
 
+        case PARAM_DEFLECTION_CONTROL:
+            value      = (uint8_t *) values;
+            value_size  = 1;
+            break;
+
         default:
             return -1;
     }
@@ -1789,6 +1794,10 @@ int commGetParam(comm_settings *comm_settings_t,
             break;
 
         case PARAM_MOTOR_SUPPLY:
+            value_size = 1;
+            break;
+
+        case PARAM_DEFLECTION_CONTROL:
             value_size = 1;
             break; 
 
