@@ -97,7 +97,17 @@ enum qbmove_command
 
     CMD_GET_VELOCITIES      = 137,  ///< Command for asking device's
                                     ///  current velocity of motors and pulley
-    CMD_GET_COUNTERS        = 138
+    CMD_GET_COUNTERS        = 138,  ///< Command for asking device's counters
+                                    ///  (mostly used for debugging sent commands)
+    CMD_GET_ACCEL           = 139,  ///< Command for asking device's
+                                    ///  acceleretion measurements
+    CMD_GET_CURR_DIFF       = 140,  ///< Command for asking device's 
+                                    ///  current difference between a measured
+                                    ///  one and an estimated one (Only for SoftHand)
+    CMD_SET_CURR_DIFF       = 141,  ///< Command used to set current difference modality
+                                    ///  (Only for Cuff device)
+    CMD_SET_CUFF_INPUTS     = 142   ///< Command used to set Cuff device inputs 
+                                    ///  (Only for Cuff device)
 };
 
 /** \} */
@@ -142,7 +152,9 @@ enum qbmove_parameter
     PARAM_DOUBLE_ENC_ON_OFF      = 19,  ///< Double Encoder Y/N
     PARAM_MOT_HANDLE_RATIO       = 20,  ///< Multiplier between handle and motor
     PARAM_MOTOR_SUPPLY           = 21,  ///< Motor supply voltage of the hand
-    PARAM_DEFLECTION_CONTROL     = 22
+    PARAM_DEFLECTION_CONTROL     = 22,  ///< Activation of deflection control (qbMove only)
+    PARAM_CURRENT_LOOKUP         = 23   ///< Table of values used to calculate 
+                                        ///  an estimated current of the SoftHand
 
 };
 
@@ -187,8 +199,8 @@ enum qbmove_control_mode
 {
     CONTROL_ANGLE           = 0,        ///< Classic position control
     CONTROL_PWM             = 1,        ///< Direct PWM value
-    CONTROL_CURRENT         = 2,        ///< Current control (beta)
-    CURR_AND_POS_CONTROL    = 3         ///< Current control (beta)
+    CONTROL_CURRENT         = 2,        ///< Current control
+    CURR_AND_POS_CONTROL    = 3         ///< Current and position control (beta)
 };
 
 //============================================================     supply types

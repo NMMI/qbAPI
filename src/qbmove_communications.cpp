@@ -1639,8 +1639,13 @@ int commSetParam(  comm_settings *comm_settings_t,
             break;
 
         case PARAM_DEFLECTION_CONTROL:
-            value      = (uint8_t *) values;
+            value       = (uint8_t *) values;
             value_size  = 1;
+            break;
+
+        case PARAM_CURRENT_LOOKUP:
+            value      = (float *) values;
+            value_size = 4;
             break;
 
         default:
@@ -1801,6 +1806,10 @@ int commGetParam(comm_settings *comm_settings_t,
             value_size = 1;
             break; 
 
+        case PARAM_CURRENT_LOOKUP:
+            value_size = 4;
+            break;
+            
         default:
             break;
     }
