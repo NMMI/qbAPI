@@ -26,9 +26,7 @@
  *  \file       qbmove_communications.cpp
  *
  *  \brief      Library of functions for SERIAL PORT communication with a
- *              qbMove.
- *
- *              Implementation.
+ *              qbMove or a qbHand
  *
  *  \details
  *

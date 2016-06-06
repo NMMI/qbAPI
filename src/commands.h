@@ -25,10 +25,10 @@
 /**
  * \file        commands.h
  *
- *  \brief      Definitions for QB Move commands, parameters and packages.
+ *  \brief      Definitions for qbMove or qbHand commands, parameters and packages.
  *
  *  \details
- *  This file is included in the qbMove firmware, in its libraries and
+ *  This file is included in the qbMove and qbHand firmware, in its libraries and
  *  applications. It contains all definitions that are necessary for the
  *  contruction of communication packages.
  *
@@ -58,9 +58,9 @@ enum qbmove_command
 //=========================================================     general commands
 
     CMD_PING                    = 0,    ///< Asks for a ping message
-    CMD_SET_PARAM               = 1,    ///< Command for setting a parameter to be
+    CMD_SET_PARAM               = 1,    ///< Command used to set a parameter to be
                                         ///  stored in the device memory
-    CMD_GET_PARAM               = 2,    ///< Command for getting stored parameters
+    CMD_GET_PARAM               = 2,    ///< Command used to get stored parameters
     CMD_STORE_PARAMS            = 3,    ///< Stores all parameters in memory and
                                         ///  loads them
     CMD_STORE_DEFAULT_PARAMS    = 4,    ///< Store current parameters as factory parameters
@@ -79,29 +79,29 @@ enum qbmove_command
 
 //=========================================================     QB Move commands
 
-    CMD_ACTIVATE            = 128,  ///< Command for activating/deactivating
+    CMD_ACTIVATE            = 128,  ///< Command used to activate/deactivate
                                     ///  the device
-    CMD_GET_ACTIVATE        = 129,  ///< Command for getting device activation
+    CMD_GET_ACTIVATE        = 129,  ///< Command used to get device activation
                                     ///  state
-    CMD_SET_INPUTS          = 130,  ///< Command for setting reference inputs
-    CMD_GET_INPUTS          = 131,  ///< Command for getting reference inputs
-    CMD_GET_MEASUREMENTS    = 132,  ///< Command for asking device's
+    CMD_SET_INPUTS          = 130,  ///< Command used to set reference inputs
+    CMD_GET_INPUTS          = 131,  ///< Command used to get reference inputs
+    CMD_GET_MEASUREMENTS    = 132,  ///< Command used to ask device's
                                     ///  position measurements
-    CMD_GET_CURRENTS        = 133,  ///< Command for asking device's
+    CMD_GET_CURRENTS        = 133,  ///< Command used to ask device's
                                     ///  current measurements
-    CMD_GET_CURR_AND_MEAS   = 134,  ///< Command for asking device's
+    CMD_GET_CURR_AND_MEAS   = 134,  ///< Command used to ask device's
                                     ///  measurements and currents
-    CMD_SET_POS_STIFF       = 135,  ///< Command for setting stiffness and position
+    CMD_SET_POS_STIFF       = 135,  ///< Command used to set stiffness and position
                                     ///  of the qbMove's shaft
-    CMD_GET_EMG             = 136,  ///< Command for getting the emg sensors measurements
+    CMD_GET_EMG             = 136,  ///< Command used to get the emg sensors measurements
 
-    CMD_GET_VELOCITIES      = 137,  ///< Command for asking device's
+    CMD_GET_VELOCITIES      = 137,  ///< Command used to ask device's
                                     ///  current velocity of motors and pulley
-    CMD_GET_COUNTERS        = 138,  ///< Command for asking device's counters
-                                    ///  (mostly used for debugging sent commands)
-    CMD_GET_ACCEL           = 139,  ///< Command for asking device's
+    CMD_GET_COUNTERS        = 138,  ///< Command used to ask device's counters
+                                    ///  (mostly used to debug sent commands)
+    CMD_GET_ACCEL           = 139,  ///< Command used to ask device's
                                     ///  acceleretion measurements
-    CMD_GET_CURR_DIFF       = 140,  ///< Command for asking device's 
+    CMD_GET_CURR_DIFF       = 140,  ///< Command used to ask device's 
                                     ///  current difference between a measured
                                     ///  one and an estimated one (Only for SoftHand)
     CMD_SET_CURR_DIFF       = 141,  ///< Command used to set current difference modality
@@ -155,11 +155,11 @@ enum qbmove_parameter
 	PARAM_DEFLECTION_CONTROL 	 = 22,	///< Activation of deflection control (qbMove only)
     PARAM_CURRENT_LOOKUP         = 23,	///< Table of values used to calculate an estimated
 										///  current of the hand
-    PARAM_CURR_PROP_GAIN         = 24,
-    PARAM_CURR_SAT               = 25,
-    PARAM_CURR_DEAD_ZONE         = 26,
-    PARAM_CUFF_ACTIVATION_FLAG   = 27, 
-    PARAM_POWER_TENSION          = 28
+    PARAM_CURR_PROP_GAIN         = 24,  ///< Proportional gain of the Cuff device control
+    PARAM_CURR_SAT               = 25,  ///< Current saturation of the Cuff device control
+    PARAM_CURR_DEAD_ZONE         = 26,  ///< Current dead zone of the Cuff device control
+    PARAM_CUFF_ACTIVATION_FLAG   = 27,  ///< Activation flag for the Cuff device control
+    PARAM_POWER_TENSION          = 28   ///< Parameter used to rescale the power of the Cuff device
 };
 
 

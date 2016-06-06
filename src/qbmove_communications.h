@@ -37,15 +37,15 @@
  /**
 * \mainpage     qbAPI Libraries
 *
-* \brief        Those functions allows to use the qbMove or the SoftHand through a serial port
+* \brief        Those functions allows to use the qbMove or the qbHand through a serial port
 *
-* \version      5.3.0
+* \version      5.5.0
 *
 * \author       qbrobotics
 *
 * \date         June 01, 2016
 *
-* \details      This is a set of functions that allows to use the qbMoves or the SoftHands 
+* \details      This is a set of functions that allows to use the qbMoves or the qbHands 
 *               via a serial port.
 *
 *               Those APIs can be compiled for Unix systems like Linux and
@@ -122,7 +122,7 @@ int RS485listPorts( char list_of_ports[10][255] );
 
 //================================================================     openRS485
 
-/** This function is used to open a serial port for using with the qbMove.
+/** This function is used to open a serial port for using with the qbMove or the qbHand.
  *
  *  \param comm_settings    A _comm_settings_ structure containing info about the
  *                          communication settings.
@@ -155,7 +155,7 @@ int RS485listPorts( char list_of_ports[10][255] );
 //===============================================================     closeRS485
 
 
-/** This function is used to close a serial port being used with the qbMove.
+/** This function is used to close a serial port being used with the qbMove or an qbHand.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
@@ -238,7 +238,7 @@ int RS485ListDevices( comm_settings *comm_settings_t, char list_of_ids[255] );
 
 //=============================================================     RS485GetInfo
 
-/** This function is used to ping the serial port for a qbMove and
+/** This function is used to ping the serial port for a qbMove or a qbHand and to
  *  get information about the device. ONLY USE WHEN ONE DEVICE IS CONNECTED
  *  ONLY.
  *
@@ -268,12 +268,12 @@ void RS485GetInfo( comm_settings *comm_settings_t, char *buffer );
 /** \} */
 
 
-/** \name qbMove Commands */
+/** \name qbAPI Commands */
 /** \{ */
 
 //================================================================     commPing
 
-/** This function is used to ping the qbMove.
+/** This function is used to ping the qbMove or the qbHand.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
@@ -304,7 +304,7 @@ int commPing( comm_settings *comm_settings_t, int id );
 
 //=============================================================     commActivate
 
-/** This function activates or deactivates a qbMove connected to
+/** This function activates or deactivates a qbMove or a qbHand connected to
  *  the serial port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -330,7 +330,7 @@ void commActivate( comm_settings *comm_settings_t, int id, char activate );
 
 //============================================================     commSetInputs
 
-/** This function send reference inputs to a qbMove connected to the serial
+/** This function send reference inputs to a qbMove or a qbHand connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -363,7 +363,7 @@ void commSetInputs( comm_settings *comm_settings_t, int id, short int inputs[] )
 
 /** This function send reference inputs to a qbMove connected to the serial
  *  port. The reference is in shaft position and stiffness preset. IS VALID ONLY WHEN USED
- *  FOR THE qbMove, NOT FOR THE softHand
+ *  FOR THE qbMove, NOT FOR THE qbHand
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
@@ -392,7 +392,7 @@ void commSetPosStiff( comm_settings *comm_settings_t, int id, short int inputs[]
 
 //============================================================     commGetInputs
 
-/** This function gets input references from a qbMove connected to the serial
+/** This function gets input references from a qbMove or a qbHand connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -427,7 +427,7 @@ int commGetInputs( comm_settings *comm_settings_t, int id, short int inputs[2] )
 
 //======================================================     commGetMeasurements
 
-/** This function gets position measurements from a qbMove connected to the serial
+/** This function gets position measurements from a qbMove or a qbHand connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -460,7 +460,7 @@ int commGetInputs( comm_settings *comm_settings_t, int id, short int inputs[2] )
 
 int commGetMeasurements( comm_settings *comm_settings_t, int id, short int measurements[3] );
 
-//======================================================     commGetMeasurements
+//======================================================     commGetCounters
 
 /** This function gets counters values from a qbMove connected to the serial
  *  port.
@@ -482,8 +482,8 @@ int commGetMeasurements( comm_settings *comm_settings_t, int id, short int measu
 
     openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
 
-    if(!commGetMeasurements(&comm_settings_t, DEVICE_ID, counters))
-        printf("Measurements: %d\t%d\t {...} %d\n", counters[0], counters[1], {...}, counters[20]);
+    if(!commGetCounters(&comm_settings_t, DEVICE_ID, counters))
+        printf("Counters: %d\t%d\t {...} %d\n", counters[0], counters[1], {...}, counters[20]);
     else
         puts("Couldn't retrieve counters.");
 
@@ -497,7 +497,7 @@ int commGetCounters( comm_settings *comm_settings_t, int id, short unsigned int 
 
 //======================================================     commGetCurrents
 
-/** This function gets currents from a qbMove connected to the serial
+/** This function gets currents from a qbMove or a qbHand connected to the serial
 *  port.
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -532,7 +532,7 @@ int commGetCurrents( comm_settings *comm_settings_t, int id, short int currents[
 
 //=======================================================     commGetCurrAndMeas
 
-/** This function gets currents and positipon measurements from a qbMove
+/** This function gets currents and position measurements from a qbMove or a qbHand
 *   connected to the serial port
 *
 *  \param  comm_settings_t      A _comm_settings_ structure containing info about the
@@ -571,7 +571,7 @@ int commGetCurrAndMeas( comm_settings *comm_settings_t, int id, short int *value
 //===============================================================     commGetEmg
 
 /** This function gets measurements from electomyographics sensors connected 
-*   to the SoftHand. IS USED ONLY WHEN THE BOARD IS USED FOR A SoftHand
+*   to the qbHand. IS USED ONLY WHEN THE BOARD IS USED FOR A QBHAND
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -606,7 +606,7 @@ int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]);
 //========================================================     commGetVelocities
 
 /** This function gets velocities of the two motors and the shaft from a qbMove
-*   connected to a serial port
+*   connected to a serial port or from the only shaft of the qbHand
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -640,8 +640,8 @@ int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurem
 
 //========================================================     commGetAccelerations
 
-/** This function gets acceleration of the SoftHand motor
-*   connected to a serial port
+/** This function gets the acceleration of the qbHand motor
+*
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -675,7 +675,7 @@ int commGetAccelerations(comm_settings *comm_settings_t, int id, short int measu
 
 //==========================================================     commGetActivate
 
-/** This function gets the activation status of a qbMove connected to the serial
+/** This function gets the activation status of a qbMove or a qbHand connected to the serial
  *  port.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -711,7 +711,7 @@ int commGetActivate( comm_settings *comm_settings_t, int id, char *activate );
 
 //==============================================================     commGetInfo
 
-/** This function is used to ping the qbMove and get information about the
+/** This function is used to ping the qbMove or the qbHand and get information about the
  *  device.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -741,7 +741,7 @@ int commGetInfo( comm_settings *comm_settings_t, int id, short int info_type, ch
 
 //==============================================================     commBootloader
 
-/** This function sends the board in the bootloader modality in order to update
+/** This function sends the board in bootloader modality in order to update
 *   the firmware on the board
 *
 *   \param  comm_settings_t     A _comm_settings_ structure containing info about the
@@ -794,7 +794,7 @@ int commCalibrate(comm_settings *comm_settings_t, int id);
 
 //==============================================================     commHandCalibrate
 
-/** This function is used to make a series of opening and closures of the SoftHand
+/** This function is used to make a series of opening and closures of the qbHand
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -823,13 +823,13 @@ int commHandCalibrate(comm_settings *comm_settings_t, int id, short int speed, s
 /** \} */
 
 
-/** \name qbMove Parameters */
+/** \name qbAPI Parameters */
 /** \{ */
 
 
 //============================================================     commSetParam
 
-/** This function sets a parameter that remains stored in the qbMove memory.
+/** This function sets a parameter that remains stored in the qbMove or the qbHand memory.
  *
  *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
  *                              communication settings.
@@ -864,7 +864,7 @@ int commSetParam( comm_settings *comm_settings_t,
 
 //============================================================     commGetParam
 
-/** This function gets a parameter that is stored in the qbMove memory.
+/** This function gets a parameter that is stored in the qbMove or the qbHand memory.
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
@@ -900,7 +900,7 @@ int commGetParam(comm_settings *comm_settings_t,
 
 //============================================================     commStoreParams
 
-/** This function stores all parameters that were set in the qbMove memory.
+/** This function stores all parameters that were set in the qbMove or the qbHand memory.
 *
 *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
 *                              communication settings.
