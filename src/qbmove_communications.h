@@ -43,7 +43,7 @@
 *
 * \author       qbrobotics
 *
-* \date         May 26, 2012
+* \date         June 01, 2016
 *
 * \details      This is a set of functions that allows to use the qbMoves or the SoftHands 
 *               via a serial port.
@@ -638,6 +638,40 @@ int commGetEmg(comm_settings *comm_settings_t, int id, short int emg[2]);
 
 int commGetVelocities(comm_settings *comm_settings_t, int id, short int measurements[] );
 
+//========================================================     commGetAccelerations
+
+/** This function gets acceleration of the SoftHand motor
+*   connected to a serial port
+*
+*  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                              communication settings.
+*
+*  \param  id                  The device's id number.
+*  \param  measurements        Velocity measurements.
+*
+*  \return Returns 0 if communication was ok, -1 otherwise.
+*
+*  \par Example
+*  \code
+
+   comm_settings    comm_settings_t;
+   int              device_id = 65;
+   short int        acc_measurements[3];
+
+   openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+   if(!commGetAccelerations(&comm_settings_t, device_id, acc_measurements))
+       printf("Measurements: %d\t%d\t%d\n", acc_measurements[0], acc_measurements[1], acc_measurements[2]);
+   else
+       puts("Couldn't retrieve accelerations.");
+
+   closeRS485(&comm_settings_t);
+
+*  \endcode
+
+**/
+
+int commGetAccelerations(comm_settings *comm_settings_t, int id, short int measurements[] );
 
 //==========================================================     commGetActivate
 

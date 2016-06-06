@@ -152,10 +152,14 @@ enum qbmove_parameter
     PARAM_DOUBLE_ENC_ON_OFF      = 19,  ///< Double Encoder Y/N
     PARAM_MOT_HANDLE_RATIO       = 20,  ///< Multiplier between handle and motor
     PARAM_MOTOR_SUPPLY           = 21,  ///< Motor supply voltage of the hand
-    PARAM_DEFLECTION_CONTROL     = 22,  ///< Activation of deflection control (qbMove only)
-    PARAM_CURRENT_LOOKUP         = 23   ///< Table of values used to calculate 
-                                        ///  an estimated current of the SoftHand
-
+	PARAM_DEFLECTION_CONTROL 	 = 22,	///< Activation of deflection control (qbMove only)
+    PARAM_CURRENT_LOOKUP         = 23,	///< Table of values used to calculate an estimated
+										///  current of the hand
+    PARAM_CURR_PROP_GAIN         = 24,
+    PARAM_CURR_SAT               = 25,
+    PARAM_CURR_DEAD_ZONE         = 26,
+    PARAM_CUFF_ACTIVATION_FLAG   = 27, 
+    PARAM_POWER_TENSION          = 28
 };
 
 
