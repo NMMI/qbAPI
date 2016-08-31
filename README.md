@@ -55,8 +55,11 @@ Download *XCode* from Mac App Store, this will install *gcc/g++* and *make* util
 
 ### Windows
 Download [MinGW](http://www.mingw.org) and install it. Open MinGW Installation
-Manager, from the left panel select basic setup, then from the right panel select
-mingw32-base and mingw32-gcc-g++, then click on `Installation -> Apply Changes`.
+Manager select the *Basic Setup* tab on the left panel and from the right panel 
+the **mingw32-base** and **mingw32-gcc-g++** packages.
+From the left panel select *All Packages* and then *MinGW*, next mark for installation
+the **mingw-libpthreadgc** packages, both dev and dll extensions.
+Then click on `Installation -> Apply Changes` to install the selected packages.
 This will install the *gcc/g++* compiler. To use it from the command line you need
 to provide to windows the binary path to the executable. Go to System Properties
 and click on Environment Variables. In the System Variable windows, look for `path`,
