@@ -5,8 +5,8 @@ composed of 3 numbers in the form: **v x.y.z**
 |  Tools  [T]    |  Libraries [L] |  Firmware [F]            |
 |-----------------|---------------|--------------------------|
 | qbmove simulink | qbAPI         | qbmove firmware          |
-| qbmoveadmin     |               | qbmove advanced firmware |
-| handmoveadmin   |               | hand firmware micro      |
+| qbadmin         |               | qbmove advanced firmware |
+|                 |               | hand firmware micro      |
 
 E.g. **xT** is the **x** number of the Tools whereas **yF** is the **y** number of the Firmware version.
 
@@ -24,11 +24,11 @@ Summarising
 
 E.g.
 
-| Tools              | Libraries    | Firmware               | Compatible |
-|--------------------|--------------|------------------------|------------|
-| qbmoveadmin v4.2.3 | qbAPI v4.5.0 | qbmove firmware v4.6.7 | YES        |
-| qbmoveadmin v3.2.3 | qbAPI v4.5.0 | qbmove firmware v4.6.7 | NO         |
-| qbmoveadmin v4.2.3 | qbAPI v4.5.7 | qbmove firmware v4.5.0 | YES        |
+| Tools          | Libraries    | Firmware               | Compatible |
+|----------------|--------------|------------------------|------------|
+| qbadmin v4.2.3 | qbAPI v4.5.0 | qbmove firmware v4.6.7 | YES        |
+| qbadmin v3.2.3 | qbAPI v4.5.0 | qbmove firmware v4.6.7 | NO         |
+| qbadmin v4.2.3 | qbAPI v4.5.7 | qbmove firmware v4.5.0 | YES        |
 
 
 # What is this?
