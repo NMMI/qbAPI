@@ -153,17 +153,19 @@ int RS485listPorts( char list_of_ports[10][255] )
     HANDLE port;
     int i, h;
     char aux_string[255];
+	char aux_port_str[255];
 
     h = 0;
 
-    for(i = 1; i < 10; ++i) {
+    for(i = 1; i < 20; ++i) {
         strcpy(list_of_ports[i], "");
-        sprintf(aux_string, "COM%d", i);
+        sprintf(aux_string, "\\\\.\\COM%d", i);
         port = CreateFile(aux_string, GENERIC_WRITE|GENERIC_READ,
                 0, NULL, OPEN_EXISTING, 0, NULL);
 
         if( port != INVALID_HANDLE_VALUE) {
-            strcpy(list_of_ports[h], aux_string);
+			sscanf(aux_string, "\\\\.\\%s", aux_port_str);
+            strcpy(list_of_ports[h], aux_port_str);
             CloseHandle( port );
             h++;
         }
@@ -210,11 +212,14 @@ void openRS485(comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE
 
     DCB  dcb;                   // for serial port configuration
     COMMTIMEOUTS cts;           // for serial port configuration
-
+	char my_port[255];
+	
 //======================================================     opening serial port
+	
+	sprintf(my_port, "\\\\.\\%s", port_s);
 
     comm_settings_t->file_handle =
-        CreateFile( port_s,
+        CreateFile( my_port,
                     GENERIC_WRITE|GENERIC_READ,
                     0, NULL, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT, NULL);
 
