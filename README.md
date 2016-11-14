@@ -33,14 +33,13 @@ E.g.
 
 # What is this?
 
-These are the C/C++ libraries to interact with *qbmove* and *SoftHand*
+These are the C/C++ libraries to interact with *qbMove* and *qbHand*
 
-If you want to use these libraries with [*qbmoveadmin*](https://github.com/qbrobotics/qbmoveadmin) or [*handadmin*](https://github.com/qbrobotics/handadmin) software, be sure to organize your folder as follows:
+If you want to use these libraries with [*qbadmin*](https://github.com/qbrobotics/qbadmin) software, be sure to organize your folder as follows:
 
 * your_workingcopy
     * qbAPI
-    * qbmoveadmin
-    * handadmin
+    * qbadmin
 
 ## Install the compiler
 
@@ -99,5 +98,4 @@ or this:
 
 > The generated `libqbmove_comm.a` is a static library and
 > can be used in your own application.
-> It is also used by [*qbmoveadmin*](https://github.com/qbrobotics/qbmoveadmin)
-> and [*handadmin*](https://github.com/qbrobotics/handadmin).
+> It is also used by [*qbadmin*](https://github.com/qbrobotics/qbadmin).
