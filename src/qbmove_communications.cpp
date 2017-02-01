@@ -600,8 +600,8 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
         }
 
         if(aux_int) {
-         list_of_ids[h] = package_in[2];
-         h++;
+            list_of_ids[h] = package_in[2];
+            h++;
         }
 
 #else

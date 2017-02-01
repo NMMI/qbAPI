@@ -69,7 +69,6 @@
 #if (defined(_WIN32) || defined(_WIN64))
     #include <windows.h>
 #else
-    #define HANDLE  int
     #define INVALID_HANDLE_VALUE    -1
 #endif
 
@@ -94,7 +93,11 @@ typedef struct comm_settings comm_settings;
 
 struct comm_settings
 {
+#if (defined(_WIN32) || defined(_WIN64))
     HANDLE file_handle;
+#else
+    int file_handle;
+#endif
 };
 
 
