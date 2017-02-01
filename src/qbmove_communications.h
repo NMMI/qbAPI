@@ -163,7 +163,7 @@ int RS485listPorts( char list_of_ports[10][255] );
 #if !(defined(_WIN32) || defined(_WIN64)) && !(defined(__APPLE__)) //only for linux
     void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = B2000000);
 #elif !(defined(_WIN32) || defined(_WIN64)) && (defined(__APPLE__)) //only for mac
-    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 300);
+    void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 2000000);
 #else
     void openRS485( comm_settings *comm_settings_t, const char *port_s, int BAUD_RATE = 2000000);
 #endif
