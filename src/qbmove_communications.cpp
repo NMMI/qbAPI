@@ -317,32 +317,23 @@ error:
     // set baud rate
     if (BAUD_RATE > 460800){
 
-      // cfmakeraw(&options);
+        // enable the receiver and set local mode
+        options.c_cflag |= (CLOCAL | CREAD);
 
-      cfsetispeed(&options, 300);
-      cfsetospeed(&options, 300);
+        // enable flags
+        options.c_cflag &= ~PARENB;
+        //options.c_cflag &= ~CSTOPB;
+        options.c_cflag &= ~CSIZE;
+        options.c_cflag |= CS8;
 
-      // enable the receiver and set local mode
-      options.c_cflag |= (CLOCAL | CREAD);
+        //disable flags
+        options.c_cflag &= ~CRTSCTS;
+        options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+        options.c_oflag &= ~OPOST;
+        options.c_iflag &= ~(IXON | IXOFF | IXANY | INLCR);
 
-      // enable flags
-      options.c_cflag &= ~PARENB;
-      //options.c_cflag &= ~CSTOPB;
-      options.c_cflag &= ~CSIZE;
-      options.c_cflag |= CS8;
-
-      //disable flags
-      options.c_cflag &= ~CRTSCTS;
-      options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-      options.c_oflag &= ~OPOST;
-      options.c_iflag &= ~(IXON | IXOFF | IXANY | INLCR);
-
-      options.c_cc[VMIN] = 0;
-      options.c_cc[VTIME] = 0;
-      // Set not-standard BAUDRATE bypassing termios.h
-
-      if (ioctl(comm_settings_t->file_handle, IOSSIOSPEED, &custom_baudrate))
-          goto error;
+        options.c_cc[VMIN] = 0;
+        options.c_cc[VTIME] = 0;
 
     }
     else{
@@ -386,6 +377,7 @@ error:
     ioctl(comm_settings_t->file_handle, TIOCGSERIAL, &serinfo);
     serinfo.flags |= ASYNC_LOW_LATENCY;
     ioctl(comm_settings_t->file_handle, TIOCSSERIAL, &serinfo);
+    
 #endif
 
     // save changes
@@ -393,6 +385,14 @@ error:
         goto error;
     }
 
+#if (defined __APPLE__)
+    //Set non custom baudrate for APPLE systems
+    if(ioctl(comm_settings_t->file_handle, IOSSIOSPEED, &custom_baudrate, 1)){
+        printf("ERROR\n");
+        goto error;
+    }
+#endif
+    
     return;
 
 error:
@@ -414,7 +414,7 @@ error:
 void closeRS485(comm_settings *comm_settings_t)
 {
 #if (defined(_WIN32) || defined(_WIN64))
-    CloseHandle( comm_settings_t->file_handle );
+    CloseHandle(comm_settings_t->file_handle);
 #else
     close(comm_settings_t->file_handle);
 #endif
