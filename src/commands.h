@@ -46,7 +46,7 @@
 #ifndef COM_COMMANDS_DEFINITIONS_H_INCLUDED
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
-#define API_VERSION "v6.1.0"
+#define API_VERSION "v6.2.0"
 
 //==============================================================================
 //                                                                      COMMANDS
