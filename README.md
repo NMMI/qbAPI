@@ -41,10 +41,15 @@ If you want to use these libraries with [*qbadmin*](https://github.com/qbrobotic
     * qbAPI
     * qbadmin
 
-## Install the compiler
+## Installation requirements
 
 The simplest way to compile these libraries is by using the command line utility *make*.
 To do so, you will need also the *gcc/g++* compiler installed on your system.
+
+> NOTE: if it is the first time you use qbrobotics devices on your computer, it is possible that
+> you need to download the drivers to let your computer see the port correctly.
+> To do that visit [FTDI driver](http://www.ftdichip.com/Drivers/VCP.htm) webpage -> VCP drivers
+> and download the proper driver depending on your OS
 
 ### Unix
 You should have both *gcc/g++* and *make* installed. 
