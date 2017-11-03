@@ -1,0 +1,140 @@
+\begin{theindex}
+
+  \item {checksum}
+    \subitem {qbmove\+\_\+communications.\+h}, 17
+  \item {close\+R\+S485}
+    \subitem {qbmove\+\_\+communications.\+h}, 17
+  \item {comm\+\_\+settings}, 7
+  \item {comm\+Activate}
+    \subitem {qbmove\+\_\+communications.\+h}, 18
+  \item {comm\+Bootloader}
+    \subitem {qbmove\+\_\+communications.\+h}, 18
+  \item {comm\+Calibrate}
+    \subitem {qbmove\+\_\+communications.\+h}, 19
+  \item {comm\+Ext\+Drive}
+    \subitem {qbmove\+\_\+communications.\+h}, 19
+  \item {comm\+Get\+Accelerations}
+    \subitem {qbmove\+\_\+communications.\+h}, 21
+  \item {comm\+Get\+Activate}
+    \subitem {qbmove\+\_\+communications.\+h}, 21
+  \item {comm\+Get\+Counters}
+    \subitem {qbmove\+\_\+communications.\+h}, 23
+  \item {comm\+Get\+Curr\+And\+Meas}
+    \subitem {qbmove\+\_\+communications.\+h}, 24
+  \item {comm\+Get\+Currents}
+    \subitem {qbmove\+\_\+communications.\+h}, 24
+  \item {comm\+Get\+Emg}
+    \subitem {qbmove\+\_\+communications.\+h}, 25
+  \item {comm\+Get\+Info}
+    \subitem {qbmove\+\_\+communications.\+h}, 26
+  \item {comm\+Get\+Inputs}
+    \subitem {qbmove\+\_\+communications.\+h}, 26
+  \item {comm\+Get\+Joystick}
+    \subitem {qbmove\+\_\+communications.\+h}, 27
+  \item {comm\+Get\+Measurements}
+    \subitem {qbmove\+\_\+communications.\+h}, 27
+  \item {comm\+Get\+Param\+List}
+    \subitem {qbmove\+\_\+communications.\+h}, 28
+  \item {comm\+Get\+Velocities}
+    \subitem {qbmove\+\_\+communications.\+h}, 29
+  \item {comm\+Hand\+Calibrate}
+    \subitem {qbmove\+\_\+communications.\+h}, 29
+  \item {comm\+Init\+Mem}
+    \subitem {qbmove\+\_\+communications.\+h}, 30
+  \item {comm\+Ping}
+    \subitem {qbmove\+\_\+communications.\+h}, 31
+  \item {comm\+Restore\+Params}
+    \subitem {qbmove\+\_\+communications.\+h}, 31
+  \item {comm\+Set\+Baud\+Rate}
+    \subitem {qbmove\+\_\+communications.\+h}, 32
+  \item {comm\+Set\+Cuff\+Inputs}
+    \subitem {qbmove\+\_\+communications.\+h}, 32
+  \item {comm\+Set\+Inputs}
+    \subitem {qbmove\+\_\+communications.\+h}, 33
+  \item {comm\+Set\+Pos\+Stiff}
+    \subitem {qbmove\+\_\+communications.\+h}, 33
+  \item {comm\+Set\+Watch\+Dog}
+    \subitem {qbmove\+\_\+communications.\+h}, 34
+  \item {comm\+Set\+Zeros}
+    \subitem {qbmove\+\_\+communications.\+h}, 34
+  \item {comm\+Store\+Default\+Params}
+    \subitem {qbmove\+\_\+communications.\+h}, 35
+  \item {comm\+Store\+Params}
+    \subitem {qbmove\+\_\+communications.\+h}, 35
+  \item {commands.\+h}, 9
+    \subitem {qbmove\+\_\+command}, 11
+    \subitem {qbmove\+\_\+control\+\_\+mode}, 12
+    \subitem {qbmove\+\_\+input\+\_\+mode}, 12
+    \subitem {qbmove\+\_\+parameter}, 13
+
+  \indexspace
+
+  \item {open\+R\+S485}
+    \subitem {qbmove\+\_\+communications.\+h}, 36
+
+  \indexspace
+
+  \item {qbmove\+\_\+command}
+    \subitem {commands.\+h}, 11
+  \item {qbmove\+\_\+communications.\+cpp}, 13
+  \item {qbmove\+\_\+communications.\+h}, 15
+    \subitem {checksum}, 17
+    \subitem {close\+R\+S485}, 17
+    \subitem {comm\+Activate}, 18
+    \subitem {comm\+Bootloader}, 18
+    \subitem {comm\+Calibrate}, 19
+    \subitem {comm\+Ext\+Drive}, 19
+    \subitem {comm\+Get\+Accelerations}, 21
+    \subitem {comm\+Get\+Activate}, 21
+    \subitem {comm\+Get\+Counters}, 23
+    \subitem {comm\+Get\+Curr\+And\+Meas}, 24
+    \subitem {comm\+Get\+Currents}, 24
+    \subitem {comm\+Get\+Emg}, 25
+    \subitem {comm\+Get\+Info}, 26
+    \subitem {comm\+Get\+Inputs}, 26
+    \subitem {comm\+Get\+Joystick}, 27
+    \subitem {comm\+Get\+Measurements}, 27
+    \subitem {comm\+Get\+Param\+List}, 28
+    \subitem {comm\+Get\+Velocities}, 29
+    \subitem {comm\+Hand\+Calibrate}, 29
+    \subitem {comm\+Init\+Mem}, 30
+    \subitem {comm\+Ping}, 31
+    \subitem {comm\+Restore\+Params}, 31
+    \subitem {comm\+Set\+Baud\+Rate}, 32
+    \subitem {comm\+Set\+Cuff\+Inputs}, 32
+    \subitem {comm\+Set\+Inputs}, 33
+    \subitem {comm\+Set\+Pos\+Stiff}, 33
+    \subitem {comm\+Set\+Watch\+Dog}, 34
+    \subitem {comm\+Set\+Zeros}, 34
+    \subitem {comm\+Store\+Default\+Params}, 35
+    \subitem {comm\+Store\+Params}, 35
+    \subitem {open\+R\+S485}, 36
+    \subitem {R\+S485\+Get\+Info}, 36
+    \subitem {R\+S485\+List\+Devices}, 37
+    \subitem {R\+S485list\+Ports}, 38
+    \subitem {R\+S485read}, 38
+    \subitem {timevaldiff}, 39
+  \item {qbmove\+\_\+control\+\_\+mode}
+    \subitem {commands.\+h}, 12
+  \item {qbmove\+\_\+input\+\_\+mode}
+    \subitem {commands.\+h}, 12
+  \item {qbmove\+\_\+parameter}
+    \subitem {commands.\+h}, 13
+
+  \indexspace
+
+  \item {R\+S485\+Get\+Info}
+    \subitem {qbmove\+\_\+communications.\+h}, 36
+  \item {R\+S485\+List\+Devices}
+    \subitem {qbmove\+\_\+communications.\+h}, 37
+  \item {R\+S485list\+Ports}
+    \subitem {qbmove\+\_\+communications.\+h}, 38
+  \item {R\+S485read}
+    \subitem {qbmove\+\_\+communications.\+h}, 38
+
+  \indexspace
+
+  \item {timevaldiff}
+    \subitem {qbmove\+\_\+communications.\+h}, 39
+
+\end{theindex}

@@ -1,6 +1,8 @@
+// ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2017, qbrobotics
+// Copyright (c) 2016, qbrobotics
+// Copyright (c) 2017, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -27,13 +29,17 @@
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// POSSIBILITY OF SUCH DAMAGE.
+// ----------------------------------------------------------------------------
 
 /**
  *  \file       qbmove_communications.cpp
  *
- *  \brief      Library of functions for serial port communication with a
- *              qbMove or a qbHand
- *
+ *  \brief      Library of functions for serial port communication with a board
+ * \date         October 01, 2017
+ * \author       _Centro "E.Piaggio"_
+ * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
+ * \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
  *  \details
  *
  *  Check the \ref qbmove_communications.h "qbmove_communications.h" file
@@ -317,23 +323,32 @@ error:
     // set baud rate
     if (BAUD_RATE > 460800){
 
-        // enable the receiver and set local mode
-        options.c_cflag |= (CLOCAL | CREAD);
+      // cfmakeraw(&options);
 
-        // enable flags
-        options.c_cflag &= ~PARENB;
-        //options.c_cflag &= ~CSTOPB;
-        options.c_cflag &= ~CSIZE;
-        options.c_cflag |= CS8;
+      cfsetispeed(&options, 300);
+      cfsetospeed(&options, 300);
 
-        //disable flags
-        options.c_cflag &= ~CRTSCTS;
-        options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-        options.c_oflag &= ~OPOST;
-        options.c_iflag &= ~(IXON | IXOFF | IXANY | INLCR);
+      // enable the receiver and set local mode
+      options.c_cflag |= (CLOCAL | CREAD);
 
-        options.c_cc[VMIN] = 0;
-        options.c_cc[VTIME] = 0;
+      // enable flags
+      options.c_cflag &= ~PARENB;
+      //options.c_cflag &= ~CSTOPB;
+      options.c_cflag &= ~CSIZE;
+      options.c_cflag |= CS8;
+
+      //disable flags
+      options.c_cflag &= ~CRTSCTS;
+      options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+      options.c_oflag &= ~OPOST;
+      options.c_iflag &= ~(IXON | IXOFF | IXANY | INLCR);
+
+      options.c_cc[VMIN] = 0;
+      options.c_cc[VTIME] = 0;
+      // Set not-standard BAUDRATE bypassing termios.h
+
+      if (ioctl(comm_settings_t->file_handle, IOSSIOSPEED, &custom_baudrate))
+          goto error;
 
     }
     else{
@@ -377,7 +392,6 @@ error:
     ioctl(comm_settings_t->file_handle, TIOCGSERIAL, &serinfo);
     serinfo.flags |= ASYNC_LOW_LATENCY;
     ioctl(comm_settings_t->file_handle, TIOCSSERIAL, &serinfo);
-    
 #endif
 
     // save changes
@@ -385,14 +399,6 @@ error:
         goto error;
     }
 
-#if (defined __APPLE__)
-    //Set non custom baudrate for APPLE systems
-    if(ioctl(comm_settings_t->file_handle, IOSSIOSPEED, &custom_baudrate, 1)){
-        printf("ERROR\n");
-        goto error;
-    }
-#endif
-    
     return;
 
 error:
@@ -414,7 +420,7 @@ error:
 void closeRS485(comm_settings *comm_settings_t)
 {
 #if (defined(_WIN32) || defined(_WIN64))
-    CloseHandle(comm_settings_t->file_handle);
+    CloseHandle( comm_settings_t->file_handle );
 #else
     close(comm_settings_t->file_handle);
 #endif
@@ -600,8 +606,8 @@ int RS485ListDevices(comm_settings *comm_settings_t, char list_of_ids[255])
         }
 
         if(aux_int) {
-            list_of_ids[h] = package_in[2];
-            h++;
+         list_of_ids[h] = package_in[2];
+         h++;
         }
 
 #else
@@ -948,7 +954,7 @@ void commSetInputs(comm_settings *comm_settings_t, int id, short int inputs[]) {
 //==============================================================================
 //                                                               commSetPosStiff
 //==============================================================================
-// This function send reference position and stiffness to the qbmove
+// This function send reference position and stiffness
 //==============================================================================
 
 void commSetPosStiff(comm_settings *comm_settings_t, int id, short int inputs[]) {
@@ -2182,7 +2188,7 @@ int commExtDrive(comm_settings *comm_settings_t, int id, char ext_input) {
 //==============================================================================
 //                                                            commSetCuffInputs
 //==============================================================================
-// This function send reference inputs to a qbMove board connected to a Cuff
+// This function send reference inputs to a board connected to a Cuff
 //==============================================================================
 
 void commSetCuffInputs(comm_settings *comm_settings_t, int id, int flag) {

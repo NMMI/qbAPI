@@ -1,0 +1,1363 @@
+\section{qbmove\+\_\+communications.\+h File Reference}
+\label{qbmove__communications_8h}\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+
+
+Library of functions for S\+E\+R\+I\+AL P\+O\+RT communication with a board. Function Prototypes.  
+
+
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}commands.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for qbmove\+\_\+communications.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{qbmove__communications_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{qbmove__communications_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ comm\+\_\+settings}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{qbmove__communications_8h_ab521aa5010fb1afb801a899a55569e03}} 
+\#define {\bfseries H\+A\+N\+D\+LE}~int
+\item 
+\mbox{\label{qbmove__communications_8h_a5fdc7facea201bfce4ad308105f88d0c}} 
+\#define {\bfseries I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+V\+A\+L\+UE}~-\/1
+\item 
+\mbox{\label{qbmove__communications_8h_a44483e681594d0e510fd59c2b4b09ed9}} 
+\#define {\bfseries B\+A\+U\+D\+\_\+\+R\+A\+T\+E\+\_\+\+T\+\_\+2000000}~0
+\item 
+\mbox{\label{qbmove__communications_8h_ad2c3e3edb0886633d686996e2f8c48e6}} 
+\#define {\bfseries B\+A\+U\+D\+\_\+\+R\+A\+T\+E\+\_\+\+T\+\_\+460800}~1
+\item 
+\mbox{\label{qbmove__communications_8h_ab5b4465b1096182b9ebb03e87d572c59}} 
+\#define {\bfseries M\+A\+X\+\_\+\+W\+A\+T\+C\+H\+D\+O\+G\+\_\+\+T\+I\+ME}~500
+\item 
+\mbox{\label{qbmove__communications_8h_a18e13c9ac88403c42395bb0af487eb2d}} 
+\#define {\bfseries R\+E\+A\+D\+\_\+\+T\+I\+M\+E\+O\+UT}~4000
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{qbmove__communications_8h_a4a4b9cd04b7bc0361256581b13fadbdc}} 
+typedef struct \textbf{ comm\+\_\+settings} {\bfseries comm\+\_\+settings}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{Indent}\textbf{ Virtual C\+OM (R\+S485) functions}\par
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ R\+S485list\+Ports} (char list\+\_\+of\+\_\+ports[10][255])
+\item 
+void \textbf{ open\+R\+S485} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, const char $\ast$port\+\_\+s, int B\+A\+U\+D\+\_\+\+R\+A\+TE=B2000000)
+\item 
+void \textbf{ close\+R\+S485} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t)
+\item 
+int \textbf{ R\+S485read} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, char $\ast$package)
+\item 
+int \textbf{ R\+S485\+List\+Devices} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, char list\+\_\+of\+\_\+ids[255])
+\item 
+void \textbf{ R\+S485\+Get\+Info} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, char $\ast$buffer)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ qb\+A\+PI Commands}\par
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ comm\+Ping} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\item 
+void \textbf{ comm\+Activate} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, char activate)
+\item 
+void \textbf{ comm\+Set\+Baud\+Rate} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int baudrate)
+\item 
+void \textbf{ comm\+Set\+Watch\+Dog} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int wdt)
+\item 
+void \textbf{ comm\+Set\+Inputs} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int inputs[$\,$])
+\item 
+void \textbf{ comm\+Set\+Pos\+Stiff} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int inputs[$\,$])
+\item 
+int \textbf{ comm\+Get\+Inputs} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int inputs[2])
+\item 
+int \textbf{ comm\+Get\+Measurements} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int measurements[3])
+\item 
+int \textbf{ comm\+Get\+Counters} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short unsigned int counters[20])
+\item 
+int \textbf{ comm\+Get\+Currents} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int currents[2])
+\item 
+int \textbf{ comm\+Get\+Curr\+And\+Meas} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int $\ast$values)
+\item 
+int \textbf{ comm\+Get\+Emg} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int emg[2])
+\item 
+int \textbf{ comm\+Get\+Velocities} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int measurements[$\,$])
+\item 
+int \textbf{ comm\+Get\+Accelerations} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int measurements[$\,$])
+\item 
+int \textbf{ comm\+Get\+Activate} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, char $\ast$activate)
+\item 
+int \textbf{ comm\+Get\+Info} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int info\+\_\+type, char $\ast$info)
+\item 
+int \textbf{ comm\+Bootloader} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\item 
+int \textbf{ comm\+Calibrate} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\item 
+int \textbf{ comm\+Hand\+Calibrate} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int speed, short int repetitions)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ qb\+A\+PI Parameters}\par
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ comm\+Set\+Zeros} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, void $\ast$values, unsigned short num\+\_\+of\+\_\+values)
+\item 
+int \textbf{ comm\+Get\+Param\+List} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, unsigned short index, void $\ast$values, unsigned short value\+\_\+size, unsigned short num\+\_\+of\+\_\+values, uint8\+\_\+t $\ast$buffer)
+\item 
+int \textbf{ comm\+Store\+Params} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\item 
+int \textbf{ comm\+Store\+Default\+Params} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\item 
+int \textbf{ comm\+Restore\+Params} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\item 
+int \textbf{ comm\+Init\+Mem} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ General Functions}\par
+\begin{DoxyCompactItemize}
+\item 
+long \textbf{ timevaldiff} (struct timeval $\ast$starttime, struct timeval $\ast$finishtime)
+\item 
+char \textbf{ checksum} (char $\ast$data\+\_\+buffer, int data\+\_\+length)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Functions for other devices}\par
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ comm\+Ext\+Drive} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, char ext\+\_\+input)
+\item 
+void \textbf{ comm\+Set\+Cuff\+Inputs} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, int flag)
+\item 
+int \textbf{ comm\+Get\+Joystick} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, short int joystick[2])
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Library of functions for S\+E\+R\+I\+AL P\+O\+RT communication with a board. Function Prototypes. 
+
+\begin{DoxyDate}{Date}
+October 01, 2017 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+{\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(C) 2012-\/2016 qbrobotics. All rights reserved. 
+
+(C) 2017 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
+\end{DoxyCopyright}
+This library contains all necessary functions for communicating with a board when using a U\+SB to R\+S485 connector that provides a Virtual C\+OM interface. 
+
+\subsection{Function Documentation}
+\mbox{\label{qbmove__communications_8h_a35819265b74001583803a2295b3236dc}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!checksum@{checksum}}
+\index{checksum@{checksum}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{checksum()}
+{\footnotesize\ttfamily char checksum (\begin{DoxyParamCaption}\item[{char $\ast$}]{data\+\_\+buffer,  }\item[{int}]{data\+\_\+length }\end{DoxyParamCaption})}
+
+This functions returns an 8 bit L\+CR checksum over the lenght of a buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+buffer} & Buffer. \\
+\hline
+{\em data\+\_\+length} & Buffer length.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{char}    aux;
+\textcolor{keywordtype}{char}    buffer[5];
+
+buffer  = \textcolor{stringliteral}{"abcde"};
+aux     = checksum(buffer,5);
+printf(\textcolor{stringliteral}{"Checksum: %d"}, (\textcolor{keywordtype}{int}) aux)
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a5f87643fab51e02e4eab71bf4ab1a33a}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!close\+R\+S485@{close\+R\+S485}}
+\index{close\+R\+S485@{close\+R\+S485}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{close\+R\+S485()}
+{\footnotesize\ttfamily void close\+R\+S485 (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t }\end{DoxyParamCaption})}
+
+This function is used to close a serial port being used with the board.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_aff081c6687d87e38cddfe714ad2de0fd}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Activate@{comm\+Activate}}
+\index{comm\+Activate@{comm\+Activate}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Activate()}
+{\footnotesize\ttfamily void comm\+Activate (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{char}]{activate }\end{DoxyParamCaption})}
+
+This function activates or deactivates a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em activate} & T\+R\+UE to turn motors on. F\+A\+L\+SE to turn motors off. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commActivate(&comm\_settings\_t, device\_id, TRUE);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a70990e1cf4d18b3baeb3c7295dbd6426}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Bootloader@{comm\+Bootloader}}
+\index{comm\+Bootloader@{comm\+Bootloader}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Bootloader()}
+{\footnotesize\ttfamily int comm\+Bootloader (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function sends the board in bootloader modality in order to update the firmware on the board
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return 0 on success, -\/1 otherwise
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commBootloader(&comm\_settings\_t, device\_id);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a92ef5f590c59ab49a224b8e612eb08ac}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Calibrate@{comm\+Calibrate}}
+\index{comm\+Calibrate@{comm\+Calibrate}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Calibrate()}
+{\footnotesize\ttfamily int comm\+Calibrate (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function is used to calibrate the maximum stiffness value of the board
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, -\/1 otherwise
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commCalibrate(&comm\_settings\_t, device\_id);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_ac9705be6201442447bfa37e498721d2b}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Ext\+Drive@{comm\+Ext\+Drive}}
+\index{comm\+Ext\+Drive@{comm\+Ext\+Drive}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Ext\+Drive()}
+{\footnotesize\ttfamily int comm\+Ext\+Drive (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{char}]{ext\+\_\+input }\end{DoxyParamCaption})}
+
+This function is used with the armslider device. Is used to drive another board with the inputs of the first one
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the comunication settings. \\
+\hline
+{\em id} & The id of the board drive. \\
+\hline
+{\em ext\+\_\+input} & A flag used to activate the external drive functionality of the board.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A negative value if something went wrong, a zero if everything went fine. 
+\end{DoxyReturn}
+\mbox{\label{qbmove__communications_8h_abfa23acd4ac72099fa96a32df01969d2}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Accelerations@{comm\+Get\+Accelerations}}
+\index{comm\+Get\+Accelerations@{comm\+Get\+Accelerations}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Accelerations()}
+{\footnotesize\ttfamily int comm\+Get\+Accelerations (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{measurements[$\,$] }\end{DoxyParamCaption})}
+
+This function gets the acceleration of the qb\+Hand motor
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em measurements} & Velocity measurements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{int}              device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}        acc\_measurements[3];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetAccelerations(&comm\_settings\_t, device\_id, acc\_measurements))
+    printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"}, acc\_measurements[0], acc\_measurements[1], acc\_measurements[2]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve accelerations."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_abaec903aef1ce3cebb5f42f63995c2e1}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Activate@{comm\+Get\+Activate}}
+\index{comm\+Get\+Activate@{comm\+Get\+Activate}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Activate()}
+{\footnotesize\ttfamily int comm\+Get\+Activate (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{char $\ast$}]{activate }\end{DoxyParamCaption})}
+
+This function gets the activation status of a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em activation} & Activation status.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+\textcolor{keywordtype}{char}    activation\_status;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetActivate(&comm\_settings\_t, DEVICE\_ID, activation\_status))
+    printf(\textcolor{stringliteral}{"Activation status: %d\(\backslash\)n"}, &activation\_status);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve activation status."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_aab579187b08cac507c18584b242eb02d}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Counters@{comm\+Get\+Counters}}
+\index{comm\+Get\+Counters@{comm\+Get\+Counters}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Counters()}
+{\footnotesize\ttfamily int comm\+Get\+Counters (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short unsigned int}]{counters[20] }\end{DoxyParamCaption})}
+
+This function gets counters values from a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em counters} & Counters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings       comm\_settings\_t;
+\textcolor{keywordtype}{int}                 device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}  counters[20];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetCounters(&comm\_settings\_t, DEVICE\_ID, counters))
+    printf(\textcolor{stringliteral}{"Counters: %d\(\backslash\)t%d\(\backslash\)t \{...\} %d\(\backslash\)n"}, counters[0], counters[1], \{...\}, counters[20]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve counters."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a3f700c3fc90215428707c7c98b3d538f}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Curr\+And\+Meas@{comm\+Get\+Curr\+And\+Meas}}
+\index{comm\+Get\+Curr\+And\+Meas@{comm\+Get\+Curr\+And\+Meas}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Curr\+And\+Meas()}
+{\footnotesize\ttfamily int comm\+Get\+Curr\+And\+Meas (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int $\ast$}]{values }\end{DoxyParamCaption})}
+
+This function gets currents and position measurements from a board connected to the serial port
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em values} & Current and position measurements. Currents are in first two positions\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{int}              device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}        values[5];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+ \textcolor{keywordflow}{if}(!commGetCurrAndMeas(&comm\_settings\_t, device\_id, currents))\{
+     printf(\textcolor{stringliteral}{"Currents: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"},values[0], values[1]);
+     printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"}, values[2], values[3], values[4]);
+ \}
+ \textcolor{keywordflow}{else}
+     puts(\textcolor{stringliteral}{"Couldn't retrieve currents."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a4b3c724150046fc4a766db52fa086fdf}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Currents@{comm\+Get\+Currents}}
+\index{comm\+Get\+Currents@{comm\+Get\+Currents}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Currents()}
+{\footnotesize\ttfamily int comm\+Get\+Currents (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{currents[2] }\end{DoxyParamCaption})}
+
+This function gets currents from a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em currents} & Currents.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{int}              device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}        currents[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetCurrents(&comm\_settings\_t, device\_id, currents))
+    printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"},currents[0], currents[1]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve currents."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a731e861c53a68c7e2e57d36383bf3360}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Emg@{comm\+Get\+Emg}}
+\index{comm\+Get\+Emg@{comm\+Get\+Emg}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Emg()}
+{\footnotesize\ttfamily int comm\+Get\+Emg (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{emg[2] }\end{DoxyParamCaption})}
+
+This function gets measurements from electomyographics sensors connected to the qb\+Hand. IS U\+S\+ED O\+N\+LY W\+H\+EN T\+HE B\+O\+A\+RD IS U\+S\+ED F\+OR A Q\+B\+H\+A\+ND
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em values} & Emg sensors measurements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{int}              device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}        values[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetEmg(&comm\_settings\_t, device\_id, values));
+    printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"}, values[0], values[1]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve emg values."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a052291b3dd75dee6a33242268a1de657}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Info@{comm\+Get\+Info}}
+\index{comm\+Get\+Info@{comm\+Get\+Info}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Info()}
+{\footnotesize\ttfamily int comm\+Get\+Info (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{info\+\_\+type,  }\item[{char $\ast$}]{info }\end{DoxyParamCaption})}
+
+This function is used to ping the board and get information about the device.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em buffer} & Buffer that stores a string with information about the device. B\+U\+F\+F\+ER S\+I\+ZE M\+U\+ST BE AT L\+E\+A\+ST 500. \\
+\hline
+{\em info\+\_\+type} & Information to be retrieved.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{char}    auxstring[500];
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commGetInfo(&comm\_settings\_t, device\_id, INFO_ALL, auxstring);
+puts(auxstring);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_ae0a38427212fc15a1021d2459a86f2c0}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Inputs@{comm\+Get\+Inputs}}
+\index{comm\+Get\+Inputs@{comm\+Get\+Inputs}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Inputs()}
+{\footnotesize\ttfamily int comm\+Get\+Inputs (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{inputs[2] }\end{DoxyParamCaption})}
+
+This function gets input references from a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em inputs} & Input references.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       inputs[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetInputs(&comm\_settings\_t, DEVICE\_ID, inputs))
+    printf(\textcolor{stringliteral}{"Inputs: %d\(\backslash\)t%d\(\backslash\)n"},inputs[0], inputs[1]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve device inputs."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_af78c08053431bb4d516f9ec49b651280}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Joystick@{comm\+Get\+Joystick}}
+\index{comm\+Get\+Joystick@{comm\+Get\+Joystick}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Joystick()}
+{\footnotesize\ttfamily int comm\+Get\+Joystick (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{joystick[2] }\end{DoxyParamCaption})}
+
+This function gets joystick measurementes from a softhand connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em joystick} & Joystick analog measurements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{int}              device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}        joystick[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetJoystick(&comm\_settings\_t, device\_id, joystick))
+    printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"},joystick[0], joystick[1]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve joystick measurements."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a06a73f0c93c7ae12a95541c1feee10b7}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Measurements@{comm\+Get\+Measurements}}
+\index{comm\+Get\+Measurements@{comm\+Get\+Measurements}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Measurements()}
+{\footnotesize\ttfamily int comm\+Get\+Measurements (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{measurements[3] }\end{DoxyParamCaption})}
+
+This function gets position measurements from a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em measurements} & Measurements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       measurements[3];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetMeasurements(&comm\_settings\_t, DEVICE\_ID, measurements))
+    printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"},measurements[0], measurements[1], measurements[2]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve measurements."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_ab47b8ee2e1aeab529bc3da3bfd52d3f6}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Param\+List@{comm\+Get\+Param\+List}}
+\index{comm\+Get\+Param\+List@{comm\+Get\+Param\+List}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Param\+List()}
+{\footnotesize\ttfamily int comm\+Get\+Param\+List (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{unsigned short}]{index,  }\item[{void $\ast$}]{values,  }\item[{unsigned short}]{value\+\_\+size,  }\item[{unsigned short}]{num\+\_\+of\+\_\+values,  }\item[{uint8\+\_\+t $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+This function gets all the parameters that are stored in the board memory and sets one of them if requested
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em index} & The index relative to the parameter to be get. \\
+\hline
+{\em values} & An array with the parameter values. \\
+\hline
+{\em value\+\_\+size} & The byte size of the parameter to be get \\
+\hline
+{\em num\+\_\+of\+\_\+values} & The size of the array of the parameter to be get \\
+\hline
+{\em buffer} & The array where the parameters\textquotesingle{} values and descriptions are saved\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}   aux\_string[2000];
+\textcolor{keywordtype}{int}             index = 0;
+\textcolor{keywordtype}{int}             value\_size = 0;
+\textcolor{keywordtype}{int}             num\_of\_values = 0;
+
+\textcolor{comment}{// Get parameters}
+commGetParamList(&comm\_settings\_t, device\_id, index, NULL, value\_size, num\_of\_values, aux\_string);
+string\_unpacking\_and\_printing(aux\_string);
+
+\textcolor{comment}{// Set parameters}
+
+\textcolor{keywordtype}{float}           pid[3];
+pid[0] = 0.1;
+pid[1] = 0.2;
+pid[2] = 0.3;
+index = 2;
+value\_size = 4;
+num\_of\_values = 3;
+commGetParamList(&comm\_settings\_t, device\_id, index, pid, value\_size, num\_of\_values, NULL);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_af55b8ff44432552b9e5a7cd092b8b429}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Get\+Velocities@{comm\+Get\+Velocities}}
+\index{comm\+Get\+Velocities@{comm\+Get\+Velocities}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Velocities()}
+{\footnotesize\ttfamily int comm\+Get\+Velocities (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{measurements[$\,$] }\end{DoxyParamCaption})}
+
+This function gets velocities of the two motors and the shaft from a board connected to a serial port or from the only shaft of the qb\+Hand
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em measurements} & Velocity measurements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{int}              device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}        vel\_measurements[3];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetVelocities(&comm\_settings\_t, device\_id, vel\_measurements))
+    printf(\textcolor{stringliteral}{"Measurements: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"}, vel\_measurements[0], vel\_measurements[1], vel\_measurements[2]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve velocities."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_ac3fc8ebaa05ea9d3ff895088c30103d5}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Hand\+Calibrate@{comm\+Hand\+Calibrate}}
+\index{comm\+Hand\+Calibrate@{comm\+Hand\+Calibrate}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Hand\+Calibrate()}
+{\footnotesize\ttfamily int comm\+Hand\+Calibrate (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{speed,  }\item[{short int}]{repetitions }\end{DoxyParamCaption})}
+
+This function is used to make a series of opening and closures of the qb\+Hand
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em speed} & The speed of hand closure and opening [0 -\/ 200] \\
+\hline
+{\em repetitions} & The nnumber of closures needed to be done [0 -\/ 32767]\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     speed = 200
+\textcolor{keywordtype}{int}     repetitions = 400;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commHandCalibrate(&comm\_settings\_t, device\_id, speed, repetitions);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_aa3771c9c4be2805d66c5b1a59066cb19}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Init\+Mem@{comm\+Init\+Mem}}
+\index{comm\+Init\+Mem@{comm\+Init\+Mem}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Init\+Mem()}
+{\footnotesize\ttfamily int comm\+Init\+Mem (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function initialize the E\+E\+P\+R\+OM memory of the board by loading the default factory parameters. After the initialization a flag is set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+commInitMem(&comm\_settings\_t, device\_id)
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a7f95a0e23b674b1fe32b8e35f0e36863}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Ping@{comm\+Ping}}
+\index{comm\+Ping@{comm\+Ping}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Ping()}
+{\footnotesize\ttfamily int comm\+Ping (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function is used to ping the board.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em buffer} & Buffer that stores a string with information about the device. B\+U\+F\+F\+ER S\+I\+ZE M\+U\+ST BE AT L\+E\+A\+ST 500.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if ping was ok, -\/1 otherwise. 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+ comm_settings   comm\_settings\_t;
+ \textcolor{keywordtype}{int}             device\_id = 65;
+
+ openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+ \textcolor{keywordflow}{if} ( commPing(&comm\_settings\_t, device\_id) )
+     puts(\textcolor{stringliteral}{"Device exists."});
+ \textcolor{keywordflow}{else}
+     puts(\textcolor{stringliteral}{"Device does not exist."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_af60062569bcd25b6f2fc19ba378d583c}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Restore\+Params@{comm\+Restore\+Params}}
+\index{comm\+Restore\+Params@{comm\+Restore\+Params}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Restore\+Params()}
+{\footnotesize\ttfamily int comm\+Restore\+Params (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function restores the factory default parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+commRestoreParams(&comm\_settings\_t, device\_id)
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a8ff7ead4f05a1c0bba5610fe226d0ce0}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Set\+Baud\+Rate@{comm\+Set\+Baud\+Rate}}
+\index{comm\+Set\+Baud\+Rate@{comm\+Set\+Baud\+Rate}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Set\+Baud\+Rate()}
+{\footnotesize\ttfamily void comm\+Set\+Baud\+Rate (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{baudrate }\end{DoxyParamCaption})}
+
+This function sets the baudrate of communication.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em baudrate} & Baud\+Rate requested 0 = 2M baudrate, 1 = 460.\+8k baudrate\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       baudrate = 0;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commSetBaudRate(&comm\_settings\_t, global\_args.device\_id, baudrate);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a342c0b970a9a2a661c3d5636a7601a01}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Set\+Cuff\+Inputs@{comm\+Set\+Cuff\+Inputs}}
+\index{comm\+Set\+Cuff\+Inputs@{comm\+Set\+Cuff\+Inputs}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Set\+Cuff\+Inputs()}
+{\footnotesize\ttfamily void comm\+Set\+Cuff\+Inputs (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{int}]{flag }\end{DoxyParamCaption})}
+
+This function send reference inputs to a board connected to the serial port. Is used only when the device is a Cuff.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em flag} & A flag that indicates used to activate the cuff driving functionality of the board.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       cuff\_inputs[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordtype}{int} flag = 1;
+commSetCuffInputs(&comm\_settings\_t, device\_id, flag);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a894f6f9ec9822112ff3c7eef10d123c9}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Set\+Inputs@{comm\+Set\+Inputs}}
+\index{comm\+Set\+Inputs@{comm\+Set\+Inputs}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Set\+Inputs()}
+{\footnotesize\ttfamily void comm\+Set\+Inputs (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{inputs[$\,$] }\end{DoxyParamCaption})}
+
+This function send reference inputs to a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em inputs} & Input references.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       inputs[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+inputs[0]   = 1000;
+inputs[1]   = -1000;
+commSetInputs(&comm\_settings\_t, device\_id, inputs);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_aa3aee192f28b08cf6d80fc719e73ad46}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Set\+Pos\+Stiff@{comm\+Set\+Pos\+Stiff}}
+\index{comm\+Set\+Pos\+Stiff@{comm\+Set\+Pos\+Stiff}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Set\+Pos\+Stiff()}
+{\footnotesize\ttfamily void comm\+Set\+Pos\+Stiff (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{inputs[$\,$] }\end{DoxyParamCaption})}
+
+This function send reference inputs to a board connected to the serial port. The reference is in shaft position and stiffness preset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em inputs} & Input references.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       inputs[2];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+inputs[0]   = 100;          \textcolor{comment}{//Degrees}
+inputs[1]   = 30;           \textcolor{comment}{//stiffness preset}
+commSetPosStiff(&comm\_settings\_t, device\_id, inputs);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a69b4f92e4ef6b8cfef5d0c34fd4993db}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Set\+Watch\+Dog@{comm\+Set\+Watch\+Dog}}
+\index{comm\+Set\+Watch\+Dog@{comm\+Set\+Watch\+Dog}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Set\+Watch\+Dog()}
+{\footnotesize\ttfamily void comm\+Set\+Watch\+Dog (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{short int}]{wdt }\end{DoxyParamCaption})}
+
+This function sets watchdog timer of a board.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em wdt} & Watchdog timer in [csec], max value\+: 500 [cs] / min value\+: 0 (disable) [cs]\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       wdt = 60;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128);}
+\textcolor{stringliteral}{commSetWatchDog(&comm\_settings\_t, global\_args.device\_id, wdt);}
+\textcolor{stringliteral}{closeRS485(&comm\_settings\_t);}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a95fbe9919cbe89dc444e333edad6642e}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Set\+Zeros@{comm\+Set\+Zeros}}
+\index{comm\+Set\+Zeros@{comm\+Set\+Zeros}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Set\+Zeros()}
+{\footnotesize\ttfamily int comm\+Set\+Zeros (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{void $\ast$}]{values,  }\item[{unsigned short}]{num\+\_\+of\+\_\+values }\end{DoxyParamCaption})}
+
+This function sets the encoders\textquotesingle{}s zero positon value that remains stored in the board memory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em value} & An array with the encoder readings values. \\
+\hline
+{\em num\+\_\+of\+\_\+values} & The size of the values array, equal to the sensor number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       measurements[3];
+
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commGetMeasurements(comm\_settings\_t, device\_id, measurements)
+\textcolor{keywordflow}{for}(i = 0; i<3; i++)
+    measurements[i] = -measurements[i];
+commSetZeros(&comm\_settings\_t, global\_args.device\_id, measurements, 3);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_af49ed4d474529ec3a53e37f5f85c1e7b}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Store\+Default\+Params@{comm\+Store\+Default\+Params}}
+\index{comm\+Store\+Default\+Params@{comm\+Store\+Default\+Params}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Store\+Default\+Params()}
+{\footnotesize\ttfamily int comm\+Store\+Default\+Params (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function stores the factory default parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commStoreDefaultParams(&comm\_settings\_t, device\_id)
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_ad3359fdac0ba857804dfc4a9bc761b20}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!comm\+Store\+Params@{comm\+Store\+Params}}
+\index{comm\+Store\+Params@{comm\+Store\+Params}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{comm\+Store\+Params()}
+{\footnotesize\ttfamily int comm\+Store\+Params (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+This function stores all parameters that were set in the board memory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings comm\_settings\_t;
+\textcolor{keywordtype}{int}     device\_id = 65;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+commStoreParams(&comm\_settings\_t, device\_id)
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_adce66aac7dbbd52de59bb7a3a9c1b3bd}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!open\+R\+S485@{open\+R\+S485}}
+\index{open\+R\+S485@{open\+R\+S485}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{open\+R\+S485()}
+{\footnotesize\ttfamily void open\+R\+S485 (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{const char $\ast$}]{port\+\_\+s,  }\item[{int}]{B\+A\+U\+D\+\_\+\+R\+A\+TE = {\ttfamily B2000000} }\end{DoxyParamCaption})}
+
+This function is used to open a serial port for using with the board.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings. \\
+\hline
+{\em port\+\_\+s} & The string to the serial port path. \\
+\hline
+{\em B\+A\+U\+D\+\_\+\+R\+A\+TE} & The default baud rate value of the serial port\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the file descriptor associated to the serial port.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+\textcolor{keywordflow}{if}(comm\_settings\_t.file\_handle == INVALID\_HANDLE\_VALUE)
+\{
+\textcolor{comment}{// ERROR}
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a65b0719c48b487b5e7432f794e3fec1b}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!R\+S485\+Get\+Info@{R\+S485\+Get\+Info}}
+\index{R\+S485\+Get\+Info@{R\+S485\+Get\+Info}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{R\+S485\+Get\+Info()}
+{\footnotesize\ttfamily void R\+S485\+Get\+Info (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+This function is used to ping the serial port for a board and to get information about the device. O\+N\+LY U\+SE W\+H\+EN O\+NE D\+E\+V\+I\+CE IS C\+O\+N\+N\+E\+C\+T\+ED O\+N\+LY.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em buffer} & Buffer that stores a string with information about the device. B\+U\+F\+F\+ER S\+I\+ZE M\+U\+ST BE AT L\+E\+A\+ST 500.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings    comm\_settings\_t;
+\textcolor{keywordtype}{char}             auxstring[500];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+RS485GetInfo(&comm\_settings\_t, auxstring);
+puts(auxstring);
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_af5bf8448818684348d30d03d59fc2c1b}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!R\+S485\+List\+Devices@{R\+S485\+List\+Devices}}
+\index{R\+S485\+List\+Devices@{R\+S485\+List\+Devices}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{R\+S485\+List\+Devices()}
+{\footnotesize\ttfamily int R\+S485\+List\+Devices (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{char}]{list\+\_\+of\+\_\+ids[255] }\end{DoxyParamCaption})}
+
+This function is used to list the number of devices connected to the serial port and get their relative I\+Ds
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em list\+\_\+of\+\_\+ids\mbox{[}255\mbox{]}} & Buffer that stores a list of I\+Ds to ping, in order to see which of those I\+Ds is connected. Is then filled with the I\+Ds connected to the serial port.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of devices connected
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65; 
+\textcolor{keywordtype}{int}             device\_num;
+\textcolor{keywordtype}{char}            list\_of\_ids[255];
+
+openRS485(&comm\_settings\_t, device\_id);
+device\_num = RS485ListDevices(&comm\_settings\_t, &list\_of\_ids);
+closeRS485(&comm\_settings\_t);
+printf(\textcolor{stringliteral}{"Number of devices connected: %d"}, i);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a088f2abb4e7610589910e31f5c72b236}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!R\+S485list\+Ports@{R\+S485list\+Ports}}
+\index{R\+S485list\+Ports@{R\+S485list\+Ports}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{R\+S485list\+Ports()}
+{\footnotesize\ttfamily int R\+S485list\+Ports (\begin{DoxyParamCaption}\item[{char}]{list\+\_\+of\+\_\+ports[10][255] }\end{DoxyParamCaption})}
+
+This function is used to return a list of available serial ports. A maximum of 10 ports are found.
+
+
+\begin{DoxyParams}{Parameters}
+{\em list\+\_\+of\+\_\+ports} & An array of strings with the serial ports paths.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of serial ports found.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{int}     i, num\_ports;
+\textcolor{keywordtype}{char}    list\_of\_ports[10][255];
+
+num\_ports = RS485listPorts(ports);
+
+\textcolor{keywordflow}{for}(i = 0; i < num\_ports; ++i)
+\{
+    puts(ports[i]);
+\}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a8c7444a05d655538cb7d13ee47290c8d}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!R\+S485read@{R\+S485read}}
+\index{R\+S485read@{R\+S485read}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{R\+S485read()}
+{\footnotesize\ttfamily int R\+S485read (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{char $\ast$}]{package }\end{DoxyParamCaption})}
+
+This function is used to read a package from the device.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em package} & Package will be stored here.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns package length if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{char}            data\_read[1000];
+
+openRS485(&comm\_settings\_t, \textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+commPing(&comm\_settings\_t, device\_id);
+RS485read(&comm\_settings\_t, device\_id, data\_read);
+closeRS485(&comm\_settings\_t);
+
+printf(data\_read);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{qbmove__communications_8h_a97912dd3b3c6529884b0e61a2ca6a31b}} 
+\index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!timevaldiff@{timevaldiff}}
+\index{timevaldiff@{timevaldiff}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
+\subsubsection{timevaldiff()}
+{\footnotesize\ttfamily long timevaldiff (\begin{DoxyParamCaption}\item[{struct timeval $\ast$}]{starttime,  }\item[{struct timeval $\ast$}]{finishtime }\end{DoxyParamCaption})}
+
+This functions returns a difference between two timeval structures in order to obtain time elapsed between the two timeval;
+
+
+\begin{DoxyParams}{Parameters}
+{\em starttime} & The timeval structure containing the start time \\
+\hline
+{\em finishtime} & The timeval structure containing the finish time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the elapsed time between the two timeval structures.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }timeval start, finish;
+gettimeofday(&start, NULL);
+\textcolor{comment}{// other instructions }
+gettimeofday(&now, NULL);
+\textcolor{keywordtype}{long} diff = timevaldiff(&start, &now);
+
+printf(Time elapsed: %ld, diff);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

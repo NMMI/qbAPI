@@ -1,6 +1,8 @@
+// ----------------------------------------------------------------------------
 // BSD 3-Clause License
 
-// Copyright (c) 2017, qbrobotics
+// Copyright (c) 2016, qbrobotics
+// Copyright (c) 2017, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -27,14 +29,20 @@
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// POSSIBILITY OF SUCH DAMAGE.
+// ----------------------------------------------------------------------------
 
 /**
  * \file        commands.h
  *
- *  \brief      Definitions for qbMove or qbHand commands, parameters and packages.
+ *  \brief      Definitions for board commands, parameters and packages.
+ *
+ * \author       _Centro "E.Piaggio"_
+ * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
+ * \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
  *
  *  \details
- *  This file is included in the qbMove and qbHand firmware, in its libraries and
+ *  This file is included in the board firmware, in its libraries and
  *  applications. It contains all definitions that are necessary for the
  *  contruction of communication packages.
  *
@@ -46,14 +54,14 @@
 #ifndef COM_COMMANDS_DEFINITIONS_H_INCLUDED
 #define COM_COMMANDS_DEFINITIONS_H_INCLUDED
 
-#define API_VERSION "v6.2.0"
+#define API_VERSION "v6.1.0"
 
 //==============================================================================
 //                                                                      COMMANDS
 //==============================================================================
 
 
-/** \name qbMove and qbHand Commands
+/** \name Board Commands
  * \{
 **/
 
@@ -76,7 +84,7 @@ enum qbmove_command
     CMD_BOOTLOADER              = 9,    ///< Sets the bootloader modality to update the
                                         ///  firmware
     CMD_INIT_MEM                = 10,   ///< Initialize the memory with the defalut values
-    CMD_CALIBRATE               = 11,   ///< Starts the stiffness calibration of the qbMove
+    CMD_CALIBRATE               = 11,   ///< Starts the stiffness calibration of the board
     CMD_GET_PARAM_LIST          = 12,   ///< Command to get the parameters list or to set
                                         ///  a defined value chosen by the use
     CMD_HAND_CALIBRATE          = 13,   ///< Starts a series of opening and closures of the hand
@@ -125,7 +133,7 @@ enum qbmove_command
 //==============================================================================
 //                                                                    PARAMETERS
 //==============================================================================
-/** \name qbMove and qbHand Parameters */
+/** \name Board Parameters */
 /** \{ */
 
 enum qbmove_parameter
