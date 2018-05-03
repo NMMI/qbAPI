@@ -2,11 +2,13 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017, Centro "E.Piaggio"
+// Copyright (c) 2017-2018, Centro "E.Piaggio"
 // All rights reserved.
+
 
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
+
 
 // * Redistributions of source code must retain the above copyright notice, this
 //   list of conditions and the following disclaimer.
@@ -19,9 +21,11 @@
 //   contributors may be used to endorse or promote products derived from
 //   this software without specific prior written permission.
 
+
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+
 // DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
 // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 // DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
@@ -36,10 +40,12 @@
  *  \file       qbmove_communications.cpp
  *
  *  \brief      Library of functions for serial port communication with a board
- * \date         October 01, 2017
+ * \date         May 03, 2018
  * \author       _Centro "E.Piaggio"_
  * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
- * \copyright    (C) 2017 Centro "E.Piaggio". All rights reserved.
+ * \copyright    (C) 2017-2018 Centro "E.Piaggio". All rights reserved.
+
+
  *  \details
  *
  *  Check the \ref qbmove_communications.h "qbmove_communications.h" file
@@ -156,7 +162,7 @@ void hexdump(void *mem, unsigned int len)
 //                                                               RS485listPorts
 //==============================================================================
 
-int RS485listPorts( char list_of_ports[10][255] )
+int RS485listPorts( char list_of_ports[20][255] )
 {
     //////////////////////////////   WINDOWS   //////////////////////////////
 #if (defined(_WIN32) || defined(_WIN64))
@@ -168,7 +174,7 @@ int RS485listPorts( char list_of_ports[10][255] )
 
     h = 0;
 
-    for(i = 1; i < 20; ++i) {
+    for(i = 1; i < 60; ++i) {
         strcpy(list_of_ports[i], "");
         sprintf(aux_string, "\\\\.\\COM%d", i);
         port = CreateFile(aux_string, GENERIC_WRITE|GENERIC_READ,
@@ -1056,7 +1062,7 @@ int commGetInputs(comm_settings *comm_settings_t, int id, short int inputs[2]) {
 
 int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measurements[]) {
 
-    unsigned char data_out[BUFFER_SIZE];         // output data buffer
+    char data_out[BUFFER_SIZE];         // output data buffer
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
 
@@ -1111,14 +1117,14 @@ int commGetMeasurements(comm_settings *comm_settings_t, int id, short int measur
             ((char *) &measurements[2])[1] = package_in[5];
         break;
         case 4:
-            ((int8_t *) &measurements[0])[0] = package_in[2];
-            ((int8_t *) &measurements[0])[1] = package_in[1];
-            ((int8_t *) &measurements[1])[0] = package_in[4];
-            ((int8_t *) &measurements[1])[1] = package_in[3];
-            ((int8_t *) &measurements[2])[0] = package_in[6];
-            ((int8_t *) &measurements[2])[1] = package_in[5];
-            ((int8_t *) &measurements[3])[0] = package_in[8];
-            ((int8_t *) &measurements[3])[1] = package_in[7];
+            ((char *) &measurements[0])[0] = package_in[2];
+            ((char *) &measurements[0])[1] = package_in[1];
+            ((char *) &measurements[1])[0] = package_in[4];
+            ((char *) &measurements[1])[1] = package_in[3];
+            ((char *) &measurements[2])[0] = package_in[6];
+            ((char *) &measurements[2])[1] = package_in[5];
+            ((char *) &measurements[3])[0] = package_in[8];
+            ((char *) &measurements[3])[1] = package_in[7];
         break;
         default:
             printf("Number of sensors not supported.\n");
@@ -1996,7 +2002,7 @@ int commStoreParams( comm_settings *comm_settings_t, int id ) {
     package_in_size = RS485read(comm_settings_t, id, package_in);
 
     if ( (package_in_size < 0) || (package_in[0] == ACK_ERROR) ) {
-        printf("package_in_size: %d\n", package_in_size);
+
         return package_in_size;
     }
 
