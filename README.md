@@ -35,7 +35,7 @@ E.g.
 
 These are the C/C++ libraries to interact with *qbMove* and *qbHand*
 
-If you want to use these libraries with [*qbadmin*](https://github.com/qbrobotics/qbadmin) software, be sure to organize your folder as follows:
+If you want to use these libraries with [*qbadmin*](https://github.com/NMMI/qbadmin) software, be sure to organize your folder as follows:
 
 * your_workingcopy
     * qbAPI
@@ -103,4 +103,4 @@ or this:
 
 > The generated `libqbmove_comm.a` is a static library and
 > can be used in your own application.
-> It is also used by [*qbadmin*](https://github.com/qbrobotics/qbadmin).
+> It is also used by [*qbadmin*](https://github.com/NMMI/qbadmin).
