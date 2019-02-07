@@ -18,12 +18,15 @@ LIB_FOLDER = ../lib_unix
 
 endif
 
-all:$(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER) $(LIB_FOLDER)
-	ar rcs $(LIB_FOLDER)/libqbmove_comm.a $(OBJS_FOLDER)/qbmove_communications.o
+all:$(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/cp_communications.o $(OBJS_FOLDER) $(LIB_FOLDER)
+	ar rcs $(LIB_FOLDER)/libqbmove_comm.a $(OBJS_FOLDER)/qbmove_communications.o $(OBJS_FOLDER)/cp_communications.o
 
 $(OBJS_FOLDER)/qbmove_communications.o:qbmove_communications.cpp $(OBJS_FOLDER)
 	$(COMPILER) $(CFLAGS) qbmove_communications.cpp -o $(OBJS_FOLDER)/qbmove_communications.o
 
+$(OBJS_FOLDER)/cp_communications.o:cp_communications.cpp $(OBJS_FOLDER)
+	$(COMPILER) $(CFLAGS) cp_communications.cpp -o $(OBJS_FOLDER)/cp_communications.o
+	
 clean:
 ifeq "$(OS)"  "Windows_NT"
 	rmdir /Q /S $(OBJS_FOLDER)

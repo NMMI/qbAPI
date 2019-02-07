@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2018, Centro "E.Piaggio"
+// Copyright (c) 2017-2019, Centro "E.Piaggio"
 // All rights reserved.
 
 
