@@ -337,7 +337,7 @@ int commGetIMUParamList(comm_settings *comm_settings_t, int id, unsigned short i
                 if(bytes > size)
                     bytes = size;
 
-				if (!read(comm_settings_t->file_handle, data_in, 4)) {
+				if (!read(comm_settings_t->file_handle, aux_buffer, bytes)) {
 					return -1;
 				}
 
