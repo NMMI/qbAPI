@@ -548,9 +548,9 @@ int commGetADCConf(comm_settings *comm_settings_t, int id, uint8_t* tot_adc_chan
 }
 
 //==============================================================================
-//                                                       commGetAdditionalEmgRaw
+//                                                       	 commGetADCRawValues
 //==============================================================================
-// This function gets measurements from the QB Move.
+// This function gets ADC raw values from the board.
 //==============================================================================
 
 int commGetADCRawValues(comm_settings *comm_settings_t, int id, uint8_t num_channels, short int adc[]) {
@@ -598,7 +598,6 @@ int commGetADCRawValues(comm_settings *comm_settings_t, int id, uint8_t num_chan
 	
 	return 0;
 }
-
 /// @endcond
 
 /* [] END OF FILE */

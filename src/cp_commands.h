@@ -44,7 +44,7 @@
 
 #ifdef API_VERSION
 	#undef API_VERSION
-	#define API_VERSION "v6.1.0 mod. IMU board"
+	#define API_VERSION "v7.0.0 Centro Piaggio"
 #endif
 
 //==============================================================================
@@ -65,7 +65,7 @@ enum additional_command
     CMD_GET_ENCODER_CONF        = 163,  // Get encoder configuration
     CMD_GET_ENCODER_RAW         = 164,  // Get all encoder raw values
 	CMD_GET_ADC_CONF			= 165,	// Get ADC configuration
-    CMD_GET_ADC_RAW  			= 166  	// Get ADC raw values  
+    CMD_GET_ADC_RAW  			= 166 	// Get ADC raw values  
 };
 
 
