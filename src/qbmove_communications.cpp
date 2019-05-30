@@ -1870,7 +1870,7 @@ int commGetParamList(comm_settings *comm_settings_t, int id, unsigned short inde
     int bytes;
     int count = 0;
     const int size = 512;
-    int8_t aux_buffer[size];
+    char aux_buffer[size];
 #endif
 
 //================================================      preparing packet to send
@@ -1916,11 +1916,13 @@ int commGetParamList(comm_settings *comm_settings_t, int id, unsigned short inde
             write(comm_settings_t->file_handle, data_out, 8);
 
             usleep(200000);
+    
             while(1) {
                 usleep(50000);
                 if(ioctl(comm_settings_t->file_handle, FIONREAD, &bytes) < 0) {
                     break;
                 }
+
                 if(bytes == 0) {
                     break;
                 }
