@@ -134,7 +134,7 @@ struct comm_settings
  *  \endcode
 **/
 
-int RS485listPorts( char list_of_ports[20][255] );
+int RS485listPorts( char list_of_ports[60][255] );
 
 //================================================================     openRS485
 

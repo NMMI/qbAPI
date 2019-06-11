@@ -162,7 +162,7 @@ void hexdump(void *mem, unsigned int len)
 //                                                               RS485listPorts
 //==============================================================================
 
-int RS485listPorts( char list_of_ports[20][255] )
+int RS485listPorts( char list_of_ports[60][255] )
 {
     //////////////////////////////   WINDOWS   //////////////////////////////
 #if (defined(_WIN32) || defined(_WIN64))
