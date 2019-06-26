@@ -1,0 +1,502 @@
+\section{commands.\+h File Reference}
+\label{commands_8h}\index{commands.\+h@{commands.\+h}}
+
+
+Definitions for board commands, parameters and packages.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{commands_8h_ad97188edfdd667de971027b35330fa41}} 
+\#define {\bfseries A\+P\+I\+\_\+\+V\+E\+R\+S\+I\+ON}~\char`\"{}v6.\+1.\+0\char`\"{}
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ QB Move Information Strings}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{commands_8h_a2ba44fc5b8a316bd307d0baa9ab629ef}} 
+\#define \textbf{ I\+N\+F\+O\+\_\+\+A\+LL}~0
+\begin{DoxyCompactList}\small\item\em All system information. \end{DoxyCompactList}\item 
+\mbox{\label{commands_8h_a1d08cadf994ec74db774800cfe81e499}} 
+\#define \textbf{ I\+N\+F\+O\+\_\+\+R\+E\+A\+D\+I\+NG}~1
+\begin{DoxyCompactList}\small\item\em Cycles information. \end{DoxyCompactList}\item 
+\mbox{\label{commands_8h_ab4bb7fa515198a57be2407a640e6910e}} 
+\#define \textbf{ G\+E\+T\+\_\+\+S\+D\+\_\+\+P\+A\+R\+AM}~2
+\begin{DoxyCompactList}\small\item\em Read Firmware Parameters from SD file. \end{DoxyCompactList}\item 
+\mbox{\label{commands_8h_a3154ffe43f7cb799f7c35cfad7339f49}} 
+\#define \textbf{ G\+E\+T\+\_\+\+S\+D\+\_\+\+D\+A\+TA}~3
+\begin{DoxyCompactList}\small\item\em Read Usage Data from SD file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Enumerations}
+\begin{Indent}\textbf{ Board Commands}\par
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ qbmove\+\_\+command} \{ \newline
+\textbf{ C\+M\+D\+\_\+\+P\+I\+NG} = 0, 
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+Z\+E\+R\+OS} = 1, 
+\textbf{ C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS} = 3, 
+\textbf{ C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+A\+R\+A\+MS} = 4, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+R\+E\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS} = 5, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO} = 6, 
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+V\+A\+L\+UE} = 7, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+A\+L\+UE} = 8, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+B\+O\+O\+T\+L\+O\+A\+D\+ER} = 9, 
+\textbf{ C\+M\+D\+\_\+\+I\+N\+I\+T\+\_\+\+M\+EM} = 10, 
+\textbf{ C\+M\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE} = 11, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+P\+A\+R\+A\+M\+\_\+\+L\+I\+ST} = 12, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+H\+A\+N\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE} = 13, 
+\textbf{ C\+M\+D\+\_\+\+A\+C\+T\+I\+V\+A\+TE} = 128, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE} = 129, 
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+I\+N\+P\+U\+TS} = 130, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+P\+U\+TS} = 131, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+TS} = 132, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+E\+N\+TS} = 133, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AS} = 134, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+P\+O\+S\+\_\+\+S\+T\+I\+FF} = 135, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+MG} = 136, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+T\+I\+ES} = 137, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+O\+U\+N\+T\+E\+RS} = 138, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+C\+EL} = 139, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF} = 140, 
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF} = 141, 
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS} = 142, 
+\newline
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+W\+A\+T\+C\+H\+D\+OG} = 143, 
+\textbf{ C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE} = 144, 
+\textbf{ C\+M\+D\+\_\+\+E\+X\+T\+\_\+\+D\+R\+I\+VE} = 145, 
+\textbf{ C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK} = 146
+ \}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Board Parameters}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{commands_8h_ae3302107827a773be3200e459e7b24da}} 
+\#define {\bfseries P\+A\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+\_\+\+S\+L\+OT}~50
+\item 
+\mbox{\label{commands_8h_a3bab5133f6aa363d84307b39e17b0d74}} 
+\#define {\bfseries P\+A\+R\+A\+M\+\_\+\+M\+E\+N\+U\+\_\+\+S\+L\+OT}~150
+\item 
+enum \textbf{ qbmove\+\_\+parameter} \{ \newline
+\textbf{ P\+A\+R\+A\+M\+\_\+\+ID} = 0, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+O\+N\+T\+R\+OL} = 1, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+A\+C\+T\+I\+V\+A\+T\+I\+ON} = 2, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+I\+N\+P\+U\+T\+\_\+\+M\+O\+DE} = 3, 
+\newline
+\textbf{ P\+A\+R\+A\+M\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+M\+O\+DE} = 4, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+O\+F\+F\+S\+ET} = 5, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER} = 6, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+I\+T\+\_\+\+F\+L\+AG} = 7, 
+\newline
+\textbf{ P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+IT} = 8, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+P\+OS} = 9, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+N\+EG} = 10, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+E\+S\+O\+L\+U\+T\+I\+ON} = 11, 
+\newline
+\textbf{ P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT} = 12, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+C\+A\+L\+I\+B\+\_\+\+F\+L\+AG} = 13, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD} = 14, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE} = 15, 
+\newline
+\textbf{ P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+S\+P\+E\+ED} = 16, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+U\+R\+R\+\_\+\+C\+O\+N\+T\+R\+OL} = 18, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+E\+N\+C\+\_\+\+O\+N\+\_\+\+O\+FF} = 19, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+R\+A\+T\+IO} = 20, 
+\newline
+\textbf{ P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+O\+R\+\_\+\+S\+U\+P\+P\+LY} = 21, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+O\+O\+K\+UP} = 23, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+P\+O\+S\+\_\+\+P\+ID} = 24, 
+\textbf{ P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+C\+U\+R\+R\+\_\+\+P\+ID} = 25
+ \}
+\item 
+\mbox{\label{commands_8h_ad18f2ef316ee226b52882af5758c39e8}} 
+enum {\bfseries qbmove\+\_\+resolution} \{ \newline
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+360} = 0, 
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+720} = 1, 
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+1440} = 2, 
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+2880} = 3, 
+\newline
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+5760} = 4, 
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+11520} = 5, 
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+23040} = 6, 
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+46080} = 7, 
+\newline
+{\bfseries R\+E\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+92160} = 8
+ \}
+\item 
+enum \textbf{ qbmove\+\_\+input\+\_\+mode} \{ \newline
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+T\+E\+R\+N\+AL} = 0, 
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+E\+R3} = 1, 
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+AL} = 2, 
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL} = 3, 
+\newline
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS} = 4, 
+\textbf{ I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV} = 5
+ \}
+\item 
+enum \textbf{ qbmove\+\_\+control\+\_\+mode} \{ \newline
+\textbf{ C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE} = 0, 
+\textbf{ C\+O\+N\+T\+R\+O\+L\+\_\+\+P\+WM} = 1, 
+\textbf{ C\+O\+N\+T\+R\+O\+L\+\_\+\+C\+U\+R\+R\+E\+NT} = 2, 
+\textbf{ C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+P\+O\+S\+\_\+\+C\+O\+N\+T\+R\+OL} = 3, 
+\newline
+\textbf{ D\+E\+F\+L\+E\+C\+T\+I\+O\+N\+\_\+\+C\+O\+N\+T\+R\+OL} = 4, 
+\textbf{ D\+E\+F\+L\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+R\+OL} = 5
+ \}
+\item 
+\mbox{\label{commands_8h_a17c218160a8b2c5f25db27616793d564}} 
+enum {\bfseries motor\+\_\+supply\+\_\+tipe} \{ {\bfseries M\+A\+X\+O\+N\+\_\+24V} = 0, 
+{\bfseries M\+A\+X\+O\+N\+\_\+12V} = 1
+ \}
+\item 
+\mbox{\label{commands_8h_a0eae1c82d20671c5d0b9b82b10070f1b}} 
+enum {\bfseries acknowledgment\+\_\+values} \{ {\bfseries A\+C\+K\+\_\+\+E\+R\+R\+OR} = 0, 
+{\bfseries A\+C\+K\+\_\+\+OK} = 1
+ \}
+\item 
+\mbox{\label{commands_8h_aee7544e5fa6e2843ecdc3609602e56aa}} 
+enum {\bfseries data\+\_\+types} \{ \newline
+{\bfseries T\+Y\+P\+E\+\_\+\+F\+L\+AG} = 0, 
+{\bfseries T\+Y\+P\+E\+\_\+\+I\+N\+T8} = 1, 
+{\bfseries T\+Y\+P\+E\+\_\+\+U\+I\+N\+T8} = 2, 
+{\bfseries T\+Y\+P\+E\+\_\+\+I\+N\+T16} = 3, 
+\newline
+{\bfseries T\+Y\+P\+E\+\_\+\+U\+I\+N\+T16} = 4, 
+{\bfseries T\+Y\+P\+E\+\_\+\+I\+N\+T32} = 5, 
+{\bfseries T\+Y\+P\+E\+\_\+\+U\+I\+N\+T32} = 6, 
+{\bfseries T\+Y\+P\+E\+\_\+\+F\+L\+O\+AT} = 7, 
+\newline
+{\bfseries T\+Y\+P\+E\+\_\+\+D\+O\+U\+B\+LE} = 8, 
+{\bfseries T\+Y\+P\+E\+\_\+\+S\+T\+R\+I\+NG} = 9
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Definitions for board commands, parameters and packages. 
+
+\begin{DoxyAuthor}{Author}
+{\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(C) 2012-\/2016 qbrobotics. All rights reserved. 
+
+(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
+\end{DoxyCopyright}
+This file is included in the board firmware, in its libraries and applications. It contains all definitions that are necessary for the contruction of communication packages.
+
+It includes definitions for all of the device commands, parameters and also the size of answer packages. 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210b}} 
+\index{commands.\+h@{commands.\+h}!qbmove\+\_\+command@{qbmove\+\_\+command}}
+\index{qbmove\+\_\+command@{qbmove\+\_\+command}!commands.\+h@{commands.\+h}}
+\subsubsection{qbmove\+\_\+command}
+{\footnotesize\ttfamily enum \textbf{ qbmove\+\_\+command}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+P\+I\+NG@{C\+M\+D\+\_\+\+P\+I\+NG}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+P\+I\+NG@{C\+M\+D\+\_\+\+P\+I\+NG}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba1c0aa24c3612e77ea1a5ca1b82388da0}} 
+C\+M\+D\+\_\+\+P\+I\+NG&Asks for a ping message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+Z\+E\+R\+OS@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+Z\+E\+R\+OS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+Z\+E\+R\+OS@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+Z\+E\+R\+OS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba2d92e89157e03fe63bfebf8125c3a0d7}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+Z\+E\+R\+OS&Command for setting the encoders zero position. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS@{C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS@{C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac7d1170961179d8dc5ec1b4aeb4f3116}} 
+C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS&Stores all parameters in memory and loads them \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+A\+R\+A\+MS@{C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+A\+R\+A\+MS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+A\+R\+A\+MS@{C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+A\+R\+A\+MS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba17d9c730cd01059737de14b9f062e44c}} 
+C\+M\+D\+\_\+\+S\+T\+O\+R\+E\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+A\+R\+A\+MS&Store current parameters as factory parameters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+R\+E\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS@{C\+M\+D\+\_\+\+R\+E\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+R\+E\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS@{C\+M\+D\+\_\+\+R\+E\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba7f13c143f54c74572776ffae219d33d7}} 
+C\+M\+D\+\_\+\+R\+E\+S\+T\+O\+R\+E\+\_\+\+P\+A\+R\+A\+MS&Restore default factory parameters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba4681b714888632a2d8ad0a2140e4ba7f}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+FO&Asks for a string of information about. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+V\+A\+L\+UE@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+V\+A\+L\+UE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+V\+A\+L\+UE@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+V\+A\+L\+UE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac3ca8989b510cb78baff4425a0d47a67}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+V\+A\+L\+UE&Not Used. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+A\+L\+UE@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+A\+L\+UE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+A\+L\+UE@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+A\+L\+UE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac9a592ed746a114c7bfc0bd9d094263c}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+A\+L\+UE&Not Used. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+B\+O\+O\+T\+L\+O\+A\+D\+ER@{C\+M\+D\+\_\+\+B\+O\+O\+T\+L\+O\+A\+D\+ER}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+B\+O\+O\+T\+L\+O\+A\+D\+ER@{C\+M\+D\+\_\+\+B\+O\+O\+T\+L\+O\+A\+D\+ER}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac72c6075e3464ea5abbe0c0d6e11559e}} 
+C\+M\+D\+\_\+\+B\+O\+O\+T\+L\+O\+A\+D\+ER&Sets the bootloader modality to update the firmware \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+I\+N\+I\+T\+\_\+\+M\+EM@{C\+M\+D\+\_\+\+I\+N\+I\+T\+\_\+\+M\+EM}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+I\+N\+I\+T\+\_\+\+M\+EM@{C\+M\+D\+\_\+\+I\+N\+I\+T\+\_\+\+M\+EM}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba7bd24a7ad88af9a4e7c398a9ecb08ed4}} 
+C\+M\+D\+\_\+\+I\+N\+I\+T\+\_\+\+M\+EM&Initialize the memory with the defalut values. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE@{C\+M\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE@{C\+M\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba238830aded332d3bd5cbbb4ea2cb6ce7}} 
+C\+M\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE&Starts the stiffness calibration of the board. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+P\+A\+R\+A\+M\+\_\+\+L\+I\+ST@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+P\+A\+R\+A\+M\+\_\+\+L\+I\+ST}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+P\+A\+R\+A\+M\+\_\+\+L\+I\+ST@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+P\+A\+R\+A\+M\+\_\+\+L\+I\+ST}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba3e92a6e4c288be3abb6f3cfadf261e78}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+P\+A\+R\+A\+M\+\_\+\+L\+I\+ST&Command to get the parameters list or to set a defined value chosen by the use \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+H\+A\+N\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE@{C\+M\+D\+\_\+\+H\+A\+N\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+H\+A\+N\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE@{C\+M\+D\+\_\+\+H\+A\+N\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba76be5a50e0ac4a9f944d0d6382f06e92}} 
+C\+M\+D\+\_\+\+H\+A\+N\+D\+\_\+\+C\+A\+L\+I\+B\+R\+A\+TE&Starts a series of opening and closures of the hand. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+A\+C\+T\+I\+V\+A\+TE@{C\+M\+D\+\_\+\+A\+C\+T\+I\+V\+A\+TE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+A\+C\+T\+I\+V\+A\+TE@{C\+M\+D\+\_\+\+A\+C\+T\+I\+V\+A\+TE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba341cc0e29a584b4c75a7502529920a7f}} 
+C\+M\+D\+\_\+\+A\+C\+T\+I\+V\+A\+TE&Command for activating/deactivating the device \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac56c7ee3592b79204a8f209460ca6531}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+T\+I\+V\+A\+TE&Command for getting device activation state \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+I\+N\+P\+U\+TS@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+I\+N\+P\+U\+TS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+I\+N\+P\+U\+TS@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+I\+N\+P\+U\+TS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac271d0c424b55b263c47f451b3685d65}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+I\+N\+P\+U\+TS&Command for setting reference inputs. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+P\+U\+TS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+P\+U\+TS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+P\+U\+TS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+P\+U\+TS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba7e1020474f9835468c3cfbcce610f7df}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+I\+N\+P\+U\+TS&Command for getting reference inputs. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+TS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+TS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+TS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+TS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bae71f36974018d7c926d1023127ba5018}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+TS&Command for asking device\textquotesingle{}s position measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+E\+N\+TS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+E\+N\+TS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+E\+N\+TS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+E\+N\+TS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba7cec1501d2f9057540987c1f9f3eaf2d}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+E\+N\+TS&Command for asking device\textquotesingle{}s current measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba00e1e21809cce47849f8d237b14c9e17}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+M\+E\+AS&Command for asking device\textquotesingle{}s measurements and currents \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+P\+O\+S\+\_\+\+S\+T\+I\+FF@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+P\+O\+S\+\_\+\+S\+T\+I\+FF}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+P\+O\+S\+\_\+\+S\+T\+I\+FF@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+P\+O\+S\+\_\+\+S\+T\+I\+FF}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210baa8ff629570855ac5162560c19fcbd374}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+P\+O\+S\+\_\+\+S\+T\+I\+FF&Not used in the softhand firmware. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+MG@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+MG}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+MG@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+MG}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210baf64fae1b253023ea4d6307619fb00bd6}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+E\+MG&Command for asking device\textquotesingle{}s emg sensors measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+T\+I\+ES@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+T\+I\+ES}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+T\+I\+ES@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+T\+I\+ES}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba91f95871982459406bcbfa9e84affcf8}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+V\+E\+L\+O\+C\+I\+T\+I\+ES&Command for asking device\textquotesingle{}s velocity measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+O\+U\+N\+T\+E\+RS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+O\+U\+N\+T\+E\+RS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+O\+U\+N\+T\+E\+RS@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+O\+U\+N\+T\+E\+RS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba852a1e9b4cec526ef7b4e550cee73cae}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+O\+U\+N\+T\+E\+RS&Command for asking device\textquotesingle{}s counters (mostly used for debugging sent commands) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+C\+EL@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+C\+EL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+C\+EL@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+C\+EL}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba62e954ab85dca16967b1d2b11f099515}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+A\+C\+C\+EL&Command for asking device\textquotesingle{}s acceleration measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210bac1a1e6554eb0603ea5a5f77f604f594c}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF&Command for asking device\textquotesingle{}s current difference between a measured one and an estimated one (Only for Soft\+Hand) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba75bb0f4bbebcfa9d066c0d1f41531127}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+R\+R\+\_\+\+D\+I\+FF&Command used to set current difference modality (Only for Cuff device) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba78d9d45e499f848da1c4d03a1ba534a4}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+C\+U\+F\+F\+\_\+\+I\+N\+P\+U\+TS&Command used to set Cuff device inputs (Only for Cuff device) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+W\+A\+T\+C\+H\+D\+OG@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+W\+A\+T\+C\+H\+D\+OG}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+W\+A\+T\+C\+H\+D\+OG@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+W\+A\+T\+C\+H\+D\+OG}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba4fa373fa933adfa01f2a9bea1281aa2f}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+W\+A\+T\+C\+H\+D\+OG&Command for setting watchdog timer or disable it \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE@{C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba2ddc0e8c5f0a28ad470e881d1e196c47}} 
+C\+M\+D\+\_\+\+S\+E\+T\+\_\+\+B\+A\+U\+D\+R\+A\+TE&Command for setting baudrate of communication \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+E\+X\+T\+\_\+\+D\+R\+I\+VE@{C\+M\+D\+\_\+\+E\+X\+T\+\_\+\+D\+R\+I\+VE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+E\+X\+T\+\_\+\+D\+R\+I\+VE@{C\+M\+D\+\_\+\+E\+X\+T\+\_\+\+D\+R\+I\+VE}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba533b9dc5738b9a717fff08f29278b8a5}} 
+C\+M\+D\+\_\+\+E\+X\+T\+\_\+\+D\+R\+I\+VE&Command to set the actual measurements as inputs to another device (Only for Armslider device) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK@{C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK}}}\mbox{\label{commands_8h_abf0494aabdc65d654a54044eddc9210ba51f92ae4cb4dffafda985f714433039a}} 
+C\+M\+D\+\_\+\+G\+E\+T\+\_\+\+J\+O\+Y\+S\+T\+I\+CK&Command to get the joystick measurements (Only for devices driven by a joystick) \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87a}} 
+\index{commands.\+h@{commands.\+h}!qbmove\+\_\+control\+\_\+mode@{qbmove\+\_\+control\+\_\+mode}}
+\index{qbmove\+\_\+control\+\_\+mode@{qbmove\+\_\+control\+\_\+mode}!commands.\+h@{commands.\+h}}
+\subsubsection{qbmove\+\_\+control\+\_\+mode}
+{\footnotesize\ttfamily enum \textbf{ qbmove\+\_\+control\+\_\+mode}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE@{C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE@{C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE}}}\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87aa20c655b0cd3c61eec041dc6da114880d}} 
+C\+O\+N\+T\+R\+O\+L\+\_\+\+A\+N\+G\+LE&Classic position control. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+N\+T\+R\+O\+L\+\_\+\+P\+WM@{C\+O\+N\+T\+R\+O\+L\+\_\+\+P\+WM}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+O\+N\+T\+R\+O\+L\+\_\+\+P\+WM@{C\+O\+N\+T\+R\+O\+L\+\_\+\+P\+WM}}}\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87aa5b03a0bf46af8ab4b7340ee8a2efca3c}} 
+C\+O\+N\+T\+R\+O\+L\+\_\+\+P\+WM&Direct P\+WM value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+N\+T\+R\+O\+L\+\_\+\+C\+U\+R\+R\+E\+NT@{C\+O\+N\+T\+R\+O\+L\+\_\+\+C\+U\+R\+R\+E\+NT}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+O\+N\+T\+R\+O\+L\+\_\+\+C\+U\+R\+R\+E\+NT@{C\+O\+N\+T\+R\+O\+L\+\_\+\+C\+U\+R\+R\+E\+NT}}}\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87aa52205add0ea0ad05b25dc5c346a5ee38}} 
+C\+O\+N\+T\+R\+O\+L\+\_\+\+C\+U\+R\+R\+E\+NT&Current control. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+P\+O\+S\+\_\+\+C\+O\+N\+T\+R\+OL@{C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+P\+O\+S\+\_\+\+C\+O\+N\+T\+R\+OL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+P\+O\+S\+\_\+\+C\+O\+N\+T\+R\+OL@{C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+P\+O\+S\+\_\+\+C\+O\+N\+T\+R\+OL}}}\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87aa3385b0c8c7d7070041b92396eaa0c3af}} 
+C\+U\+R\+R\+\_\+\+A\+N\+D\+\_\+\+P\+O\+S\+\_\+\+C\+O\+N\+T\+R\+OL&Position and current control. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+F\+L\+E\+C\+T\+I\+O\+N\+\_\+\+C\+O\+N\+T\+R\+OL@{D\+E\+F\+L\+E\+C\+T\+I\+O\+N\+\_\+\+C\+O\+N\+T\+R\+OL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!D\+E\+F\+L\+E\+C\+T\+I\+O\+N\+\_\+\+C\+O\+N\+T\+R\+OL@{D\+E\+F\+L\+E\+C\+T\+I\+O\+N\+\_\+\+C\+O\+N\+T\+R\+OL}}}\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87aa5d49c5435eca705b31004125b446cf34}} 
+D\+E\+F\+L\+E\+C\+T\+I\+O\+N\+\_\+\+C\+O\+N\+T\+R\+OL&Deflection control. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+F\+L\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+R\+OL@{D\+E\+F\+L\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+R\+OL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!D\+E\+F\+L\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+R\+OL@{D\+E\+F\+L\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+R\+OL}}}\mbox{\label{commands_8h_a6960e5b914fe207839e82d6f66a6b87aa469ffc3e1d60e9c5ba86d19e38a4578e}} 
+D\+E\+F\+L\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+O\+N\+T\+R\+OL&Deflection and current control. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cd}} 
+\index{commands.\+h@{commands.\+h}!qbmove\+\_\+input\+\_\+mode@{qbmove\+\_\+input\+\_\+mode}}
+\index{qbmove\+\_\+input\+\_\+mode@{qbmove\+\_\+input\+\_\+mode}!commands.\+h@{commands.\+h}}
+\subsubsection{qbmove\+\_\+input\+\_\+mode}
+{\footnotesize\ttfamily enum \textbf{ qbmove\+\_\+input\+\_\+mode}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+T\+E\+R\+N\+AL@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+T\+E\+R\+N\+AL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+T\+E\+R\+N\+AL@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+T\+E\+R\+N\+AL}}}\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cdae9164f9cc9192eb336b04d078f46b8ba}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+X\+T\+E\+R\+N\+AL&References through external commands (default) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+E\+R3@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+E\+R3}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+E\+R3@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+E\+R3}}}\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cda9bfa7271b88d5876a1c3fd050f67bd3e}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+N\+C\+O\+D\+E\+R3&Encoder 3 drives all inputs. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+AL@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+AL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+AL@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+AL}}}\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cda791c735316bd375c6e93d561cb80eafd}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+AL&Use E\+MG measure to proportionally drive the position of the motor 1 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL}}}\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cda9ccbbc4cd825d977b0b089b9121cfac5}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+I\+N\+T\+E\+G\+R\+AL&Use 2 E\+MG signals to drive motor position \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS}}}\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cda63042e0fb1fcf5bf0008b15442eea194}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+FS&Use 2 E\+MG. First reaching threshold wins and its value defines hand closure \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV@{I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV}}}\mbox{\label{commands_8h_a4c6f8687cc4a70ce967c910614fbc6cda9e54aef6ab6f164ed0db5c3d59058da8}} 
+I\+N\+P\+U\+T\+\_\+\+M\+O\+D\+E\+\_\+\+E\+M\+G\+\_\+\+F\+C\+F\+S\+\_\+\+A\+DV&Use 2 E\+MG. First reaching threshold wins and its value defines hand closure Wait for both E\+MG to lower under threshold \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36}} 
+\index{commands.\+h@{commands.\+h}!qbmove\+\_\+parameter@{qbmove\+\_\+parameter}}
+\index{qbmove\+\_\+parameter@{qbmove\+\_\+parameter}!commands.\+h@{commands.\+h}}
+\subsubsection{qbmove\+\_\+parameter}
+{\footnotesize\ttfamily enum \textbf{ qbmove\+\_\+parameter}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+ID@{P\+A\+R\+A\+M\+\_\+\+ID}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+ID@{P\+A\+R\+A\+M\+\_\+\+ID}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a172b8d344a5aaae4d87daa52e36e9e5f}} 
+P\+A\+R\+A\+M\+\_\+\+ID&Device\textquotesingle{}s ID number. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+O\+N\+T\+R\+OL@{P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+O\+N\+T\+R\+OL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+O\+N\+T\+R\+OL@{P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+O\+N\+T\+R\+OL}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a878e85d61c0bca0141e6118d1ceba299}} 
+P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+O\+N\+T\+R\+OL&P\+ID parameters. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+A\+C\+T\+I\+V\+A\+T\+I\+ON@{P\+A\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+A\+C\+T\+I\+V\+A\+T\+I\+ON}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+A\+C\+T\+I\+V\+A\+T\+I\+ON@{P\+A\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+A\+C\+T\+I\+V\+A\+T\+I\+ON}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a9f7e2f9c7b92726e1ffd5dda3af47fd8}} 
+P\+A\+R\+A\+M\+\_\+\+S\+T\+A\+R\+T\+U\+P\+\_\+\+A\+C\+T\+I\+V\+A\+T\+I\+ON&Start up activation byte. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+I\+N\+P\+U\+T\+\_\+\+M\+O\+DE@{P\+A\+R\+A\+M\+\_\+\+I\+N\+P\+U\+T\+\_\+\+M\+O\+DE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+I\+N\+P\+U\+T\+\_\+\+M\+O\+DE@{P\+A\+R\+A\+M\+\_\+\+I\+N\+P\+U\+T\+\_\+\+M\+O\+DE}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a5c697f31b90e98e2eba960b79f2ed25c}} 
+P\+A\+R\+A\+M\+\_\+\+I\+N\+P\+U\+T\+\_\+\+M\+O\+DE&Input mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+M\+O\+DE@{P\+A\+R\+A\+M\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+M\+O\+DE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+M\+O\+DE@{P\+A\+R\+A\+M\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+M\+O\+DE}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36aad84d584a61a3575db214d10d9bb6cb0}} 
+P\+A\+R\+A\+M\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+M\+O\+DE&Choose the kind of control between position control, current control, direct P\+WM value or current+position control \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+O\+F\+F\+S\+ET@{P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+O\+F\+F\+S\+ET}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+O\+F\+F\+S\+ET@{P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+O\+F\+F\+S\+ET}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36adcdce0ed2b6b62335e8986a1758819d5}} 
+P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+O\+F\+F\+S\+ET&Adds a constant offset to the measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a547d8f3a487a08ba25a87e5a1c4035a3}} 
+P\+A\+R\+A\+M\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER&Adds a multiplier to the measurements \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+I\+T\+\_\+\+F\+L\+AG@{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+I\+T\+\_\+\+F\+L\+AG}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+I\+T\+\_\+\+F\+L\+AG@{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+I\+T\+\_\+\+F\+L\+AG}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36ae1ba46d5587fe44580417535c0ccf4fc}} 
+P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+I\+T\+\_\+\+F\+L\+AG&Enable/disable position limiting. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+IT@{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+IT}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+IT@{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+IT}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a02e68c657a942155b8bd2b037b755011}} 
+P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+L\+I\+M\+IT&Position limit values $\vert$ int32 $\vert$ int32 $\vert$ int32 $\vert$ int32 $\vert$ $\vert$ I\+N\+F\+\_\+\+L\+I\+M\+\_\+1 $\vert$ S\+U\+P\+\_\+\+L\+I\+M\+\_\+1 $\vert$ I\+N\+F\+\_\+\+L\+I\+M\+\_\+2 $\vert$ S\+U\+P\+\_\+\+L\+I\+M\+\_\+2 $\vert$ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+P\+OS@{P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+P\+OS}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+P\+OS@{P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+P\+OS}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a9e5ffa64ed5e03da3fa0cc5f1b1cd2ae}} 
+P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+P\+OS&Used to slow down movements for positive values. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+N\+EG@{P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+N\+EG}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+N\+EG@{P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+N\+EG}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a5f7c88ebecbc39113c0621701cfedd07}} 
+P\+A\+R\+A\+M\+\_\+\+M\+A\+X\+\_\+\+S\+T\+E\+P\+\_\+\+N\+EG&Used to slow down movements for negative values. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+E\+S\+O\+L\+U\+T\+I\+ON@{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+E\+S\+O\+L\+U\+T\+I\+ON}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+E\+S\+O\+L\+U\+T\+I\+ON@{P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+E\+S\+O\+L\+U\+T\+I\+ON}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a6857aadbe11091d0d3cebe2c22da1eba}} 
+P\+A\+R\+A\+M\+\_\+\+P\+O\+S\+\_\+\+R\+E\+S\+O\+L\+U\+T\+I\+ON&Angle resolution for inputs and measurements. Used during communication. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT@{P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT@{P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a079999b78cd63f61764700fad99990de}} 
+P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+I\+M\+IT&Limit for absorbed current. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+C\+A\+L\+I\+B\+\_\+\+F\+L\+AG@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+C\+A\+L\+I\+B\+\_\+\+F\+L\+AG}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+C\+A\+L\+I\+B\+\_\+\+F\+L\+AG@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+C\+A\+L\+I\+B\+\_\+\+F\+L\+AG}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36ae4c6b7c830d9065cee4039a489274b2f}} 
+P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+C\+A\+L\+I\+B\+\_\+\+F\+L\+AG&Enable calibration on startup. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36aa1d42c709c9c12afffae0921126d9cbf}} 
+P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD&Minimum value to have effect. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a0cd67acda69d33841a94f55b33d14863}} 
+P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+M\+A\+X\+\_\+\+V\+A\+L\+UE&Maximum value of E\+MG. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+S\+P\+E\+ED@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+S\+P\+E\+ED}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+S\+P\+E\+ED@{P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+S\+P\+E\+ED}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a028d803ac1aa5cc81d9902f8f519d51d}} 
+P\+A\+R\+A\+M\+\_\+\+E\+M\+G\+\_\+\+S\+P\+E\+ED&Closure speed when using E\+MG. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+U\+R\+R\+\_\+\+C\+O\+N\+T\+R\+OL@{P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+U\+R\+R\+\_\+\+C\+O\+N\+T\+R\+OL}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+U\+R\+R\+\_\+\+C\+O\+N\+T\+R\+OL@{P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+U\+R\+R\+\_\+\+C\+O\+N\+T\+R\+OL}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36afd84a8c2eb30f2984412ddaddd66ac7f}} 
+P\+A\+R\+A\+M\+\_\+\+P\+I\+D\+\_\+\+C\+U\+R\+R\+\_\+\+C\+O\+N\+T\+R\+OL&P\+ID current control. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+E\+N\+C\+\_\+\+O\+N\+\_\+\+O\+FF@{P\+A\+R\+A\+M\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+E\+N\+C\+\_\+\+O\+N\+\_\+\+O\+FF}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+E\+N\+C\+\_\+\+O\+N\+\_\+\+O\+FF@{P\+A\+R\+A\+M\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+E\+N\+C\+\_\+\+O\+N\+\_\+\+O\+FF}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a065de456f525cedd222737c24ec7300c}} 
+P\+A\+R\+A\+M\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+E\+N\+C\+\_\+\+O\+N\+\_\+\+O\+FF&Double Encoder Y/N. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+R\+A\+T\+IO@{P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+R\+A\+T\+IO}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+R\+A\+T\+IO@{P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+R\+A\+T\+IO}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a093ab311eb78fffe19b38dc3e18cd3f8}} 
+P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+\_\+\+H\+A\+N\+D\+L\+E\+\_\+\+R\+A\+T\+IO&Multiplier between handle and motor. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+O\+R\+\_\+\+S\+U\+P\+P\+LY@{P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+O\+R\+\_\+\+S\+U\+P\+P\+LY}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+O\+R\+\_\+\+S\+U\+P\+P\+LY@{P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+O\+R\+\_\+\+S\+U\+P\+P\+LY}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a9fdaad76676bea4caf32e4e7a1343451}} 
+P\+A\+R\+A\+M\+\_\+\+M\+O\+T\+O\+R\+\_\+\+S\+U\+P\+P\+LY&Motor supply voltage of the hand. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+O\+O\+K\+UP@{P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+O\+O\+K\+UP}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+O\+O\+K\+UP@{P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+O\+O\+K\+UP}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36a29262771f7a72b834aba013747202451}} 
+P\+A\+R\+A\+M\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+L\+O\+O\+K\+UP&Table of values used to calculate an estimated current of the Soft\+Hand \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+P\+O\+S\+\_\+\+P\+ID@{P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+P\+O\+S\+\_\+\+P\+ID}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+P\+O\+S\+\_\+\+P\+ID@{P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+P\+O\+S\+\_\+\+P\+ID}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36aed3fbd67f27a50599904c4796f3aee63}} 
+P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+P\+O\+S\+\_\+\+P\+ID&Double loop position P\+ID. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+C\+U\+R\+R\+\_\+\+P\+ID@{P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+C\+U\+R\+R\+\_\+\+P\+ID}!commands.\+h@{commands.\+h}}\index{commands.\+h@{commands.\+h}!P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+C\+U\+R\+R\+\_\+\+P\+ID@{P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+C\+U\+R\+R\+\_\+\+P\+ID}}}\mbox{\label{commands_8h_a0f1ee428e49fc602d6fde71d7ff80f36ae5c58909acc7d5d6afd5a20fb7bc9620}} 
+P\+A\+R\+A\+M\+\_\+\+D\+L\+\_\+\+C\+U\+R\+R\+\_\+\+P\+ID&Double loop current P\+ID. \\
+\hline
+
+\end{DoxyEnumFields}

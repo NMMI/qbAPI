@@ -1,0 +1,213 @@
+\section{cp\+\_\+communications.\+h File Reference}
+\label{cp__communications_8h}\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+
+
+Library of functions for S\+E\+R\+I\+AL P\+O\+RT communication additional to standard qbmove\+\_\+communications. Function Prototypes.  
+
+
+{\ttfamily \#include \char`\"{}qbmove\+\_\+communications.\+h\char`\"{}}\newline
+Include dependency graph for cp\+\_\+communications.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ comm\+Get\+Imu\+Readings} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t $\ast$imu\+\_\+table, uint8\+\_\+t $\ast$imus\+\_\+magcal, int n\+\_\+imu, float $\ast$imu\+\_\+values)
+\item 
+int \textbf{ comm\+Get\+I\+M\+U\+Param\+List} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, unsigned short index, void $\ast$values, unsigned short value\+\_\+size, unsigned short num\+\_\+of\+\_\+values, uint8\+\_\+t $\ast$buffer)
+\item 
+int \textbf{ comm\+Get\+Encoder\+Conf} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t $\ast$num\+\_\+enc\+\_\+line, uint8\+\_\+t $\ast$num\+\_\+enc\+\_\+per\+\_\+line, uint8\+\_\+t $\ast$enc\+\_\+map)
+\item 
+int \textbf{ comm\+Get\+Encoder\+Raw\+Values} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t enc\+\_\+total, uint16\+\_\+t enc\+\_\+val[$\,$])
+\item 
+int \textbf{ comm\+Get\+A\+D\+C\+Conf} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t $\ast$num\+\_\+ch, uint8\+\_\+t $\ast$adc\+\_\+map)
+\item 
+int \textbf{ comm\+Get\+A\+D\+C\+Raw\+Values} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t num\+\_\+channels, short int adc[3])
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Library of functions for S\+E\+R\+I\+AL P\+O\+RT communication additional to standard qbmove\+\_\+communications. Function Prototypes. 
+
+This library contains all necessary functions for communicating with a board when using a U\+SB to R\+S485 connector that provides a Virtual C\+OM interface. 
+
+\subsection{Function Documentation}
+\mbox{\label{cp__communications_8h_ac71b9c21542fead8cde21f060239f678}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+A\+D\+C\+Conf@{comm\+Get\+A\+D\+C\+Conf}}
+\index{comm\+Get\+A\+D\+C\+Conf@{comm\+Get\+A\+D\+C\+Conf}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+A\+D\+C\+Conf()}
+{\footnotesize\ttfamily int comm\+Get\+A\+D\+C\+Conf (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{uint8\+\_\+t $\ast$}]{num\+\_\+ch,  }\item[{uint8\+\_\+t $\ast$}]{adc\+\_\+map }\end{DoxyParamCaption})}
+
+This function gets A\+DC map from board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+num\+\_\+ch Number of channels. 
+
+adc\+\_\+map Vector of adc map. 
+\end{DoxyReturn}
+\mbox{\label{cp__communications_8h_a5e327776bfe1699fa9aade77a619714c}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+A\+D\+C\+Raw\+Values@{comm\+Get\+A\+D\+C\+Raw\+Values}}
+\index{comm\+Get\+A\+D\+C\+Raw\+Values@{comm\+Get\+A\+D\+C\+Raw\+Values}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+A\+D\+C\+Raw\+Values()}
+{\footnotesize\ttfamily int comm\+Get\+A\+D\+C\+Raw\+Values (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{uint8\+\_\+t}]{num\+\_\+channels,  }\item[{short int}]{adc[3] }\end{DoxyParamCaption})}
+
+This function gets position measurements from a board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em num\+\_\+channels} & Number of channels. \\
+\hline
+{\em adc} & A\+DC raw values.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{short} \textcolor{keywordtype}{int}       adc[3];
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(!commGetADCRaw(&comm\_settings\_t, DEVICE\_ID, adc))
+    printf(\textcolor{stringliteral}{"ADC raw: %d\(\backslash\)t%d\(\backslash\)t%d\(\backslash\)n"},adc[0], adc[1], adc[2]);
+\textcolor{keywordflow}{else}
+    puts(\textcolor{stringliteral}{"Couldn't retrieve measurements."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{cp__communications_8h_a0b67793c205cbf6cc5239f576eeccef8}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+Encoder\+Conf@{comm\+Get\+Encoder\+Conf}}
+\index{comm\+Get\+Encoder\+Conf@{comm\+Get\+Encoder\+Conf}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Encoder\+Conf()}
+{\footnotesize\ttfamily int comm\+Get\+Encoder\+Conf (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{uint8\+\_\+t $\ast$}]{num\+\_\+enc\+\_\+line,  }\item[{uint8\+\_\+t $\ast$}]{num\+\_\+enc\+\_\+per\+\_\+line,  }\item[{uint8\+\_\+t $\ast$}]{enc\+\_\+map }\end{DoxyParamCaption})}
+
+This function gets encoder map from board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em num\+\_\+enc\+\_\+line} & Number of encoder lines. \\
+\hline
+{\em num\+\_\+enc\+\_\+per\+\_\+line} & Number of encoder per line.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+encoder\+\_\+map Vector of encoder map. 
+\end{DoxyReturn}
+\mbox{\label{cp__communications_8h_a2ea65333dd2bf74f494a047dc9eaebd8}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+Encoder\+Raw\+Values@{comm\+Get\+Encoder\+Raw\+Values}}
+\index{comm\+Get\+Encoder\+Raw\+Values@{comm\+Get\+Encoder\+Raw\+Values}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Encoder\+Raw\+Values()}
+{\footnotesize\ttfamily int comm\+Get\+Encoder\+Raw\+Values (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{uint8\+\_\+t}]{enc\+\_\+total,  }\item[{uint16\+\_\+t}]{enc\+\_\+val[$\,$] }\end{DoxyParamCaption})}
+
+This function gets encoder raw readings from board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+encoder\+\_\+val Vector of encoder map. 
+\end{DoxyReturn}
+\mbox{\label{cp__communications_8h_a464dcb52a0343106ec1e0d6977a07ef3}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+I\+M\+U\+Param\+List@{comm\+Get\+I\+M\+U\+Param\+List}}
+\index{comm\+Get\+I\+M\+U\+Param\+List@{comm\+Get\+I\+M\+U\+Param\+List}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+I\+M\+U\+Param\+List()}
+{\footnotesize\ttfamily int comm\+Get\+I\+M\+U\+Param\+List (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{unsigned short}]{index,  }\item[{void $\ast$}]{values,  }\item[{unsigned short}]{value\+\_\+size,  }\item[{unsigned short}]{num\+\_\+of\+\_\+values,  }\item[{uint8\+\_\+t $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+This function gets all the parameters that are stored in the board memory and sets one of them if requested
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em index} & The index relative to the parameter to be get. \\
+\hline
+{\em values} & An array with the parameter values. \\
+\hline
+{\em value\+\_\+size} & The byte size of the parameter to be get \\
+\hline
+{\em num\+\_\+of\+\_\+values} & The size of the array of the parameter to be get \\
+\hline
+{\em buffer} & The array where the parameters\textquotesingle{} values and descriptions are saved\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}   aux\_string[2000];
+\textcolor{keywordtype}{int}             index = 0;
+\textcolor{keywordtype}{int}             value\_size = 0;
+\textcolor{keywordtype}{int}             num\_of\_values = 0;
+
+\textcolor{comment}{// Get parameters}
+commGetIMUParamList(&comm\_settings\_t, device\_id, index, NULL, value\_size, num\_of\_values, aux\_string);
+string\_unpacking\_and\_printing(aux\_string);
+
+\textcolor{comment}{// Set parameters}
+
+\textcolor{keywordtype}{float}           val[5];
+val[0] = 1;
+val[1] = 1;
+val[2] = 0;
+val[3] = 0;
+val[4] = 0;
+index = 2;
+value\_size = 6;
+num\_of\_values = 5;
+commGetIMUParamList(&comm\_settings\_t, device\_id, index, pid, value\_size, num\_of\_values, NULL);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\label{cp__communications_8h_a426594a85393efcb699bd92a9d9349a8}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+Imu\+Readings@{comm\+Get\+Imu\+Readings}}
+\index{comm\+Get\+Imu\+Readings@{comm\+Get\+Imu\+Readings}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+Imu\+Readings()}
+{\footnotesize\ttfamily int comm\+Get\+Imu\+Readings (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{uint8\+\_\+t $\ast$}]{imu\+\_\+table,  }\item[{uint8\+\_\+t $\ast$}]{imus\+\_\+magcal,  }\item[{int}]{n\+\_\+imu,  }\item[{float $\ast$}]{imu\+\_\+values }\end{DoxyParamCaption})}
+
+This function gets I\+MU readings from I\+MU board connected to the serial port.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em imu\+\_\+table} & I\+MU table configuration. \\
+\hline
+{\em imus\+\_\+magcal} & I\+MU magnetometer calibratino parameters vector. \\
+\hline
+{\em n\+\_\+imu} & Number of connected I\+M\+Us.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+imu\+\_\+values Vector of imu readings. 
+\end{DoxyReturn}

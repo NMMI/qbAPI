@@ -78,17 +78,13 @@ $(function() {
 Include dependency graph for qbmove_communications.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="qbmove__communications_8h__incl.png" border="0" usemap="#qbmove__communications_8h" alt=""/></div>
-<map name="qbmove__communications_8h" id="qbmove__communications_8h">
-<area shape="rect" id="node3" href="commands_8h.html" title="Definitions for board commands, parameters and packages. " alt="" coords="105,80,203,107"/>
-</map>
+<!-- MAP 0 -->
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="qbmove__communications_8h__dep__incl.png" border="0" usemap="#qbmove__communications_8hdep" alt=""/></div>
-<map name="qbmove__communications_8hdep" id="qbmove__communications_8hdep">
-<area shape="rect" id="node2" href="qbmove__communications_8cpp.html" title="Library of functions for serial port communication with a board. " alt="" coords="5,80,199,107"/>
-</map>
+<!-- MAP 1 -->
 </div>
 </div>
 <p><a href="qbmove__communications_8h_source.html">Go to the source code of this file.</a></p>
@@ -128,8 +124,8 @@ typedef struct <a class="el" href="structcomm__settings.html">comm_settings</a>&
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Virtual COM (RS485) functions</div></td></tr>
-<tr class="memitem:a088f2abb4e7610589910e31f5c72b236"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qbmove__communications_8h.html#a088f2abb4e7610589910e31f5c72b236">RS485listPorts</a> (char list_of_ports[10][255])</td></tr>
-<tr class="separator:a088f2abb4e7610589910e31f5c72b236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c103994cbd730d3e8fc84328ee09fd5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qbmove__communications_8h.html#a7c103994cbd730d3e8fc84328ee09fd5">RS485listPorts</a> (char list_of_ports[60][255])</td></tr>
+<tr class="separator:a7c103994cbd730d3e8fc84328ee09fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adce66aac7dbbd52de59bb7a3a9c1b3bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qbmove__communications_8h.html#adce66aac7dbbd52de59bb7a3a9c1b3bd">openRS485</a> (<a class="el" href="structcomm__settings.html">comm_settings</a> *comm_settings_t, const char *port_s, int BAUD_RATE=B2000000)</td></tr>
 <tr class="separator:adce66aac7dbbd52de59bb7a3a9c1b3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f87643fab51e02e4eab71bf4ab1a33a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="qbmove__communications_8h.html#a5f87643fab51e02e4eab71bf4ab1a33a">closeRS485</a> (<a class="el" href="structcomm__settings.html">comm_settings</a> *comm_settings_t)</td></tr>
@@ -207,11 +203,11 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Library of functions for SERIAL PORT communication with a board. Function Prototypes. </p>
-<dl class="section date"><dt>Date</dt><dd>October 01, 2017 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>May 03, 2018 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017 Centro "E.Piaggio". All rights reserved.</dd></dl>
+(C) 2017-2019 Centro "E.Piaggio". All rights reserved.</dd></dl>
 <p>This library contains all necessary functions for communicating with a board when using a USB to RS485 connector that provides a Virtual COM interface. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a35819265b74001583803a2295b3236dc"></a>
@@ -1643,8 +1639,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a088f2abb4e7610589910e31f5c72b236"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a088f2abb4e7610589910e31f5c72b236">&#9670;&nbsp;</a></span>RS485listPorts()</h2>
+<a id="a7c103994cbd730d3e8fc84328ee09fd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c103994cbd730d3e8fc84328ee09fd5">&#9670;&nbsp;</a></span>RS485listPorts()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1653,7 +1649,7 @@ Functions</h2></td></tr>
           <td class="memname">int RS485listPorts </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>list_of_ports</em>[10][255]</td><td>)</td>
+          <td class="paramname"><em>list_of_ports</em>[60][255]</td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1666,7 +1662,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns the number of serial ports found.</dd></dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">int</span>     i, num_ports;</div><div class="line"><span class="keywordtype">char</span>    list_of_ports[10][255];</div><div class="line"></div><div class="line">num_ports = <a class="code" href="qbmove__communications_8h.html#a088f2abb4e7610589910e31f5c72b236">RS485listPorts</a>(ports);</div><div class="line"></div><div class="line"><span class="keywordflow">for</span>(i = 0; i &lt; num_ports; ++i)</div><div class="line">{</div><div class="line">    puts(ports[i]);</div><div class="line">}</div></div><!-- fragment --> </dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">int</span>     i, num_ports;</div><div class="line"><span class="keywordtype">char</span>    list_of_ports[10][255];</div><div class="line"></div><div class="line">num_ports = <a class="code" href="qbmove__communications_8h.html#a7c103994cbd730d3e8fc84328ee09fd5">RS485listPorts</a>(ports);</div><div class="line"></div><div class="line"><span class="keywordflow">for</span>(i = 0; i &lt; num_ports; ++i)</div><div class="line">{</div><div class="line">    puts(ports[i]);</div><div class="line">}</div></div><!-- fragment --> </dd></dl>
 
 </div>
 </div>

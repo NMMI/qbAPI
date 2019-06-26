@@ -8,20 +8,10 @@ Library of functions for S\+E\+R\+I\+AL P\+O\+RT communication with a board. Fun
 {\ttfamily \#include $<$termios.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}commands.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
-Include dependency graph for qbmove\+\_\+communications.\+h\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=295pt]{qbmove__communications_8h__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=225pt]{qbmove__communications_8h__dep__incl}
-\end{center}
-\end{figure}
+Include dependency graph for qbmove\+\_\+communications.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,7 +48,7 @@ typedef struct \textbf{ comm\+\_\+settings} {\bfseries comm\+\_\+settings}
 \begin{Indent}\textbf{ Virtual C\+OM (R\+S485) functions}\par
 \begin{DoxyCompactItemize}
 \item 
-int \textbf{ R\+S485list\+Ports} (char list\+\_\+of\+\_\+ports[10][255])
+int \textbf{ R\+S485list\+Ports} (char list\+\_\+of\+\_\+ports[60][255])
 \item 
 void \textbf{ open\+R\+S485} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, const char $\ast$port\+\_\+s, int B\+A\+U\+D\+\_\+\+R\+A\+TE=B2000000)
 \item 
@@ -153,7 +143,7 @@ int \textbf{ comm\+Get\+Joystick} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+
 Library of functions for S\+E\+R\+I\+AL P\+O\+RT communication with a board. Function Prototypes. 
 
 \begin{DoxyDate}{Date}
-October 01, 2017 
+May 03, 2018 
 \end{DoxyDate}
 \begin{DoxyAuthor}{Author}
 {\itshape Centro \char`\"{}\+E.\+Piaggio\char`\"{}} 
@@ -161,7 +151,7 @@ October 01, 2017
 \begin{DoxyCopyright}{Copyright}
 (C) 2012-\/2016 qbrobotics. All rights reserved. 
 
-(C) 2017 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
+(C) 2017-\/2019 Centro \char`\"{}\+E.\+Piaggio\char`\"{}. All rights reserved.
 \end{DoxyCopyright}
 This library contains all necessary functions for communicating with a board when using a U\+SB to R\+S485 connector that provides a Virtual C\+OM interface. 
 
@@ -1263,11 +1253,11 @@ printf(\textcolor{stringliteral}{"Number of devices connected: %d"}, i);
 \end{DoxyCode}
  
 \end{DoxyParagraph}
-\mbox{\label{qbmove__communications_8h_a088f2abb4e7610589910e31f5c72b236}} 
+\mbox{\label{qbmove__communications_8h_a7c103994cbd730d3e8fc84328ee09fd5}} 
 \index{qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}!R\+S485list\+Ports@{R\+S485list\+Ports}}
 \index{R\+S485list\+Ports@{R\+S485list\+Ports}!qbmove\+\_\+communications.\+h@{qbmove\+\_\+communications.\+h}}
 \subsubsection{R\+S485list\+Ports()}
-{\footnotesize\ttfamily int R\+S485list\+Ports (\begin{DoxyParamCaption}\item[{char}]{list\+\_\+of\+\_\+ports[10][255] }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int R\+S485list\+Ports (\begin{DoxyParamCaption}\item[{char}]{list\+\_\+of\+\_\+ports[60][255] }\end{DoxyParamCaption})}
 
 This function is used to return a list of available serial ports. A maximum of 10 ports are found.
 
