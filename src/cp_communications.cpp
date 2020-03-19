@@ -1,5 +1,5 @@
 
-// Copyright (c) 2016-2019, Mattia Poggiani.
+// Copyright (c) 2016-2020, Mattia Poggiani.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without

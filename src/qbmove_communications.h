@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@
  *
  * \brief       Library of functions for SERIAL PORT communication with a board.
  *              Function Prototypes.
- * \date         May 03, 2018
+ * \date        March 19th, 2020
  * \author       _Centro "E.Piaggio"_
  * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
  * \copyright    (C) 2017-2019 Centro "E.Piaggio". All rights reserved.
@@ -54,9 +54,9 @@
 *
 * \author       _Centro "E.Piaggio"_
 * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
-* \copyright    (C) 2017-2018 Centro "E.Piaggio". All rights reserved.
+* \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
 *
-* \date         May 03, 2018
+* \date         March 19th, 2020
 *
 * \details      This is a set of functions that allows to use the boards 
 *               via a serial port.

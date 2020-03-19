@@ -1,5 +1,5 @@
 
-// Copyright (c) 2016-2019, Mattia Poggiani.
+// Copyright (c) 2016-2020, Mattia Poggiani.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -40,11 +40,11 @@
 *
 * \brief        Those functions allows to use the board through a serial port
 *
-* \version      7.0.0
+* \version      7.0
 *
 * \author       Mattia Poggiani
 *
-* \date         January 25th, 2019
+* \date         March 19th, 2020
 *
 * \details      This is a set of functions that allows to use the board  
 *               via a serial port.

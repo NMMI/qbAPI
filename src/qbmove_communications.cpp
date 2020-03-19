@@ -2,7 +2,7 @@
 // BSD 3-Clause License
 
 // Copyright (c) 2016, qbrobotics
-// Copyright (c) 2017-2019, Centro "E.Piaggio"
+// Copyright (c) 2017-2020, Centro "E.Piaggio"
 // All rights reserved.
 
 
@@ -40,10 +40,10 @@
  *  \file       qbmove_communications.cpp
  *
  *  \brief      Library of functions for serial port communication with a board
- * \date         May 03, 2018
+ * \date        March 19th, 2020
  * \author       _Centro "E.Piaggio"_
  * \copyright    (C) 2012-2016 qbrobotics. All rights reserved.
- * \copyright    (C) 2017-2018 Centro "E.Piaggio". All rights reserved.
+ * \copyright    (C) 2017-2020 Centro "E.Piaggio". All rights reserved.
 
 
  *  \details
@@ -404,6 +404,14 @@ error:
     if (tcsetattr(comm_settings_t->file_handle, TCSANOW, &options) == -1) {
         goto error;
     }
+
+#if (defined __APPLE__)
+    //Set non custom baudrate for APPLE systems
+    if(ioctl(comm_settings_t->file_handle, IOSSIOSPEED, &custom_baudrate, 1)){
+        printf("ERROR\n");
+        goto error;
+    }
+#endif
 
     return;
 

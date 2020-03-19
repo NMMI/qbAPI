@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2019, Mattia Poggiani.
+// Copyright (c) 2016-2020, Mattia Poggiani.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,7 @@
 
 #ifdef API_VERSION
 	#undef API_VERSION
-	#define API_VERSION "v7.0.0 Centro Piaggio"
+	#define API_VERSION "v. 7.0 Centro Piaggio"
 #endif
 
 //==============================================================================
