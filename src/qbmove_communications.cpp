@@ -486,7 +486,7 @@ int RS485read(comm_settings *comm_settings_t, int id, char *package)
 
 // UNIX
 #else
-    int n_bytes;
+    unsigned int n_bytes;
     struct timeval start, now;
 
     gettimeofday(&start, NULL);
