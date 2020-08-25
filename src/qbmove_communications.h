@@ -73,7 +73,7 @@
 #if (defined(_WIN32) || defined(_WIN64))
     #include <windows.h>
 #else
-    typedef int handle;
+    typedef int HANDLE;
     #define INVALID_HANDLE_VALUE    -1
 #endif
 
