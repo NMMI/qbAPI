@@ -598,6 +598,93 @@ int commGetADCRawValues(comm_settings *comm_settings_t, int id, uint8_t num_chan
 	
 	return 0;
 }
+
+//==============================================================================
+//                                                                   commGetInfo
+//==============================================================================
+// This function gets a string of information from the QB Move.
+//==============================================================================
+
+int commGetSDFile(comm_settings *comm_settings_t, int id, char* filename, char *buffer) {
+
+    char data_out[BUFFER_SIZE];             // output data buffer
+
+#if (defined(_WIN32) || defined(_WIN64))
+    DWORD package_size_out;                 // for serial port access
+    DWORD n_bytes_in = 0;
+    unsigned char aux;
+    int i = 0;
+#else
+    int bytes;
+    int count = 0;
+    const int size = 512;
+    char aux_buffer[size];
+#endif
+
+    strcpy(buffer, "");
+    unsigned short file_length = strlen(filename);
+//=================================================		preparing packet to send
+
+    data_out[0] = ':';
+    data_out[1] = ':';
+    data_out[2] = (unsigned char) id;
+    data_out[3] = 4 + file_length;
+    data_out[4] = CMD_GET_SD_SINGLE_FILE;                        // command
+    data_out[5] = ((char *) &file_length)[1];          // parameter type
+    data_out[6] = ((char *) &file_length)[0];          // parameter type
+
+ 	for(int h = 0; h < file_length; h++) {
+        
+        data_out[ h +  7 ] = filename[ h ];
+        
+    }
+    data_out[ 7 + file_length ] = checksum( data_out + 4, 3 + file_length );
+
+
+#if (defined(_WIN32) || defined(_WIN64))
+    WriteFile(comm_settings_t->file_handle, data_out, 8+file_length, &package_size_out, NULL);
+
+    Sleep(200);
+
+    n_bytes_in = 1;
+
+    while(n_bytes_in) {
+        ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL);
+        if(n_bytes_in)
+            buffer[i] = aux;
+        i++;
+    }
+
+#else
+
+    write(comm_settings_t->file_handle, data_out, 8+file_length);
+
+    usleep(200000);
+
+    while(1) {
+        usleep(50000);
+
+        if(ioctl(comm_settings_t->file_handle, FIONREAD, &bytes) < 0)
+            break;
+
+        if(bytes == 0)
+            break;
+
+        if(bytes > size)
+            bytes = size;
+
+        read(comm_settings_t->file_handle, aux_buffer, bytes);
+
+        strncpy(buffer + count, aux_buffer, bytes);
+
+        count += bytes;
+    }
+
+    strcpy(buffer + count, "\0");
+#endif
+
+    return 0;
+}
 /// @endcond
 
 /* [] END OF FILE */

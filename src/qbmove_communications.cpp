@@ -1609,9 +1609,19 @@ int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, cha
 #if (defined(_WIN32) || defined(_WIN64))
     WriteFile(comm_settings_t->file_handle, data_out, 8, &package_size_out, NULL);
 
-    n_bytes_in = 1;
-
     Sleep(200);
+
+    if (info_type == GET_SD_FS_TREE){       // Wait until the packet arrives (wait more time) [NMMI mod.]
+        n_bytes_in = 0;
+        do{
+            ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL); 
+        } while (!n_bytes_in);
+        buffer[i] = aux;
+        i++;
+    }
+    else {
+        n_bytes_in = 1;
+    }
 
     while(n_bytes_in) {
         ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL);

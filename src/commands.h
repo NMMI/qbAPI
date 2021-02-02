@@ -209,9 +209,11 @@ enum qbmove_input_mode
                                         ///  position
     INPUT_MODE_EMG_FCFS         = 4,    ///< Use 2 EMG. First reaching threshold
                                         ///  wins and its value defines hand closure
-    INPUT_MODE_EMG_FCFS_ADV     = 5     ///< Use 2 EMG. First reaching threshold
+    INPUT_MODE_EMG_FCFS_ADV     = 5,     ///< Use 2 EMG. First reaching threshold
                                         ///  wins and its value defines hand closure
                                         ///  Wait for both EMG to lower under threshold
+    INPUT_MODE_JOYSTICK         = 6,    ///< Joystick input mode
+    INPUT_MODE_EMG_PROPORTIONAL_NC     = 7    ///< EMG Normally closed.
 };
 
 //============================================================     control modes
@@ -270,6 +272,7 @@ enum data_types {
 #define INFO_READING    1 ///< Cycles information.
 #define GET_SD_PARAM    2 ///< Read Firmware Parameters from SD file.
 #define GET_SD_DATA     3 ///< Read Usage Data from SD file.
+#define GET_SD_FS_TREE  4 ///< Get info on SD card filesystem tree
 /** \} */
 
 // ----------------------------------------------------------------------------
