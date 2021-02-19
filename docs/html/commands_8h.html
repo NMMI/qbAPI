@@ -101,6 +101,10 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="commands_8h.html#a3154ffe43f7cb799f7c35cfad7339f49">GET_SD_DATA</a>&#160;&#160;&#160;3</td></tr>
 <tr class="memdesc:a3154ffe43f7cb799f7c35cfad7339f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read Usage Data from SD file. <br /></td></tr>
 <tr class="separator:a3154ffe43f7cb799f7c35cfad7339f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb8f46ce96d5f85985e3a2c7e7f9da43"><td class="memItemLeft" align="right" valign="top"><a id="abb8f46ce96d5f85985e3a2c7e7f9da43"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="commands_8h.html#abb8f46ce96d5f85985e3a2c7e7f9da43">GET_SD_FS_TREE</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:abb8f46ce96d5f85985e3a2c7e7f9da43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get info on SD card filesystem tree. <br /></td></tr>
+<tr class="separator:abb8f46ce96d5f85985e3a2c7e7f9da43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -212,7 +216,9 @@ Board Parameters</h2></td></tr>
 <a class="el" href="commands_8h.html#a4c6f8687cc4a70ce967c910614fbc6cda9ccbbc4cd825d977b0b089b9121cfac5">INPUT_MODE_EMG_INTEGRAL</a> = 3, 
 <br />
 &#160;&#160;<a class="el" href="commands_8h.html#a4c6f8687cc4a70ce967c910614fbc6cda63042e0fb1fcf5bf0008b15442eea194">INPUT_MODE_EMG_FCFS</a> = 4, 
-<a class="el" href="commands_8h.html#a4c6f8687cc4a70ce967c910614fbc6cda9e54aef6ab6f164ed0db5c3d59058da8">INPUT_MODE_EMG_FCFS_ADV</a> = 5
+<a class="el" href="commands_8h.html#a4c6f8687cc4a70ce967c910614fbc6cda9e54aef6ab6f164ed0db5c3d59058da8">INPUT_MODE_EMG_FCFS_ADV</a> = 5, 
+<a class="el" href="commands_8h.html#a4c6f8687cc4a70ce967c910614fbc6cda6f5918e455c85bc7e916bddbf8889538">INPUT_MODE_JOYSTICK</a> = 6, 
+<a class="el" href="commands_8h.html#a4c6f8687cc4a70ce967c910614fbc6cda5615cd4b06b150f6832a773356e38101">INPUT_MODE_EMG_PROPORTIONAL_NC</a> = 7
 <br />
  }</td></tr>
 <tr class="separator:a4c6f8687cc4a70ce967c910614fbc6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -257,7 +263,7 @@ Board Parameters</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd><em>Centro "E.Piaggio"</em> </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(C) 2012-2016 qbrobotics. All rights reserved. </dd>
 <dd>
-(C) 2017-2019 Centro "E.Piaggio". All rights reserved.</dd></dl>
+(C) 2017-2020 Centro "E.Piaggio". All rights reserved.</dd></dl>
 <p>This file is included in the board firmware, in its libraries and applications. It contains all definitions that are necessary for the contruction of communication packages.</p>
 <p>It includes definitions for all of the device commands, parameters and also the size of answer packages. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -391,7 +397,12 @@ Board Parameters</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a4c6f8687cc4a70ce967c910614fbc6cda63042e0fb1fcf5bf0008b15442eea194"></a>INPUT_MODE_EMG_FCFS&#160;</td><td class="fielddoc"><p>Use 2 EMG. First reaching threshold wins and its value defines hand closure </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a4c6f8687cc4a70ce967c910614fbc6cda9e54aef6ab6f164ed0db5c3d59058da8"></a>INPUT_MODE_EMG_FCFS_ADV&#160;</td><td class="fielddoc"><p>Use 2 EMG. First reaching threshold wins and its value defines hand closure Wait for both EMG to lower under threshold </p>
+<tr><td class="fieldname"><a id="a4c6f8687cc4a70ce967c910614fbc6cda9e54aef6ab6f164ed0db5c3d59058da8"></a>INPUT_MODE_EMG_FCFS_ADV&#160;</td><td class="fielddoc"><p>Use 2 EMG. First reaching threshold </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4c6f8687cc4a70ce967c910614fbc6cda6f5918e455c85bc7e916bddbf8889538"></a>INPUT_MODE_JOYSTICK&#160;</td><td class="fielddoc"><p>Joystick input mode. </p>
+<p>wins and its value defines hand closure Wait for both EMG to lower under threshold </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4c6f8687cc4a70ce967c910614fbc6cda5615cd4b06b150f6832a773356e38101"></a>INPUT_MODE_EMG_PROPORTIONAL_NC&#160;</td><td class="fielddoc"><p>EMG Normally closed. </p>
 </td></tr>
 </table>
 

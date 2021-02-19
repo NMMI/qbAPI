@@ -24,6 +24,8 @@ int \textbf{ comm\+Get\+Encoder\+Raw\+Values} (\textbf{ comm\+\_\+settings} $\as
 int \textbf{ comm\+Get\+A\+D\+C\+Conf} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t $\ast$num\+\_\+ch, uint8\+\_\+t $\ast$adc\+\_\+map)
 \item 
 int \textbf{ comm\+Get\+A\+D\+C\+Raw\+Values} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, uint8\+\_\+t num\+\_\+channels, short int adc[3])
+\item 
+int \textbf{ comm\+Get\+S\+D\+File} (\textbf{ comm\+\_\+settings} $\ast$comm\+\_\+settings\+\_\+t, int id, char $\ast$filename, char $\ast$buffer)
 \end{DoxyCompactItemize}
 
 
@@ -211,3 +213,42 @@ This function gets I\+MU readings from I\+MU board connected to the serial port.
 \begin{DoxyReturn}{Returns}
 imu\+\_\+values Vector of imu readings. 
 \end{DoxyReturn}
+\mbox{\label{cp__communications_8h_a59cc5ced043a85a8526fd4cb015908cf}} 
+\index{cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}!comm\+Get\+S\+D\+File@{comm\+Get\+S\+D\+File}}
+\index{comm\+Get\+S\+D\+File@{comm\+Get\+S\+D\+File}!cp\+\_\+communications.\+h@{cp\+\_\+communications.\+h}}
+\subsubsection{comm\+Get\+S\+D\+File()}
+{\footnotesize\ttfamily int comm\+Get\+S\+D\+File (\begin{DoxyParamCaption}\item[{\textbf{ comm\+\_\+settings} $\ast$}]{comm\+\_\+settings\+\_\+t,  }\item[{int}]{id,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+This function gets SD card files.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm\+\_\+settings\+\_\+t} & A {\itshape \doxyref{comm\+\_\+settings}{p.}{structcomm__settings}} structure containing info about the communication settings.\\
+\hline
+{\em id} & The device\textquotesingle{}s id number. \\
+\hline
+{\em filename} & The name of the file to retrieve. \\
+\hline
+{\em buffer} & The returned file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if communication was ok, -\/1 otherwise.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}
+comm_settings   comm\_settings\_t;
+\textcolor{keywordtype}{int}             device\_id = 65;
+\textcolor{keywordtype}{char}            filename[19] = \textcolor{stringliteral}{"USR01\(\backslash\)2020\(\backslash\)01\(\backslash\)31\(\backslash\)Param0.csv"};
+\textcolor{keywordtype}{char}            buffer[10000] = \textcolor{stringliteral}{""};
+
+openRS485(&comm\_settings\_t,\textcolor{stringliteral}{"/dev/tty.usbserial-128"});
+
+\textcolor{keywordflow}{if}(commGetSDFile(&comm\_settings\_t, DEVICE\_ID, filename, buffer))
+    puts(\textcolor{stringliteral}{"Couldn't retrieve SD filesystem."});
+
+closeRS485(&comm\_settings\_t);
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

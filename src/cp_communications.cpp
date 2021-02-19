@@ -600,9 +600,9 @@ int commGetADCRawValues(comm_settings *comm_settings_t, int id, uint8_t num_chan
 }
 
 //==============================================================================
-//                                                                   commGetInfo
+//                                                                 commGetSDFile
 //==============================================================================
-// This function gets a string of information from the QB Move.
+// This function gets a file stored in SD card.
 //==============================================================================
 
 int commGetSDFile(comm_settings *comm_settings_t, int id, char* filename, char *buffer) {

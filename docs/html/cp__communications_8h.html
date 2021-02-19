@@ -99,6 +99,8 @@ Functions</h2></td></tr>
 <tr class="separator:ac71b9c21542fead8cde21f060239f678"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e327776bfe1699fa9aade77a619714c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cp__communications_8h.html#a5e327776bfe1699fa9aade77a619714c">commGetADCRawValues</a> (<a class="el" href="structcomm__settings.html">comm_settings</a> *comm_settings_t, int id, uint8_t num_channels, short int adc[3])</td></tr>
 <tr class="separator:a5e327776bfe1699fa9aade77a619714c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59cc5ced043a85a8526fd4cb015908cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cp__communications_8h.html#a59cc5ced043a85a8526fd4cb015908cf">commGetSDFile</a> (<a class="el" href="structcomm__settings.html">comm_settings</a> *comm_settings_t, int id, char *filename, char *buffer)</td></tr>
+<tr class="separator:a59cc5ced043a85a8526fd4cb015908cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Library of functions for SERIAL PORT communication additional to standard qbmove_communications. Function Prototypes. </p>
@@ -446,6 +448,58 @@ adc_map Vector of adc map. </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>imu_values Vector of imu readings. </dd></dl>
+
+</div>
+</div>
+<a id="a59cc5ced043a85a8526fd4cb015908cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59cc5ced043a85a8526fd4cb015908cf">&#9670;&nbsp;</a></span>commGetSDFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int commGetSDFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcomm__settings.html">comm_settings</a> *&#160;</td>
+          <td class="paramname"><em>comm_settings_t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function gets SD card files.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">comm_settings_t</td><td>A <em><a class="el" href="structcomm__settings.html">comm_settings</a></em> structure containing info about the communication settings.</td></tr>
+    <tr><td class="paramname">id</td><td>The device's id number. </td></tr>
+    <tr><td class="paramname">filename</td><td>The name of the file to retrieve. </td></tr>
+    <tr><td class="paramname">buffer</td><td>The returned file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns 0 if communication was ok, -1 otherwise.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code" href="structcomm__settings.html">comm_settings</a>   comm_settings_t;</div><div class="line"><span class="keywordtype">int</span>             device_id = 65;</div><div class="line"><span class="keywordtype">char</span>            filename[19] = <span class="stringliteral">&quot;USR01\2020\01\31\Param0.csv&quot;</span>;</div><div class="line"><span class="keywordtype">char</span>            buffer[10000] = <span class="stringliteral">&quot;&quot;</span>;</div><div class="line"></div><div class="line"><a class="code" href="qbmove__communications_8h.html#adce66aac7dbbd52de59bb7a3a9c1b3bd">openRS485</a>(&amp;comm_settings_t,<span class="stringliteral">&quot;/dev/tty.usbserial-128&quot;</span>);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span>(<a class="code" href="cp__communications_8h.html#a59cc5ced043a85a8526fd4cb015908cf">commGetSDFile</a>(&amp;comm_settings_t, DEVICE_ID, filename, buffer))</div><div class="line">    puts(<span class="stringliteral">&quot;Couldn&#39;t retrieve SD filesystem.&quot;</span>);</div><div class="line"></div><div class="line"><a class="code" href="qbmove__communications_8h.html#a5f87643fab51e02e4eab71bf4ab1a33a">closeRS485</a>(&amp;comm_settings_t);</div></div><!-- fragment --> </dd></dl>
 
 </div>
 </div>

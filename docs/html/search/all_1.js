@@ -57,6 +57,7 @@ var searchData=
   ['commgetjoystick',['commGetJoystick',['../qbmove__communications_8h.html#af78c08053431bb4d516f9ec49b651280',1,'qbmove_communications.h']]],
   ['commgetmeasurements',['commGetMeasurements',['../qbmove__communications_8h.html#a06a73f0c93c7ae12a95541c1feee10b7',1,'qbmove_communications.h']]],
   ['commgetparamlist',['commGetParamList',['../qbmove__communications_8h.html#ab47b8ee2e1aeab529bc3da3bfd52d3f6',1,'qbmove_communications.h']]],
+  ['commgetsdfile',['commGetSDFile',['../cp__communications_8h.html#a59cc5ced043a85a8526fd4cb015908cf',1,'cp_communications.h']]],
   ['commgetvelocities',['commGetVelocities',['../qbmove__communications_8h.html#af55b8ff44432552b9e5a7cd092b8b429',1,'qbmove_communications.h']]],
   ['commhandcalibrate',['commHandCalibrate',['../qbmove__communications_8h.html#ac3fc8ebaa05ea9d3ff895088c30103d5',1,'qbmove_communications.h']]],
   ['comminitmem',['commInitMem',['../qbmove__communications_8h.html#aa3771c9c4be2805d66c5b1a59066cb19',1,'qbmove_communications.h']]],

@@ -40,11 +40,11 @@
 *
 * \brief        Those functions allows to use the board through a serial port
 *
-* \version      7.0
+* \version      7.1
 *
 * \author       Mattia Poggiani
 *
-* \date         March 19th, 2020
+* \date         February 19th, 2021
 *
 * \details      This is a set of functions that allows to use the board  
 *               via a serial port.
