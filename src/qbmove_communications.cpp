@@ -1611,7 +1611,7 @@ int commGetInfo(comm_settings *comm_settings_t, int id, short int info_type, cha
 
     Sleep(200);
 
-    if (info_type == GET_SD_FS_TREE){       // Wait until the packet arrives (wait more time) [NMMI mod.]
+    if (info_type == GET_SD_FS_TREE || info_type == GET_SD_EMG_HIST){       // Wait until the packet arrives (wait more time) [NMMI mod.]
         n_bytes_in = 0;
         do{
             ReadFile(comm_settings_t->file_handle, &aux, 1, &n_bytes_in, NULL); 

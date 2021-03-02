@@ -273,6 +273,7 @@ enum data_types {
 #define GET_SD_PARAM    2 ///< Read Firmware Parameters from SD file.
 #define GET_SD_DATA     3 ///< Read Usage Data from SD file.
 #define GET_SD_FS_TREE  4 ///< Get info on SD card filesystem tree.
+#define GET_SD_EMG_HIST 5 ///< Read recent EMG history from SD file
 /** \} */
 
 // ----------------------------------------------------------------------------
