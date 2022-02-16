@@ -685,6 +685,64 @@ int commGetSDFile(comm_settings *comm_settings_t, int id, char* filename, char *
 
     return 0;
 }
+
+//==============================================================================
+//                                                              commRemoveSDFile
+//==============================================================================
+// This function removes a file stored in SD card.
+//==============================================================================
+
+int commRemoveSDFile(comm_settings *comm_settings_t, int id, char* filename) {
+
+	char data_out[BUFFER_SIZE];         // output data buffer
+    char package_in[BUFFER_SIZE];       // output data buffer
+    int package_in_size;
+    
+#if (defined(_WIN32) || defined(_WIN64))
+    DWORD package_size_out;                 // for serial port access
+#else
+    int bytes;
+#endif
+
+    unsigned short file_length = strlen(filename);
+//=================================================		preparing packet to send
+
+    data_out[0] = ':';
+    data_out[1] = ':';
+    data_out[2] = (unsigned char) id;
+    data_out[3] = 4 + file_length;
+    data_out[4] = CMD_REMOVE_SD_SINGLE_FILE;           // command
+    data_out[5] = ((char *) &file_length)[1];          // parameter type
+    data_out[6] = ((char *) &file_length)[0];          // parameter type
+
+ 	for(int h = 0; h < file_length; h++) {
+        
+        data_out[ h +  7 ] = filename[ h ];
+        
+    }
+    data_out[ 7 + file_length ] = checksum( data_out + 4, 3 + file_length );
+
+#if (defined(_WIN32) || defined(_WIN64))
+    WriteFile(comm_settings_t->file_handle, data_out, 8+file_length, &package_size_out, NULL);
+#else
+    ioctl(comm_settings_t->file_handle, FIONREAD, &n_bytes);
+    if(n_bytes)
+        read(comm_settings_t->file_handle, package_in, n_bytes);
+
+    write(comm_settings_t->file_handle, data_out, 8+file_length);
+#endif
+
+    package_in_size = RS485read(comm_settings_t, id, package_in);
+    if (package_in_size < 0)
+        return package_in_size;
+
+//==============================================================	 get packet
+
+    return package_in[1];
+
+	//	((char *) &adc[i])[1] = package_in[1 + 2*i];
+	//return 0;
+}
 /// @endcond
 
 /* [] END OF FILE */

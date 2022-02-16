@@ -244,6 +244,39 @@ int commGetADCRawValues( comm_settings *comm_settings_t, int id, uint8_t num_cha
 **/
 
 int commGetSDFile(comm_settings *comm_settings_t, int id, char* filename, char *buffer);
+
+//======================================================     commRemoveSDFile
+
+/** This function removes SD card files.
+ *
+ *  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+ *                              communication settings.
+ *
+ *  \param  id                  The device's id number.
+ *  \param  filename            The name of the file to retrieve.
+ *  \param  buffer              The returned file.
+ *
+ *  \return Returns 0 if communication was ok, -1 otherwise.
+ *
+ *  \par Example
+ *  \code
+
+    comm_settings   comm_settings_t;
+    int             device_id = 65;
+    char            filename[19] = "USR01\2020\01\31\Param0.csv";
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+
+    if(commRemoveSDFile(&comm_settings_t, DEVICE_ID, filename))
+        puts("Error in removing SD file.");
+
+    closeRS485(&comm_settings_t);
+
+ *  \endcode
+
+**/
+
+int commRemoveSDFile(comm_settings *comm_settings_t, int id, char* filename);
 	   
 // ----------------------------------------------------------------------------
 #endif

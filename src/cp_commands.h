@@ -66,7 +66,8 @@ enum additional_command
     CMD_GET_ENCODER_RAW         = 164,  // Get all encoder raw values
 	CMD_GET_ADC_CONF			= 165,	// Get ADC configuration
     CMD_GET_ADC_RAW  			= 166,	// Get ADC raw values  
-    CMD_GET_SD_SINGLE_FILE      = 167   // Get a single file of the SD card given the path
+    CMD_GET_SD_SINGLE_FILE      = 167,  // Get a single file of the SD card given the path
+    CMD_REMOVE_SD_SINGLE_FILE   = 168   // Removes a single file of the SD card given the path
 };
 
 
