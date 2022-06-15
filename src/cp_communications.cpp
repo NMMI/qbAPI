@@ -701,7 +701,7 @@ int commRemoveSDFile(comm_settings *comm_settings_t, int id, char* filename) {
 #if (defined(_WIN32) || defined(_WIN64))
     DWORD package_size_out;                 // for serial port access
 #else
-    int bytes;
+    int n_bytes;
 #endif
 
     unsigned short file_length = strlen(filename);

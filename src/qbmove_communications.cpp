@@ -200,7 +200,7 @@ int RS485listPorts( char list_of_ports[60][255] )
     directory = opendir("/dev");
 
     while ( ( directory_p = readdir(directory) ) && i < 10 ) {
-        if (strstr(directory_p->d_name, "tty.usbserial") || strstr(directory_p->d_name, "ttyUSB")) {
+        if (strstr(directory_p->d_name, "tty.usbserial") || strstr(directory_p->d_name, "ttyUSB") || strstr(directory_p->d_name, "rfcomm") || strstr(directory_p->d_name, "-BTCOMPORT")) {
             strcpy(list_of_ports[i], "/dev/" );
             strcat(list_of_ports[i], directory_p->d_name);
             i++;
