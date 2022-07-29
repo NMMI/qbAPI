@@ -58,7 +58,7 @@ You should have both *gcc/g++* and *make* installed.
 Download *XCode* from Mac App Store, this will install *gcc/g++* and *make* utility.
 
 ### Windows
-Download [MinGW](http://www.mingw.org) and install it. Open MinGW Installation
+Download [MinGW](https://sourceforge.net/projects/mingw/) and install it. Open MinGW Installation
 Manager, from the left panel select basic setup, then from the right panel select
 mingw32-base and mingw32-gcc-g++, then click on `Installation -> Apply Changes`.
 This will install the *gcc/g++* compiler. To use it from the command line you need
