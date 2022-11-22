@@ -128,8 +128,9 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
 	memset(package_in, 0, sizeof(package_in));
 	
     package_in_size = RS485read(comm_settings_t, id, package_in);
-    if (package_in_size < 0)
+    if (package_in_size < 0){
         return package_in_size;
+    }
 	
 	acc_sf 	= 0.000061037;			// Ticks to G
 	gyro_sf = 0.007629627 * 8;		// Ticks to deg/s with FS +/- 2000 °/s
@@ -164,7 +165,7 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
 				((char *) &aux_si)[1] = values[c+5];
 				aux_float[2] = (float) ( aux_si * acc_sf);
 
-				imu_values[(3*3+4+1)*i] 	= aux_float[0];
+				imu_values[(3*3+4+1)*i]   = aux_float[0];
 				imu_values[(3*3+4+1)*i+1] = aux_float[1];
 				imu_values[(3*3+4+1)*i+2] = aux_float[2];
 				c += 6;
@@ -236,7 +237,7 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
 			if (imu_table[5*i + 4]) {
 				((char *) &aux_si)[0] = values[c+2];
 				((char *) &aux_si)[1] = values[c+1];
-				aux_float[0] = (float) (aux_si * (float)temp_sf + temp_off) / temp_div;
+				aux_float[0] = (float) (aux_si * temp_sf + temp_off) / temp_div;
 				
 				imu_values[(3*3+4+1)*i+13] = aux_float[0];
 				c += 2;
@@ -423,8 +424,9 @@ int commGetEncoderConf(comm_settings *comm_settings_t, int id, uint8_t* num_enc_
 #endif
 
     package_in_size = RS485read(comm_settings_t, id, package_in);
-    if (package_in_size < 0)
+    if (package_in_size < 0){
         return package_in_size;
+    }
 
 	num_enc_line = package_in[1];
 	num_enc_per_line = package_in[2];
@@ -533,8 +535,9 @@ int commGetADCConf(comm_settings *comm_settings_t, int id, uint8_t* tot_adc_chan
 #endif
 
     package_in_size = RS485read(comm_settings_t, id, package_in);
-    if (package_in_size < 0)
+    if (package_in_size < 0){
         return package_in_size;
+    }
 
 	*tot_adc_channels = package_in[1];
 	
