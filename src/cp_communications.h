@@ -55,7 +55,33 @@
 
 #include "qbmove_communications.h"
 
-			   
+
+
+//==============================================================     commCalibIMUMagnetometer
+
+/** This function starts calibration of IMU magnetometers
+*
+*  \param  comm_settings_t     A _comm_settings_ structure containing info about the
+*                              communication settings.
+*
+*  \param  id                  The device's id number.
+* 
+*  \par Example
+*  \code
+
+    comm_settings comm_settings_t;    
+    int     device_id = 65;
+
+    openRS485(&comm_settings_t,"/dev/tty.usbserial-128");
+    commCalibIMUMagnetometer(&comm_settings_t, device_id);
+    closeRS485(&comm_settings_t);
+
+*  \endcode
+**/
+
+int commCalibIMUMagnetometer(comm_settings *comm_settings_t, int id);
+
+
 //===========================================================  commGetImuReadings
 
 /** This function gets IMU readings from IMU board connected to the serial port.

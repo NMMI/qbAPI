@@ -60,6 +60,7 @@
 
 enum additional_command
 {
+    CMD_CALIB_IMU_MAGNETOMETER  = 160,  // Start calibration procedure of IMU magnetometers 
     CMD_GET_IMU_READINGS        = 161,  // Retrieve accelerometers, gyroscopes and magnetometers readings    
     CMD_GET_IMU_PARAM           = 162,  // Retrieve and set IMU parameters
     CMD_GET_ENCODER_CONF        = 163,  // Get encoder configuration
