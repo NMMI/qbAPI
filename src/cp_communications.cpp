@@ -139,7 +139,7 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
     char package_in[BUFFER_SIZE];       // output data buffer
     int package_in_size;
 	float acc_sf = 0, gyro_sf = 0, mag_sf = 0;
-	float temp_sf = 0, temp_off = 0, temp_div = 0;	
+	float temp_sf = 0;	
 	char* values;
 	int c = 0;
 	float aux_float[4];
@@ -180,11 +180,8 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
 	
 	acc_sf 	= 0.000061037;			// Ticks to G
 	gyro_sf = 0.007629627 * 8;		// Ticks to deg/s with FS +/- 2000 °/s
-	mag_sf 	= 0.1465;				// Ticks to uT
-	
-	temp_sf = 0.00294118; // 1/340 //0.001426;
-	temp_off = 36.53; //21.6;
-	temp_div = 2.0;
+	mag_sf 	= 0.1465;				// Ticks to uT	
+	temp_sf = 0.01; // 1/100 Fw gives °C values times 100
 	
 	values = &package_in[1];
 /*	
@@ -283,7 +280,7 @@ int commGetImuReadings(comm_settings *comm_settings_t, int id, uint8_t* imu_tabl
 			if (imu_table[5*i + 4]) {
 				((char *) &aux_si)[0] = values[c+2];
 				((char *) &aux_si)[1] = values[c+1];
-				aux_float[0] = (float) (aux_si * temp_sf + temp_off) / temp_div;
+				aux_float[0] = (float) (aux_si * temp_sf);
 				
 				imu_values[(3*3+4+1)*i+13] = aux_float[0];
 				c += 2;
